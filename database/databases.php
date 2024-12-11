@@ -18,9 +18,7 @@ catch (PDOException $e) {
 }
 
 /* 
-$Doctors = new db($conn,'doctors','id');
-$Patients = new db($conn,'patients','id');
-$Glucose = new db($conn,'glucose','id');
+$Table = new db($conn,'nomDeLaTable','cleprimaire');
 */
 ?> 
 
