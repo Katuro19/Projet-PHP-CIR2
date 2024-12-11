@@ -19,6 +19,8 @@ catch (PDOException $e) {
 
 /* 
 $Table = new db($conn,'nomDeLaTable','cleprimaire');
+Et après tu peut faire des trucs du genre 
+$result = $Table->request($truc); (va voir la doc)
 */
 ?> 
 
