@@ -163,7 +163,7 @@ class db{
             if($details)
             echo "<br>Requested query : ".$query;
 
-            /* $request->execute();
+            $request->execute();
 
             $result = $request->fetchAll(PDO::FETCH_ASSOC);
             if($details)
@@ -171,7 +171,7 @@ class db{
             
             
             return $result;
-            */
+            
         }
         catch(PDOException $e){
             if($verbose)
