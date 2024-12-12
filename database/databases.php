@@ -18,10 +18,19 @@ catch (PDOException $e) {
 }
 
 /* 
-$Table = new db($conn,'nomDeLaTable','cleprimaire');
-Et après tu peut faire des trucs du genre 
-$result = $Table->request($truc); (va voir la doc)
+$Table = new db($conn,'tableName','primaryKey');
+ And then you can do request :
+$result = $Table->request($truc); (read the f doc)
 */
+
+
+$Doctors = new db($conn, 'doctors', 'id');
+$Patients = new db($conn, 'patients', 'id');
+$Rendezvous = new db($conn, 'rendezvous', 'id');
+$Expertise = new db($conn, 'expertise', 'id');
+$Locations = new db($conn, 'locations', 'id');
+
+
 ?> 
 
 
