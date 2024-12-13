@@ -24,11 +24,11 @@ $result = $Table->request($truc); (read the f doc)
 */
 
 
-$Doctors = new db($conn, 'doctors', 'id');
-$Patients = new db($conn, 'patients', 'id');
-$Rendezvous = new db($conn, 'rendezvous', 'id');
-$Expertise = new db($conn, 'expertise', 'id');
-$Locations = new db($conn, 'locations', 'id');
+//$Doctors = new db($conn, 'doctors', 'id');
+//$Patients = new db($conn, 'patients', 'id');
+//$Rendezvous = new db($conn, 'rendezvous', 'id');
+//$Expertise = new db($conn, 'expertise', 'id');
+$Locations = new db($conn, 'locations', 'id',['id','name','postcode']);
 
 
 ?> 

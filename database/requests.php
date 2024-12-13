@@ -7,11 +7,12 @@ class db{
     How to create an instance of the class : 
 
     // Let's imagine our database Users with the table user.
-    $Users = new db($conn,'user','id');
+    $Users = new db($conn,'user','username',['username','anotherColumn']);
+
     //The $conn is your connection instance and must be created before.
     // The 'user' is my table name.
     // The 'id' is the primary key of my table. this doesn't have to be called id everytime. 
-    //If you don't enter the primary key, you may have error if two datas are not unique.
+    // If you don't enter the primary key, you may have error if two datas are not unique.
 
     How to use the class :
 
@@ -28,6 +29,7 @@ class db{
     mainTable : Table choosed in the constructor.
     conn : The connection given.
     primaryKey : The key given.
+    columns : This will contains the columns list of the database. It's a mesure against SQLInjection.
 
     Function of the class:
 
@@ -35,6 +37,7 @@ class db{
     - request (public)
     - request_if (public)
     - add_with (public)
+    - change_if (public)
 
     \ -------------------------------- /
 
@@ -43,12 +46,14 @@ class db{
     private $mainTable;
     private $conn;
     private $primaryKey;
+    private $columns; //This will be the array containing all the column of the class
 
     //CONSTRUCTOR
-    public function __construct($connectionInfo, $table, $primaryKey_){
+    public function __construct($connectionInfo, $table, $primaryKey_, array $columnsList){
         $this->mainTable = $table;
         $this->conn = $connectionInfo;
         $this->primaryKey = $primaryKey_;
+        $this->columns = $columnsList;
     }
 
 
@@ -62,6 +67,12 @@ class db{
         Verbose will display informations about the failure
         Details will display informations about the queries
         */
+        if(!in_array($column,$this->columns)){
+            if($verbose){
+                echo "<br>The column '".$column."' was not set as a valid column by your admin. If this is not normal, check the database definition in your code.";
+            }
+            return false;
+        }
 
         try {
         $query = "SELECT * FROM ".$this->mainTable." WHERE ".$this->primaryKey." = ?;";
@@ -103,6 +114,14 @@ class db{
         Verbose will display informations about the failure
         Details will display informations about the queries
         */
+
+        if(!in_array($column,$this->columns)){
+            if($verbose){
+                echo "<br>The column '".$column."' was not set as a valid column by your admin. If this is not normal, check the database definition in your code.";
+            }
+            return false;
+        }
+    
         try {
             
             $query = "SELECT * FROM ".$this->mainTable." WHERE ".$column." = ?;";
@@ -147,10 +166,19 @@ class db{
             ... //Code when the datas are added
         }
 
-        In case of failure, return 0, and if case of success, return 1
+
+        In case of failure, return false, and if case of success, return true
         Verbose will display informations about the failure
         Details will display informations about the queries
         */
+
+        if(!in_array($column,$this->columns)){
+            if($verbose){
+                echo "<br>The column '".$column."' was not set as a valid column by your admin. If this is not normal, check the database definition in your code.";
+            }
+            return false;
+        }
+
         try {
 
             // get the columns
@@ -158,30 +186,77 @@ class db{
             
             // get the values
             $datas = array_values($values);
+            
 
-            $query = "INSERT INTO ".$this->mainTable." (".implode(',',$columns).") VALUES (".implode(',', $datas).")"; //the implode will cut my array into the values !
+            $placeholders = array_fill(0, count($datas), '?'); //This auto create the ? for the request !
+
+
+            $query = "INSERT INTO ".$this->mainTable." (".implode(',',$columns).") VALUES (".implode(',', $placeholders).");"; //the implode will cut my array into the values !
+            
+            
             if($details)
             echo "<br>Requested query : ".$query;
 
-            $request->execute();
+
+            $request = ($this->conn)->prepare($query);
+            $request->execute($datas); //The execute take $datas to auto-bind
+    
+
+            $result = $request->fetchAll(PDO::FETCH_ASSOC);
+            if($details)
+                echo "<br>Request executed !"; 
+            
+            
+            return true;
+            
+        }
+        catch(PDOException $e){
+            if($verbose)
+                echo "Error on request_if function : ".$e->getMessage();
+            return false;            
+        } 
+    }
+
+
+    public function change_if($id,$column,$value,$verbose=false,$details=false){
+        /* Change the value of a given column for a given id
+        ARGS : id,column,value,verbose=false,details=false
+        - Fetched : NaN
+
+        In case of failure, return false, and in case of success, return true
+        Verbose will display informations about the failure
+        Details will display informations about the queries
+        */
+        if(!in_array($column,$this->columns)){
+            if($verbose){
+                echo "<br>The column '".$column."' was not set as a valid column by your admin. If this is not normal, check the database definition in your code.";
+            }
+            return false;
+        }
+
+
+        try {
+            
+            $query = "UPDATE ".$this->mainTable." SET ".$column." = ? WHERE ".$this->primaryKey." = ?;";
+            if($details)
+                echo "<br>Requested query : ".$query." (Parameters are : ".$value.", ".$id.")";
+
+            $request = ($this->conn)->prepare($query);
+            $request->execute([$value,$id]); //Autobind
 
             $result = $request->fetchAll(PDO::FETCH_ASSOC);
             if($details)
                 echo "<br>Request executed and fetched"; 
             
             
-            return $result;
-            
+            return true;
         }
         catch(PDOException $e){
             if($verbose)
-                echo "Error on request_if function : ".$e->getMessage();
-            return [];            
+                echo "<br>Error on request_if function : ".$e->getMessage();
+            return false;            
         } 
     }
-
-
-
 
 }
 
