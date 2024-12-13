@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-    session_start();
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    include 'database/requests.php';
-    include 'database/databases.php';   
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+include 'database/requests.php';
+include 'database/databases.php';
 ?>
 
 
@@ -13,6 +13,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css" type="text/css">
+    <link rel="stylesheet" href="edt.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Page</title>
     <script src="navbar.js" defer></script>
@@ -33,17 +34,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="test.html">Home</a>
-                            <!-- fonction "page" à faire en js -->
+                            <a class="nav-link">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="">My appointments</a>
+                            <a class="nav-link">My appointments</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="">My past appointments</a>
+                            <a class="nav-link">My past appointments</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link " href="">My patients</a>
+                            <a class="nav-link">My patients</a>
                         </li>
                     </ul>
                     <ul class="add_appointment">
@@ -57,7 +57,7 @@
                                     <input type="date" id="date">
                                     <br><br>
                                     <label for="list2">Choose a time slot :</label>
-                                    <select id="day" name="day">
+                                    <select id="time" name="time">
                                         <!-- instert php request here to get available time slots  for the selected day-->
                                         <!-- echo "<option value="optionC">". content ."</option>" -->
                                     </select>
@@ -65,11 +65,11 @@
                                     <label for="list3">Choose a location :</label>
                                     <select id="location" name="location">
                                         <!-- instert php request here to get available locations-->
-                                         <?php
-                                            // foreach($Locations->request() as $location){
-                                            //     echo "<option value=".$location['id'].">".$location['name']."</option>";
-                                            // }
-                                         ?>
+                                        <?php
+                                        // foreach($Locations->request() as $location){
+                                        //     echo "<option value=".$location['id'].">".$location['name']."</option>";
+                                        // }
+                                        ?>
                                         <!-- echo "<option value="optionC">". content ."</option>" -->
                                     </select>
                                     <br><br>
@@ -936,6 +936,42 @@
             </div>
         </form>
     </div>
+    <div class="my_appointments">
+        <from>
+            <label for="list1">Choose a day :</label>
+            <input type="date" id="date">
+            <label for="list2">Chose a doctor</label>
+            <select id="doctor" name="doctor"></select>
+            <!-- php request -->
+            <label for="list2">Chose an expertise</label>
+            <select id="expertise" name="expertise"></select>
+            <!-- php request -->
+            <label for="list3">Choose a location :</label>
+            <select id="location" name="location"></select>
+            <!-- php request -->
+            <!-- js to dynamicly adjust the visible elements  -->
+        </from>
+    </div>
+    <div class="my_past_appointments">
+        <label for="list2">Chose a doctor</label>
+        <select id="doctor" name="doctor"></select>
+        <!-- php request -->
+        <label for="list2">Chose an expertise</label>
+        <select id="expertise" name="expertise"></select>
+        <!-- php request -->
+        <label for="list3">Choose a location :</label>
+        <select id="location" name="location"></select>
+        <!-- php request -->
+        <!-- js to dynamicly adjust the visible elements  -->
+    </div>
+    <div class="my_patients">
+        <input type="text" placeholder="First name" id="first_name">
+        <input type="text" placeholder="Last name" id="last_name">
+    </div>
+
+    <footer class="footer">
+        <a class="nav-link"href="logout.php">Logout</a>
+    </footer>
 </body>
 
 </html>
