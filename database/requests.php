@@ -63,16 +63,10 @@ class db{
         ARGS : id, verbose=false, details=false
         - Fetched : YES
 
-        In case of failure, return NULL
+        In case of failure, return an empty array
         Verbose will display informations about the failure
         Details will display informations about the queries
         */
-        if(!in_array($column,$this->columns)){
-            if($verbose){
-                echo "<br>The column '".$column."' was not set as a valid column by your admin. If this is not normal, check the database definition in your code.";
-            }
-            return false;
-        }
 
         try {
         $query = "SELECT * FROM ".$this->mainTable." WHERE ".$this->primaryKey." = ?;";
@@ -91,7 +85,7 @@ class db{
 
         $result = $request->fetch(PDO::FETCH_ASSOC);
         if($details)
-            echo "<br>Request executed and fetched"; 
+            echo "<br>Request executed and fetched<br>"; 
         
         
         return $result;
@@ -100,7 +94,7 @@ class db{
         catch(PDOException $e){
             if($verbose)
                 echo "Error on request function : ".$e->getMessage();
-            return NULL;
+            return [];
         }
     }
 
@@ -119,7 +113,7 @@ class db{
             if($verbose){
                 echo "<br>The column '".$column."' was not set as a valid column by your admin. If this is not normal, check the database definition in your code.";
             }
-            return false;
+            return [];
         }
     
         try {
@@ -171,13 +165,6 @@ class db{
         Verbose will display informations about the failure
         Details will display informations about the queries
         */
-
-        if(!in_array($column,$this->columns)){
-            if($verbose){
-                echo "<br>The column '".$column."' was not set as a valid column by your admin. If this is not normal, check the database definition in your code.";
-            }
-            return false;
-        }
 
         try {
 
@@ -243,6 +230,42 @@ class db{
 
             $request = ($this->conn)->prepare($query);
             $request->execute([$value,$id]); //Autobind
+
+            $result = $request->fetchAll(PDO::FETCH_ASSOC);
+            if($details)
+                echo "<br>Request executed and fetched"; 
+            
+            
+            return true;
+        }
+        catch(PDOException $e){
+            if($verbose)
+                echo "<br>Error on request_if function : ".$e->getMessage();
+            return false;            
+        } 
+    }
+
+
+    public function delete($id,$verbose=false,$details=false){
+        /* Remove the line matching the given primary key. Note that if you dont use the primary key, you may have unexpected results.
+        ARGS : id,verbose=false,details=false
+        - Fetched : NaN
+
+        Return true if the process worked, and false if not. Note that a true is just no error in the database, so maybe the delete was not done properly, it's up to you to check after
+        Verbose will display informations about the failure
+        Details will display informations about the queries
+        */
+        try {
+            
+            $query = "DELETE FROM ".$this->mainTable." WHERE ".$this->primaryKey." = ?;";
+            if($details)
+            echo "<br>Requested query : ".$query."<br>The ID is ".$id.".";
+
+            $request = ($this->conn)->prepare($query);
+            if($details)
+                echo "<br>The prepare is done";
+
+            $request->execute([$id]);
 
             $result = $request->fetchAll(PDO::FETCH_ASSOC);
             if($details)
