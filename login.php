@@ -11,23 +11,23 @@ else
     echo "yipee<br>";
 
 
-$test = $Patients->request(0);
-print_r($test);
 
+    
+
+
+// How a dictionnary is made :
 $tempExpert = [
     'id' => 6, 'name' => 'Lazyness professional'
 
 ];
 
-$addSuccess = $Expertise->add_with($tempExpert,true,true);
-if($addSuccess){
-    echo "<br>Lets select the id : ";
-    print_r($Expertise->request($tempExpert['id']));
-    $Expertise->delete($tempExpert['id'],false,true);
-    echo "<br> lets re-select to see :";
-    print_r($Expertise->request($tempExpert['id']));
+
+$superListOfDictionnary = $Locations->request_all(true,true); //The true true is just to display infos, can be removed
+
+//Lets display every location name :
+
+foreach($superListOfDictionnary as $city ){
+    echo "The city is ".$city['name']." and have the postcode ".$city['postcode'].".<br>";
 }
-
-
 
 ?>

@@ -18,7 +18,7 @@ class db{
 
     //Folowing our user exemple, if i want all the datas of the user with the primary key (ex, username) being CoolUser19
     $myUser = 'CoolUser19';
-    $fetched_data = $User->db_request($myUser); //For those who are asking, what is $User, please read the doc again
+    $fetched_data = $User->request($myUser); //For those who are asking, what is $User, please read the doc again
     //To display my username :
     echo $fetched_data['username']; //The name between ' must be a valid key.
 
@@ -38,6 +38,8 @@ class db{
     - request_if (public)
     - add_with (public)
     - change_if (public)
+    - delete (public)
+    - request_all (public)
 
     \ -------------------------------- /
 
@@ -279,6 +281,43 @@ class db{
                 echo "<br>Error on request_if function : ".$e->getMessage();
             return false;            
         } 
+    }
+
+
+
+    public function request_all($verbose = false, $details = false){
+        /* Return the entire table in a list of dictionnary (basically do a request on each line)
+        ARGS : verbose=false, details=false
+        - Fetched : YES
+
+        Verbose will display informations about the failure
+        Details will display informations about the queries
+        */
+
+        try {
+        $query = "SELECT * FROM ".$this->mainTable.";";
+        if($details)
+            echo "<br>Requested query : ".$query;
+
+            
+        $request = ($this->conn)->prepare($query);
+
+        $request->execute();
+
+
+        $result = $request->fetchAll(PDO::FETCH_ASSOC);
+        if($details)
+            echo "<br>Request executed and fetched<br>"; 
+        
+        
+        return $result;
+
+        }
+        catch(PDOException $e){
+            if($verbose)
+                echo "Error on request function : ".$e->getMessage();
+            return [];
+        }
     }
 
 }
