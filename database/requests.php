@@ -1,17 +1,17 @@
 <?php
 
 class db{
-    /* This class is made to make db interaction faster
+    /* This class is here to make your db interaction faster
     Each table of your database can have its own instance of this class
 
     How to create an instance of the class : 
 
-    // Let's imagine our database Users with the table user.
+    // Let's imagine our database Players with the table user.
     $Users = new db($conn,'user','username',['username','anotherColumn']);
 
     //The $conn is your connection instance and must be created before.
     // The 'user' is my table name.
-    // The 'id' is the primary key of my table. this doesn't have to be called id everytime. 
+    // The 'username' is the primary key of my table. this doesn't have to be called username or id everytime. 
     // If you don't enter the primary key, you may have error if two datas are not unique.
 
     How to use the class :
