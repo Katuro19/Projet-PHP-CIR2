@@ -82,25 +82,6 @@ a.nav-link {
     z-index: 10;
 }
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #333;
-}
-
-.close:hover {
-    color: red;
-}
-
-
-
-
-
-
 :root {
     --pseudowhite: #EAF2EF;
     --lightblue: #7895E0;
