@@ -4,8 +4,9 @@
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-include 'database/requests.php';
-include 'database/databases.php';
+include_once 'database/requests.php';
+include_once 'database/databases.php';
+
 ?>
 
 
@@ -58,17 +59,23 @@ include 'database/databases.php';
                                     <br><br>
                                     <label for="list2">Choose a time slot :</label>
                                     <select id="time" name="time">
+                                        <option value="default" selected>Chose an option</option>
                                         <!-- instert php request here to get available time slots  for the selected day-->
+                                        <?php
+                                            echo "tamere";
+                                        ?>
                                         <!-- echo "<option value="optionC">". content ."</option>" -->
                                     </select>
                                     <br><br>
                                     <label for="list3">Choose a location :</label>
                                     <select id="location" name="location">
+                                        <option value="default" selected>Chose an option</option>
                                         <!-- instert php request here to get available locations-->
                                         <?php
-                                        // foreach($Locations->request() as $location){
-                                        //     echo "<option value=".$location['id'].">".$location['name']."</option>";
-                                        // }
+
+                                        foreach($Locations->request_all(false,false) as $location){
+                                            echo "<option value=\"location_\"".$location['name'].">".$location['name']." - ". $location['postcode']."</option>";
+                                        }
                                         ?>
                                         <!-- echo "<option value="optionC">". content ."</option>" -->
                                     </select>
@@ -937,31 +944,71 @@ include 'database/databases.php';
         </form>
     </div>
     <div class="my_appointments">
+        <?php
+
+        ?>
+
+
+
         <from>
             <label for="list1">Choose a day :</label>
-            <input type="date" id="date">
+            <input type="date" id="date_my_appointments" value="">
+            <!-- js to catch the curently selected value -->
             <label for="list2">Chose a doctor</label>
-            <select id="doctor" name="doctor"></select>
-            <!-- php request -->
+            <select id="doctor" name="doctor">
+                <option value="default" selected>Chose an option</option>
+            
+            <?php
+                foreach($Doctors->request_all(false,false) as $doctor){
+                    echo "<option value=\"doctor_\"".$doctor['name'].">".strtoupper($doctor['lastname'])." ".$doctor['firstname']."</option>";
+                }
+            ?>
+            </select>
             <label for="list2">Chose an expertise</label>
-            <select id="expertise" name="expertise"></select>
-            <!-- php request -->
+            <select id="expertise" name="expertise">
+                <option value="default" selected>Chose an option</option>
+            
+            <?php
+                foreach($Expertise->request_all(false,false) as $expertise){
+                    echo "<option value=\"expertise_\"".$expertise['name'].">".$expertise['name']."</option>";
+                }
+            ?>
+            </select>
             <label for="list3">Choose a location :</label>
-            <select id="location" name="location"></select>
-            <!-- php request -->
+            <select id="location" name="location">
+                <option value="default" selected>Chose an option</option>
+            
+            <?php
+                foreach($Locations->request_all(false,false) as $location){
+                    echo "<option value=\"location_\"".$location['name'].">".$location['name']." - ". $location['postcode']."</option>";
+                }
+            ?>
+            </select>
             <!-- js to dynamicly adjust the visible elements  -->
         </from>
     </div>
     <div class="my_past_appointments">
         <label for="list2">Chose a doctor</label>
-        <select id="doctor" name="doctor"></select>
-        <!-- php request -->
+        <select id="doctor" name="doctor">
+            <option value="default" selected>Chose an option</option>
+        </select>
+        <?php
+
+        ?>
         <label for="list2">Chose an expertise</label>
-        <select id="expertise" name="expertise"></select>
-        <!-- php request -->
+        <select id="expertise" name="expertise">
+            <option value="default" selected>Chose an option</option>
+        </select>
+        <?php
+
+        ?>
         <label for="list3">Choose a location :</label>
-        <select id="location" name="location"></select>
-        <!-- php request -->
+        <select id="location" name="location">
+            <option value="default" selected>Chose an option</option>
+        </select>
+        <?php
+
+        ?>
         <!-- js to dynamicly adjust the visible elements  -->
     </div>
     <div class="my_patients">
@@ -970,7 +1017,7 @@ include 'database/databases.php';
     </div>
 
     <footer class="footer">
-        <a class="nav-link"href="logout.php">Logout</a>
+        <a class="nav-link" href="logout.php">Logout</a>
     </footer>
 </body>
 
