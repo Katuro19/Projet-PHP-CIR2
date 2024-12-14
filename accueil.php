@@ -956,7 +956,7 @@ include_once 'database/databases.php';
             <label for="list1">Choose a day :</label>
             <input type="date" id="date_my_appointments" value="">
             <!-- js to catch the curently selected value -->
-            <label for="list2">Chose a doctor</label>
+            <label for="list2">Doctor</label>
             <select id="doctor" name="doctor">
                 <option value="default" selected>Chose an option</option>
 
@@ -966,7 +966,7 @@ include_once 'database/databases.php';
                 }
                 ?>
             </select>
-            <label for="list2">Chose an expertise</label>
+            <label for="list2">Expertise</label>
             <select id="expertise" name="expertise">
                 <option value="default" selected>Chose an option</option>
 
@@ -976,7 +976,7 @@ include_once 'database/databases.php';
                 }
                 ?>
             </select>
-            <label for="list3">Choose a location :</label>
+            <label for="list3">Location :</label>
             <select id="location" name="location">
                 <option value="default" selected>Chose an option</option>
 
@@ -987,29 +987,35 @@ include_once 'database/databases.php';
                 ?>
             </select>
             <br><br>
-            <table class="table_my_appointments">
-                <thead style="border: 1px solid black;">
+            <table style="border: 1px solid white;" class="table_my_appointments">
+                <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Start Time</th>
-                        <th>Duration</th>
-                        <th>Doctor</th>
-                        <th>Location</th>
-                        <th>expertise</th>
+                        <th style="border: 1px solid white;">Date</th>
+                        <th style="border: 1px solid white;">Start Time</th>
+                        <th style="border: 1px solid white;">End Time</th>
+                        <?php
+                            //check if the user is a doctor or a patient
+                        ?>
+                        <th style="border: 1px solid white;">Doctor</th>
+                        <th style="border: 1px solid white;">Location</th>
+                        <th style="border: 1px solid white;">Expertise</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        foreach($Rendezvous->request_all(false, false) as $rendezvous) {
-                            echo "<tr>
-                                    <td style=\"color: black\">".$rendezvous['date']."</td>
-                                    <td style=\"color: black\">".$rendezvous['start']."</td>
-                                    <td style=\"color: black\">".$rendezvous['end']."</td>
-                                    <td style=\"color: black\">".strtoupper($Doctors->request($rendezvous['doctor_id'],false,false)['lastname'])." ".$Doctors->request($rendezvous['doctor_id'],false,false)['firstname']."</td>
-                                    <td style=\"color: black\">".$Locations->request($rendezvous['location_id'],false,false)['name']."</td>
-                                    <td style=\"color: black\">".$Expertise->request($Doctors->request($rendezvous['doctor_id'],false,false)['expertise_id'],false,false)['name']."</td>
-                                </tr>";
+                    foreach ($Rendezvous->request_all(false, false) as $rendezvous) {
+                        if ($rendezvous["date"] > date("m-d-Y")) {
+                            echo "<tr class=\"table_my_appointments_" . $rendezvous['id'] . "\">
+                                        <td style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
+                                        <td style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
+                                        <td style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>
+                                        "/*check if the user is a doctor or a patient*/."
+                                        <td style=\"color: black;border: 1px solid white;\">" . strtoupper($Doctors->request($rendezvous['doctor_id'], false, false)['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'], false, false)['firstname'] . "</td>
+                                        <td style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "</td>
+                                        <td style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "</td>
+                                    </tr>";
                         }
+                    }
                     ?>
                 </tbody>
             </table>
@@ -1037,12 +1043,43 @@ include_once 'database/databases.php';
         <select id="location" name="location">
             <option value="default" selected>Chose an option</option>
         </select>
-        <?php
-
-        ?>
+        <br><br>
+        <table style="border: 1px solid white;" class="table_my_appointments">
+                <thead>
+                    <tr>
+                        <th style="border: 1px solid white;">Date</th>
+                        <th style="border: 1px solid white;">Start Time</th>
+                        <th style="border: 1px solid white;">End Time</th>
+                        <?php
+                            //check if the user is a doctor or a patient
+                        ?>
+                        <th style="border: 1px solid white;">Doctor</th>
+                        <th style="border: 1px solid white;">Location</th>
+                        <th style="border: 1px solid white;">Expertise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($Rendezvous->request_all(false, false) as $rendezvous) {
+                        if ($rendezvous["date"] < date("m-d-Y")) {
+                            echo "<tr class=\"table_my_appointments_" . $rendezvous['id'] . "\">
+                                        <td style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
+                                        <td style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
+                                        <td style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>
+                                        "/*check if the user is a doctor or a patient*/."
+                                        <td style=\"color: black;border: 1px solid white;\">" . strtoupper($Doctors->request($rendezvous['doctor_id'], false, false)['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'], false, false)['firstname'] . "</td>
+                                        <td style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "</td>
+                                        <td style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "</td>
+                                    </tr>";
+                        }
+                    }
+                    ?>
+                </tbody>
+            </table>
         <!-- js to dynamicly adjust the visible elements  -->
     </div>
     <br><br><br><br>
+    <!-- bonus mdr -->
     <div class="my_patients">
         <input type="text" placeholder="First name" id="first_name">
         <input type="text" placeholder="Last name" id="last_name">
