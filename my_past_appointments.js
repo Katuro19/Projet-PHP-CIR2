@@ -37,5 +37,3 @@ function filter() {
         appointments.style.display ="none";
     });
 }
-
-
