@@ -62,7 +62,7 @@ include_once 'database/databases.php';
                                         <option value="default" selected>Chose an option</option>
                                         <!-- instert php request here to get available time slots  for the selected day-->
                                         <?php
-                                            echo "tamere";
+                                        echo "tamere";
                                         ?>
                                         <!-- echo "<option value="optionC">". content ."</option>" -->
                                     </select>
@@ -73,8 +73,8 @@ include_once 'database/databases.php';
                                         <!-- instert php request here to get available locations-->
                                         <?php
 
-                                        foreach($Locations->request_all(false,false) as $location){
-                                            echo "<option value=\"location_\"".$location['name'].">".$location['name']." - ". $location['postcode']."</option>";
+                                        foreach ($Locations->request_all(false, false) as $location) {
+                                            echo "<option value=\"location_\"" . $location['name'] . ">" . $location['name'] . " - " . $location['postcode'] . "</option>";
                                         }
                                         ?>
                                         <!-- echo "<option value="optionC">". content ."</option>" -->
@@ -943,6 +943,8 @@ include_once 'database/databases.php';
             </div>
         </form>
     </div>
+
+    <br><br><br><br>
     <div class="my_appointments">
         <?php
 
@@ -957,36 +959,65 @@ include_once 'database/databases.php';
             <label for="list2">Chose a doctor</label>
             <select id="doctor" name="doctor">
                 <option value="default" selected>Chose an option</option>
-            
-            <?php
-                foreach($Doctors->request_all(false,false) as $doctor){
-                    echo "<option value=\"doctor_\"".$doctor['name'].">".strtoupper($doctor['lastname'])." ".$doctor['firstname']."</option>";
+
+                <?php
+                foreach ($Doctors->request_all(false, false) as $doctor) {
+                    echo "<option value=\"doctor_\"" . $doctor['name'] . ">" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "</option>";
                 }
-            ?>
+                ?>
             </select>
             <label for="list2">Chose an expertise</label>
             <select id="expertise" name="expertise">
                 <option value="default" selected>Chose an option</option>
-            
-            <?php
-                foreach($Expertise->request_all(false,false) as $expertise){
-                    echo "<option value=\"expertise_\"".$expertise['name'].">".$expertise['name']."</option>";
+
+                <?php
+                foreach ($Expertise->request_all(false, false) as $expertise) {
+                    echo "<option value=\"expertise_\"" . $expertise['name'] . ">" . $expertise['name'] . "</option>";
                 }
-            ?>
+                ?>
             </select>
             <label for="list3">Choose a location :</label>
             <select id="location" name="location">
                 <option value="default" selected>Chose an option</option>
-            
-            <?php
-                foreach($Locations->request_all(false,false) as $location){
-                    echo "<option value=\"location_\"".$location['name'].">".$location['name']." - ". $location['postcode']."</option>";
+
+                <?php
+                foreach ($Locations->request_all(false, false) as $location) {
+                    echo "<option value=\"location_\"" . $location['name'] . ">" . $location['name'] . " - " . $location['postcode'] . "</option>";
                 }
-            ?>
+                ?>
             </select>
+            <br><br>
+            <table class="table_my_appointments">
+                <thead style="border: 1px solid black;">
+                    <tr>
+                        <th>Date</th>
+                        <th>Start Time</th>
+                        <th>Duration</th>
+                        <th>Doctor</th>
+                        <th>Location</th>
+                        <th>expertise</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        foreach($Rendezvous->request_all(false, false) as $rendezvous) {
+                            echo "<tr>
+                                    <td style=\"color: black\">".$rendezvous['date']."</td>
+                                    <td style=\"color: black\">".$rendezvous['start']."</td>
+                                    <td style=\"color: black\">".$rendezvous['end']."</td>
+                                    <td style=\"color: black\">".strtoupper($Doctors->request($rendezvous['doctor_id'],false,false)['lastname'])." ".$Doctors->request($rendezvous['doctor_id'],false,false)['firstname']."</td>
+                                    <td style=\"color: black\">".$Locations->request($rendezvous['location_id'],false,false)['name']."</td>
+                                    <td style=\"color: black\">".$Expertise->request($Doctors->request($rendezvous['doctor_id'],false,false)['expertise_id'],false,false)['name']."</td>
+                                </tr>";
+                        }
+                    ?>
+                </tbody>
+            </table>
+
             <!-- js to dynamicly adjust the visible elements  -->
         </from>
     </div>
+    <br><br><br><br>
     <div class="my_past_appointments">
         <label for="list2">Chose a doctor</label>
         <select id="doctor" name="doctor">
@@ -1011,11 +1042,12 @@ include_once 'database/databases.php';
         ?>
         <!-- js to dynamicly adjust the visible elements  -->
     </div>
+    <br><br><br><br>
     <div class="my_patients">
         <input type="text" placeholder="First name" id="first_name">
         <input type="text" placeholder="Last name" id="last_name">
     </div>
-
+    <br><br><br><br>
     <footer class="footer">
         <a class="nav-link" href="logout.php">Logout</a>
     </footer>
