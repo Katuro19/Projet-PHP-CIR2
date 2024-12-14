@@ -997,7 +997,7 @@ include_once 'database/databases.php';
                 <tbody>
                     <?php
                     foreach ($Rendezvous->request_all(false, false) as $rendezvous) {
-                        if ($rendezvous["date"] < date("d-m-Y")) {
+                        if ($rendezvous["date"] > date("d-m-Y")) {
                             echo "<tr id=\"table_my_appointments_" . $rendezvous['id'] . "\">
                                         <td id=\"my_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
                                         <td id=\"my_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
