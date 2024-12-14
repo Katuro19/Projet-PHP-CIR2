@@ -12,28 +12,24 @@ function loadTags() {
 }
 
 
-// function on_page(){ 
-//     let elem_id = document.body.children[1].id;
-//     let elems = document.body.children[0].querySelectorAll('[href]');
-//     elems.forEach(elem => {
-//         if (elem.href.includes(elem_id) && elem.parentElement.parentElement.className.includes("dropdown")) {
-//             elem.parentElement.parentElement.parentElement.classList.add('onpage');
-//         }
-//         if(elem.href.includes(elem_id)) {
-//             elem.classList.add('onpage');
-//             return;
-//             }
-//         }
-//     );
-// }
+function on_page(){ 
+    let elem_id = document.body.children[1].id;
+    let elems = document.body.children[0].querySelectorAll('[href]');
+    elems.forEach(elem => {
+        if (elem.href.includes(elem_id) && elem.parentElement.parentElement.className.includes("dropdown")) {
+            elem.parentElement.parentElement.parentElement.classList.add('onpage');
+        }
+        if(elem.href.includes(elem_id)) {
+            elem.classList.add('onpage');
+            return;
+            }
+        }
+    );
+}
 
 document.querySelector(".text").addEventListener("click", () => {
     document.querySelector(".add_appointment_container").style.display = "flex";
 });
-
-// document.querySelector(".close").addEventListener("click", () => {
-//     document.querySelector(".add_appointment_container").style.display = "none";
-// });
 
 window.addEventListener("click", (event) => {
     if (event.target === document.querySelector(".add_appointment_container")) {
@@ -46,11 +42,8 @@ document.querySelector(".validate_add_appointment").addEventListener("click", ()
     
 });
 
-
-
-// Appeler la fonction pour charger les balises au chargement de la page
 loadTags();
-// on_page();
+on_page();
 
 
 
