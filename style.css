@@ -5,7 +5,6 @@
 #navBar {
     font-size: large;
     height: 80px
-    
 }
 
 .onpage {
@@ -82,13 +81,25 @@ a.nav-link {
     z-index: 10;
 }
 
-body{
-    background-color: var(--lightblue) !important;
+body {
+    background-color: var(--lightblue) !important;   
+}
+
+.templatePrincipal {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
+    font-family: arial
+}
+
+html {
+    font-size: 10px;
+    font-family: arial;
 }
 
 
 :root {
-    --pseudowhite: #EAF2EF;
     --lightblue: #7895E0;
     --darkblue: #4069D1;
     --onpage_blue: #2A5DDD;

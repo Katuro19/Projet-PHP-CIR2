@@ -18,9 +18,6 @@ function on_page(){
     let elem_id = document.body.children[1].id;
     let elems = document.body.children[0].querySelectorAll('[href]');
     elems.forEach(elem => {
-        if (elem.href.includes(elem_id) && elem.parentElement.parentElement.className.includes("dropdown")) {
-            elem.parentElement.parentElement.parentElement.classList.add('onpage');
-        }
         if(elem.href.includes(elem_id)) {
             elem.classList.add('onpage');
             return;

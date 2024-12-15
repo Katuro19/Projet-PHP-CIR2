@@ -946,3 +946,5 @@ include_once 'database/databases.php';
         <a class="nav-link" href="logout.php">Logout</a>
     </footer>
 </body>
+
+</html>

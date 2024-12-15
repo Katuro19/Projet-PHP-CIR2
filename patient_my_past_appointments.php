@@ -24,8 +24,8 @@ include_once 'database/databases.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
-<body>
-<header id="navBarHeader">
+<body class="templatePrincipal">
+    <header id="navBarHeader">
         <nav class="navbar navbar-expand-lg " id="navBar">
             <div class="container-fluid" style="z-index: 10; background-color: var(--darkblue);">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -161,3 +161,5 @@ include_once 'database/databases.php';
         <a class="nav-link" href="logout.php">Logout</a>
     </footer>
 </body>
+
+</html>
