@@ -3,6 +3,8 @@ function loadTags() {
     //Change des paramètres css par défaut de Bootstrap, qui ne conviennent pas
     var e = document.getElementById('navBar');
     e.style.setProperty('background-color', 'var(--darkblue)');
+    e = document.body;
+    e.style.setProperty('background-color', 'var(--lightblue)');
     e = document.querySelector('.container-fluid');
     e.style.setProperty('padding-left', '0px');
     e = document.querySelector('.navbar');

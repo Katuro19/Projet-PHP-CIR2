@@ -82,6 +82,11 @@ a.nav-link {
     z-index: 10;
 }
 
+body{
+    background-color: var(--lightblue) !important;
+}
+
+
 :root {
     --pseudowhite: #EAF2EF;
     --lightblue: #7895E0;
