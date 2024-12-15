@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS "patients" (
 	"id" INTEGER PRIMARY KEY NOT NULL UNIQUE,
 	"firstname" TEXT NOT NULL,
 	"lastname"	TEXT NOT NULL,
-	"email" TEXT NOT NULL,
+	"email" TEXT NOT NULL UNIQUE,
 	"phone" TEXT NOT NULL,
 	"password" TEXT NOT NULL
 );
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS "doctors" (
 	"id" INTEGER PRIMARY KEY NOT NULL UNIQUE,
 	"firstname"	TEXT NOT NULL,
 	"lastname"	TEXT NOT NULL,
-	"email"	TEXT NOT NULL,
+	"email"	TEXT NOT NULL UNIQUE,
 	"phone" TEXT NOT NULL,
 	"password"	TEXT NOT NULL DEFAULT 'password',
 	"postcode" TEXT NOT NULL DEFAULT '999999',

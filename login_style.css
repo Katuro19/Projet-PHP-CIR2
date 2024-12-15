@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #728ed1;
+  }
+  
+  .container {
+    display: flex;
+    width: 70%;
+    height: 500px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+  
+  .photo-section {
+    flex: 1;
+    background-color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .photo-placeholder {
+    transform: rotate(-30deg);
+    font-size: 24px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .form-section {
+    flex: 1;
+    padding: 20px 40px;
+  }
+  
+  .tab-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .tab {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .tab.active {
+    background-color: #ddd;
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .password-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-container input {
+    flex: 1;
+  }
+  
+  .toggle-password {
+    cursor: pointer;
+    margin-left: -25px;
+  }
+  
+  .options {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .forgot-password {
+    display: block;
+    margin: 10px 0;
+    color: #728ed1;
+    text-decoration: none;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #728ed1;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #5c7bb0;
+  }
+  
+  
+  .error {
+    color:red;
+    align-items: center;
+    padding-top: 10px;
+
+
+  }
