@@ -8,7 +8,7 @@ session_start();
 // Check if the user is already logged in via session
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     // Redirect to dashboard if already logged in
-    if($_SESSION['user_type' === 'doctor'])
+    if($_SESSION['user_type'] === 'doctor')
         header("Location: doctors_home.php");
     else
         header("Location: patient_home.php");
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['firstname'] = $patient['firstname'];
             $_SESSION['lastname'] = $patient['lastname'];
             $_SESSION['user_type'] = $userType;
-            header("Location: home.php");
+            header("Location: patient_home.php");
             exit();
         }
         else {
@@ -55,7 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['id'] = $doctor['id'];
             $_SESSION['firstname'] = $doctor['firstname'];
             $_SESSION['lastname'] = $doctor['lastname'];
-            header("Location: home.php");
+            $_SESSION['user_type'] = $userType;
+            header("Location: doctors_home.php");
             exit();
         }
         else {
