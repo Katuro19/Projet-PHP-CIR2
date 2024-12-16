@@ -6,7 +6,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once 'database/requests.php';
 include_once 'database/databases.php';
-
+if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
+    header('Location: login.php');
+    exit();
+}
 ?>
 
 
@@ -476,6 +479,7 @@ include_once 'database/databases.php';
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
+                                                                                                                    dskvsdlvjnsdv
                                                                                                                 </div>
                                                                                                             </a>
                                                                                                         </div>
