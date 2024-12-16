@@ -54,14 +54,14 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                         </li>
                     </ul>
                     <ul class="add_appointment">
-                    <?php
+                        <?php
                         if ($_SESSION['user_type'] == 'doctor') {
                             echo "<button class=\"text\" title=\"click here to add an empty appointment\" type=\"button\">+</button>";
                         } else {
                             echo "<button class=\"text\" title=\"click here to make an appointment\" type=\"button\">+</button>";
                         }
                         ?>
-                        
+
                         <div class="add_appointment_container">
                             <div class="add_appointment_content">
                                 <h1>Add an appointment</h1>
@@ -1031,7 +1031,10 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
     </div>
     <br><br><br><br>
     <footer class="footer">
-        <a class="nav-link" href="logout.php">Logout</a>
+        <form action="logout.php" method="POST">
+            <br><br>
+            <button class="disconnect" type="submit">Logout</button>
+        </form>
     </footer>
 </body>
 
