@@ -1,7 +1,13 @@
 
 
 <?php
+
+require './database/requests.php';
+require './database/databases.php';
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $errorOccured = "";
     $first_name = htmlspecialchars($_POST['first_name']);
     $last_name = htmlspecialchars($_POST['last_name']);
     $email = htmlspecialchars($_POST['email']);
@@ -11,11 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Basic validations
     if ($email !== $confirm_email) {
-        echo "Emails do not match!";
+        $errorOccured = "Emails do not match!";
     } elseif ($password !== $confirm_password) {
-        echo "Passwords do not match!";
+        $errorOccured = "Passwords do not match!";
     } else {
-        echo "Account created successfully!";
         // Database insertion code here
     }
 }
@@ -61,6 +66,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <span class="toggle-password" onclick="togglePassword('patientConfirmPassword')">👁️</span>
         </div>
         <button type="submit" class="btn">Create account</button>
+        <?php
+                if($errorOccured != ""){
+                    echo "<div class='error-container'>".$errorOccured."</div>";
+                }
+            ?>
       </form>
 
       <!-- Doctor Form -->
@@ -82,9 +92,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="expert-container" style='display-flex : center'>
                 <select name="expertise" required>
                 <option value="" disabled selected>Expertise</option>
-                <option value="Cardiology">Cardiology</option>
-                <option value="Neurology">Neurology</option>
-                <option value="Pediatrics">Pediatrics</option>
+                <?php 
+                    
+                    foreach($Expertise->request_all(false,false) as $expertise){
+                        echo "<option value='".$expertise['name']."'>".$expertise['name']."</option>";
+                      }
+                    
+                ?>
                 </select>
         </div>
         <div class="password-container">

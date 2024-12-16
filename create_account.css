@@ -74,6 +74,7 @@
   .btn {
     width: 100%;
     padding: 10px;
+    margin-top : 10px;
     background-color: #728ed1;
     color: #fff;
     border: none;
@@ -91,7 +92,8 @@
   .password-container,
   .email-container,
   .expert-container,
-  .ppp-container{
+  .ppp-container,
+  .error-container{
     display: flex;
     justify-content: space-between;
     gap: 10px; /* Adds space between the fields */
@@ -104,3 +106,7 @@
     flex: 1; /* Makes both inputs equal width */
   }
 
+.error-container{
+    color:red;
+    margin-top : 10px;
+}
