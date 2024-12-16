@@ -94,7 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <option value="" disabled selected>Expertise</option>
                 <?php 
                     
-                    foreach($Expertise->request_all(true,true) as $expertise){
+                    foreach($Expertise->request_all(false,false) as $expertise){
                         echo "<option value='".$expertise['name']."'>".$expertise['name']."</option>";
                       }
                     
