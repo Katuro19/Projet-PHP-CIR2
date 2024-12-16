@@ -8,7 +8,11 @@ session_start();
 // Check if the user is already logged in via session
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     // Redirect to dashboard if already logged in
-    header("Location: home.php");
+    if($_SESSION['user_type' === 'doctor'])
+        header("Location: doctors_home.php");
+    else
+        header("Location: patient_home.php");
+  
     exit();
 }
 
