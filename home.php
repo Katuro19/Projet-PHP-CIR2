@@ -54,7 +54,14 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                         </li>
                     </ul>
                     <ul class="add_appointment">
-                        <button class="text" title="click here to add an empty appointment" type="button">+</button>
+                    <?php
+                        if ($_SESSION['user_type'] == 'doctor') {
+                            echo "<button class=\"text\" title=\"click here to add an empty appointment\" type=\"button\">+</button>";
+                        } else {
+                            echo "<button class=\"text\" title=\"click here to make an appointment\" type=\"button\">+</button>";
+                        }
+                        ?>
+                        
                         <div class="add_appointment_container">
                             <div class="add_appointment_content">
                                 <h1>Add an appointment</h1>
@@ -433,10 +440,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -446,10 +450,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -459,10 +460,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 274.5px 0% -374.5px; z-index: 1;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -472,83 +470,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 387px 0% -487px; z-index: 1;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                    dskvsdlvjnsdv
-                                                                                                                </div>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-highlight-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-bgevent-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-business-container">
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <div
-                                                                                                        class="fc-content-col">
-                                                                                                        <div
-                                                                                                            class="fc-event-container fc-helper-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-event-container">
-                                                                                                            <a class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 274.5px 0% -374.5px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 387px 0% -487px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -578,10 +500,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -591,10 +510,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -604,10 +520,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 274.5px 0% -374.5px; z-index: 1;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -617,10 +530,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 387px 0% -487px; z-index: 1;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -650,10 +560,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -663,10 +570,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -676,10 +580,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 274.5px 0% -374.5px; z-index: 1;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -689,10 +590,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 387px 0% -487px; z-index: 1;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -722,10 +620,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -735,10 +630,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -748,10 +640,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 274.5px 0% -374.5px; z-index: 1;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -761,10 +650,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 387px 0% -487px; z-index: 1;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -794,10 +680,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -807,10 +690,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -820,10 +700,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 274.5px 0% -374.5px; z-index: 1;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -833,10 +710,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 387px 0% -487px; z-index: 1;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -866,10 +740,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -879,10 +750,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -892,10 +760,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 274.5px 0% -374.5px; z-index: 1;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">
@@ -905,10 +770,67 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                                                                                                 title="Voir"
                                                                                                                 style="inset: 387px 0% -487px; z-index: 1;">
                                                                                                                 <div
-                                                                                                                    class="fc-content">
-                                                                                                                    <div
-                                                                                                                        class="fc-title">
-                                                                                                                    </div>
+                                                                                                                    class="fc-title">
+                                                                                                                </div>
+                                                                                                                <div
+                                                                                                                    class="fc-bg">
+                                                                                                                </div>
+                                                                                                            </a>
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="fc-highlight-container">
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="fc-bgevent-container">
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="fc-business-container">
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <div
+                                                                                                        class="fc-content-col">
+                                                                                                        <div
+                                                                                                            class="fc-event-container fc-helper-container">
+                                                                                                        </div>
+                                                                                                        <div
+                                                                                                            class="fc-event-container">
+                                                                                                            <a class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
+                                                                                                                title="Voir"
+                                                                                                                style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
+                                                                                                                <div
+                                                                                                                    class="fc-title">
+                                                                                                                </div>
+                                                                                                                <div
+                                                                                                                    class="fc-bg">
+                                                                                                                </div>
+                                                                                                            </a><a
+                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
+                                                                                                                title="Voir"
+                                                                                                                style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
+                                                                                                                <div
+                                                                                                                    class="fc-title">
+                                                                                                                </div>
+                                                                                                                <div
+                                                                                                                    class="fc-bg">
+                                                                                                                </div>
+                                                                                                            </a><a
+                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
+                                                                                                                title="Voir"
+                                                                                                                style="inset: 274.5px 0% -374.5px; z-index: 1;">
+                                                                                                                <div
+                                                                                                                    class="fc-title">
+                                                                                                                </div>
+                                                                                                                <div
+                                                                                                                    class="fc-bg">
+                                                                                                                </div>
+                                                                                                            </a><a
+                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
+                                                                                                                title="Voir"
+                                                                                                                style="inset: 387px 0% -487px; z-index: 1;">
+                                                                                                                <div
+                                                                                                                    class="fc-title">
                                                                                                                 </div>
                                                                                                                 <div
                                                                                                                     class="fc-bg">

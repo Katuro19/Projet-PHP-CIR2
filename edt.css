@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-/* Timetable CSS */
 .ui-widget-content a {
     color: inherit
 }
@@ -15,11 +14,6 @@
     width: 100%;
     font-size: 16px;
     font-family: arial
-}
-
-.planning .fc-time-grid-event .fc-content {
-    word-wrap: break-word;
-    cursor: pointer
 }
 
 .planning .schedule .fc-event .fc-title {
@@ -53,8 +47,7 @@ h2 {
 }
 
 .ui-widget-header {
-    color: #fff;
-    /* font-weight:400 */
+    color: #fff
 }
 
 .fc {
@@ -95,16 +88,11 @@ h2 {
 
 .fc-view-container table thead tr th {
     background-color: var(--lightblue);
-    ;
     color: #525252;
     border-collapse: separate;
     padding: 5px;
     border-radius: 3px !important;
     border: 0
-}
-
-.fc-view-container table thead tr .fc-sat {
-    background-color: rgba(40, 40, 40, .07)
 }
 
 .fc-view-container table tbody tr .fc-day {
@@ -129,10 +117,6 @@ h2 {
 
 table tbody tr td {
     color: #525252
-}
-
-body.templatePrincipal {
-    background-color: var(--lightblue)
 }
 
 .templatePrincipal .fc-view-container .fc-event {
@@ -343,7 +327,6 @@ html {
     font-size: 14px;
     color: #282828;
     margin-left: 280px;
-    /* vertical-align:top; */
     padding: 1rem;
     box-sizing: border-box
 }
@@ -370,11 +353,6 @@ a {
     border-collapse: collapse
 }
 
-.fc-content,
-.fc-view-container {
-    background-color: var(--lightblue);
-}
-
 ::-webkit-input-placeholder,
 :-ms-input-placeholder {
     color: #9f9f9f
@@ -397,7 +375,6 @@ a {
     position: relative
 }
 
-.fc-event .fc-content,
 .fc-time-grid .fc-slats,
 .fc-time-grid .fc-bgevent-container {
     position: relative;
@@ -413,8 +390,7 @@ a {
     z-index: 1
 }
 
-.c-time-grid-event,
-.fc-time-grid-event .fc-content {
-    overflow: hidden
+body.templatePrincipal,
+.fc-view-container {
+    background-color: var(--lightblue)
 }
-
