@@ -8,6 +8,8 @@ require './database/databases.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $errorOccured = "";
+    $postcode = null;
+    $expertise = null;
     $first_name = htmlspecialchars($_POST['first_name']);
     $last_name = htmlspecialchars($_POST['last_name']);
     $email = htmlspecialchars($_POST['email']);
@@ -15,13 +17,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = htmlspecialchars($_POST['password']);
     $confirm_password = htmlspecialchars($_POST['confirm_password']);
 
+    $user_type = 'patient';
+    if(isset($_POST['expertise']) && isset($_POST['postcode'])){
+        $expertise = $_POST['expertise'];
+        $postcode = $_POST['postcode'];
+        $user_type = 'doctor';
+    }
+
+
     // Basic validations
     if ($email !== $confirm_email) {
         $errorOccured = "Emails do not match!";
     } elseif ($password !== $confirm_password) {
         $errorOccured = "Passwords do not match!";
     } else {
-        // Database insertion code here
+        if($user_type === 'doctor'){
+            $datas = $Doctors->request_if('email',$email);
+            if($datas == []){
+                //Createhere
+            }
+            else{
+                $errorOccured = "An account with this email already exist. Please <a href='./login.php'>login</a> instead";
+            }
+        }
+        elseif($user_type === 'patient'){
+            $datas = $Patients->request_if('email',$email);
+            if($datas == []){
+                //Create here
+            }      
+            else{
+                $errorOccured = "An account with this email already exist. Please <a href='./login.php'>login</a> instead";
+            }      
+        }
     }
 }
 ?>

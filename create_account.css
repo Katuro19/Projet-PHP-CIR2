@@ -92,8 +92,7 @@
   .password-container,
   .email-container,
   .expert-container,
-  .ppp-container,
-  .error-container{
+  .ppp-container{
     display: flex;
     justify-content: space-between;
     gap: 10px; /* Adds space between the fields */
@@ -110,3 +109,4 @@
     color:red;
     margin-top : 10px;
 }
+

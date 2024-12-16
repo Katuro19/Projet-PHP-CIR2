@@ -11,9 +11,12 @@ INSERT INTO "patients" values (0,'Kévin','Pereira','thisIsMyRealEmail@gmail.com
 INSERT INTO "patients" values (1,'Louis','Lacoste','anotherRealEmail@gmail.com','0620239690','password');
 
 INSERT INTO "doctors" values (0,'Oscar','Lavigne','yesyes@outlook.com','0649777963','verydemurepassword','78500',5);
+INSERT INTO "doctors" values (1,'Pierre-Luc','Maurice','another@outlook.com','0636099659','sheep','89000',0);
 
 INSERT INTO "rendezvous" values (0,'25/01/0470','08:00','09:30',0 ,0, 3);
 INSERT INTO "rendezvous"(id, date, start, "end", doctor_id, location_id) VALUES (1, '25/01/2024', '08:00', '09:30', 0, 3);
+INSERT INTO "rendezvous" VALUES (2, '26/01/2024', '08:00', '09:30',1 ,0, 2);
+INSERT INTO "rendezvous" VALUES (3, '26/01/2024', '08:00', '09:30',0 ,1, 2);
 -- Exemples: 
 /* select d.firstname as "Doctors name", p.firstname as "Patient name", l.name as "Location" from rendezvous as rv join doctors d on rv.doctor_id = d.id join patients p on rv.patient_id = p.id join locations l on rv.location_id = l.id;
 
