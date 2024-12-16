@@ -1,0 +1,106 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+  }
+  
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #728ed1;
+  }
+
+  h2 {
+    display :flex;
+    padding-bottom : 15px;
+    justify-content: center;
+  }
+  
+  .container {
+    display: flex;
+    width: 50%;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+  
+  .form-section {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .tab-container {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .tab {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+  }
+  
+  .tab.active {
+    background-color: #ddd;
+  }
+  
+  input[type="text"], input[type="password"], input[type="email"], select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .password-container {
+    position: relative;
+  }
+  
+  .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #728ed1;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #5c7bb0;
+  }
+
+
+  .name-container,
+  .password-container,
+  .email-container,
+  .expert-container,
+  .ppp-container{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; /* Adds space between the fields */
+  }
+  
+  .name-container input,
+  .password-container input,
+  .ppp-container input,
+  .expert-container input{
+    flex: 1; /* Makes both inputs equal width */
+  }
+
