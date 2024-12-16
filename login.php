@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['id'] = $patient['id'];
             $_SESSION['firstname'] = $patient['firstname'];
             $_SESSION['lastname'] = $patient['lastname'];
+            $_SESSION['user_type'] = $userType;
             header("Location: home.php");
             exit();
         }
