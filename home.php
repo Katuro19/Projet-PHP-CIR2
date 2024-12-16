@@ -986,10 +986,12 @@ include_once 'database/databases.php';
                         <th style="border: 1px solid white;">Start Time</th>
                         <th style="border: 1px solid white;">End Time</th>
                         <?php
-                        //check if the user is a doctor or a patient
+                        if ($_SESSION['user_type'] == 'doctor') {
+                            echo "<th style=\"border: 1px solid white;\">Patient</th>";
+                        } else {
+                            echo "<th style=\"border: 1px solid white;\">Doctor</th>";
+                        }
                         ?>
-                        <th style="border: 1px solid white;">Doctor</th>
-                        <th style="border: 1px solid white;">Patient</th>
                         <th style="border: 1px solid white;">Location</th>
                         <th style="border: 1px solid white;">Expertise</th>
                     </tr>
@@ -1003,11 +1005,14 @@ include_once 'database/databases.php';
                             echo "<tr id=\"table_my_appointments_" . $rendezvous['id'] . "\">
                                         <td id=\"my_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
                                         <td id=\"my_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
-                                        <td id=\"my_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>
-                                        "/*check if the user is a doctor or a patient*/ . "
-                                        <td id=\"my_appointments_" . strtoupper($Doctors->request($rendezvous['doctor_id'], false, false)['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Doctors->request($rendezvous['doctor_id'], false, false)['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'], false, false)['firstname'] . "</td>
-                                        <td id=\"my_appointments_" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "</td>
-                                        <td id=\"my_appointments_" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "</td>
+                                        <td id=\"my_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>";
+                            /*check if the user is a doctor or a patient*/
+                            if ($_SESSION['user_type'] == 'doctor') {
+                                echo "<td id=\"my_appointments_" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "</td>";
+                            } else {
+                                echo "<td id=\"my_appointments_" . strtoupper($Doctors->request($rendezvous['doctor_id'], false, false)['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Doctors->request($rendezvous['doctor_id'], false, false)['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'], false, false)['firstname'] . "</td>";
+                            }
+                            echo "<td id=\"my_appointments_" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "</td>
                                         <td id=\"my_appointments_" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "</td>
                                     </tr>";
                         }
@@ -1056,10 +1061,12 @@ include_once 'database/databases.php';
                     <th style="border: 1px solid white;">Start Time</th>
                     <th style="border: 1px solid white;">End Time</th>
                     <?php
-                    //check if the user is a doctor or a patient
+                    if ($_SESSION['user_type'] == 'doctor') {
+                        echo "<th style=\"border: 1px solid white;\">Patient</th>";
+                    } else {
+                        echo "<th style=\"border: 1px solid white;\">Doctor</th>";
+                    }
                     ?>
-                    <th style="border: 1px solid white;">Doctor</th>
-                    <th style="border: 1px solid white;">Patient</th>
                     <th style="border: 1px solid white;">Location</th>
                     <th style="border: 1px solid white;">Expertise</th>
                 </tr>
@@ -1070,15 +1077,18 @@ include_once 'database/databases.php';
                     $rendezvousDate = DateTime::createFromFormat('d/m/Y', $rendezvous['date']);
                     $currentDate = new DateTime(); // current date
                     if ($rendezvousDate < $currentDate) {
-                        echo "<tr id=\"table_my_past_appointments_" . $rendezvous['id'] . "\">
-                                        <td id=\"my_past_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
-                                        <td id=\"my_past_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
-                                        <td id=\"my_past_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>
-                                        "/*check if the user is a doctor or a patient*/ . "
-                                        <td id=\"my_past_appointments_" . strtoupper($Doctors->request($rendezvous['doctor_id'], false, false)['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Doctors->request($rendezvous['doctor_id'], false, false)['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'], false, false)['firstname'] . "</td>
-                                        <td id=\"my_past_appointments_" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "</td>
-                                        <td id=\"my_past_appointments_" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "</td>
-                                        <td id=\"my_past_appointments_" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "</td>
+                        echo "<tr id=\"table_my_appointments_" . $rendezvous['id'] . "\">
+                                        <td id=\"my_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
+                                        <td id=\"my_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
+                                        <td id=\"my_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>";
+                        /*check if the user is a doctor or a patient*/
+                        if ($_SESSION['user_type'] == 'doctor') {
+                            echo "<td id=\"my_appointments_" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "</td>";
+                        } else {
+                            echo "<td id=\"my_appointments_" . strtoupper($Doctors->request($rendezvous['doctor_id'], false, false)['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Doctors->request($rendezvous['doctor_id'], false, false)['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'], false, false)['firstname'] . "</td>";
+                        }
+                        echo "<td id=\"my_appointments_" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "</td>
+                                        <td id=\"my_appointments_" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "</td>
                                     </tr>";
                     }
                 }
