@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['firstname'] = $patient['firstname'];
             $_SESSION['lastname'] = $patient['lastname'];
             $_SESSION['user_type'] = $userType;
-            header("Location: home.php");
+            header("Location: patient_home.php");
             exit();
         }
         else {
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['id'] = $doctor['id'];
             $_SESSION['firstname'] = $doctor['firstname'];
             $_SESSION['lastname'] = $doctor['lastname'];
-            header("Location: home.php");
+            header("Location: doctors_home.php");
             exit();
         }
         else {
