@@ -55,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['id'] = $doctor['id'];
             $_SESSION['firstname'] = $doctor['firstname'];
             $_SESSION['lastname'] = $doctor['lastname'];
+            $_SESSION['user_type'] = $userType;
             header("Location: doctors_home.php");
             exit();
         }
