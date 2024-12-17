@@ -30,6 +30,14 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
 </head>
 
 <body class="templatePrincipal">
+    <script>
+        const user_type = <?php echo json_encode($_SESSION['user_type']); ?>;
+        const user_element = document.createElement('div');
+        document.body.appendChild(user_element);
+        user_element.id = "user_type";
+        user_element.innerHTML = user_type;
+        user_element.style.display = 'none';
+    </script>
     <header id="navBarHeader">
         <nav class="navbar navbar-expand-lg " id="navBar">
             <div class="container-fluid" style="z-index: 10; background-color: var(--darkblue);">
@@ -71,7 +79,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                     <br><br>
                                     <label for="list2">Choose a time slot :</label>
                                     <select id="time" name="time">
-                                        <option value="default" selected>Chose an option</option>
+                                        <option value="default" selected>Choose an option</option>
                                         <!-- instert php request here to get available time slots  for the selected day-->
                                         <?php
                                         echo "tamere";
@@ -81,7 +89,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                     <br><br>
                                     <label for="list3">Choose a location :</label>
                                     <select id="location" name="location">
-                                        <option value="default" selected>Chose an option</option>
+                                        <option value="default" selected>Choose an option</option>
                                         <!-- instert php request here to get available locations-->
                                         <?php
 
@@ -881,24 +889,24 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
             if ($_SESSION['user_type'] == 'patient') {
                 echo "<label for=\"list2\">Doctor</label>
                     <select id=\"doctor_my_appointments\" name=\"doctor\">
-                    <option value=\"default\" selected>Chose an option</option>";
-                    foreach ($Doctors->request_all(false, false) as $doctor) {
-                        echo "<option value=\"doctor_" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "\">" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "</option>";
-                    }
+                    <option value=\"default\" selected>Choose an option</option>";
+                foreach ($Doctors->request_all(false, false) as $doctor) {
+                    echo "<option value=\"doctor_" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "\">" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "</option>";
+                }
                 echo "</select>";
             } else {
                 echo "<label for=\"list2\">Patient</label>
                     <select id=\"patient_my_appointments\" name=\"patient\">
-                    <option value=\"default\" selected>Chose an option</option>";
-                    foreach ($Patients->request_all(false, false) as $patient) {
-                        echo "<option value=\"patient_" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "\">" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "</option>";
-                    }
+                    <option value=\"default\" selected>Choose an option</option>";
+                foreach ($Patients->request_all(false, false) as $patient) {
+                    echo "<option value=\"patient_" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "\">" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "</option>";
+                }
                 echo "</select>";
             }
             ?>
             <label for="list2">Expertise</label>
             <select id="expertise_my_appointments" name="expertise">
-                <option value="default" selected>Chose an option</option>
+                <option value="default" selected>Choose an option</option>
                 <?php
                 foreach ($Expertise->request_all(false, false) as $expertise) {
                     echo "<option value=\"expertise_" . $expertise['name'] . "\">" . $expertise['name'] . "</option>";
@@ -907,7 +915,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
             </select>
             <label for="list3">Location :</label>
             <select id="location_my_appointments" name="location">
-                <option value="default" selected>Chose an option</option>
+                <option value="default" selected>Choose an option</option>
                 <?php
                 foreach ($Locations->request_all(false, false) as $location) {
                     echo "<option value=\"location_" . $location['name'] . "\">" . $location['name'] . " - " . $location['postcode'] . "</option>";
@@ -937,7 +945,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                     if ($_SESSION['user_type'] == 'doctor') {
                         foreach ($Rendezvous->request_if('doctor_id', $_SESSION['id'], false, false) as $rendezvous) {
                             $rendezvousDate = DateTime::createFromFormat('d/m/Y', $rendezvous['date']);
-                            $currentDate = new DateTime(); // current date
+                            $currentDate = new DateTime();
                             if ($rendezvousDate > $currentDate) {
                                 echo "<tr id=\"table_my_appointments_" . $rendezvous['id'] . "\">
                                         <td id=\"my_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
@@ -952,7 +960,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                     } else {
                         foreach ($Rendezvous->request_if('patient_id', $_SESSION['id'], false, false) as $rendezvous) {
                             $rendezvousDate = DateTime::createFromFormat('d/m/Y', $rendezvous['date']);
-                            $currentDate = new DateTime(); // current date
+                            $currentDate = new DateTime();
                             if ($rendezvousDate > $currentDate) {
                                 echo "<tr id=\"table_my_appointments_" . $rendezvous['id'] . "\">
                                         <td id=\"my_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
@@ -972,28 +980,28 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
     </div>
     <br><br><br><br>
     <div class="my_past_appointments">
-    <?php
-            if ($_SESSION['user_type'] == 'patient') {
-                echo "<label for=\"list2\">Doctor</label>
+        <?php
+        if ($_SESSION['user_type'] == 'patient') {
+            echo "<label for=\"list2\">Doctor</label>
                     <select id=\"doctor_my_past_appointments\" name=\"doctor\">
-                    <option value=\"default\" selected>Chose an option</option>";
-                    foreach ($Doctors->request_all(false, false) as $doctor) {
-                        echo "<option value=\"doctor_" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "\">" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "</option>";
-                    }
-                echo "</select>";
-            } else {
-                echo "<label for=\"list2\">Patient</label>
-                    <select id=\"patient_my_past_appointments\" name=\"patient\">
-                    <option value=\"default\" selected>Chose an option</option>";
-                    foreach ($Patients->request_all(false, false) as $patient) {
-                        echo "<option value=\"patient_" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "\">" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "</option>";
-                    }
-                echo "</select>";
+                    <option value=\"default\" selected>Choose an option</option>";
+            foreach ($Doctors->request_all(false, false) as $doctor) {
+                echo "<option value=\"doctor_" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "\">" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "</option>";
             }
-            ?>
+            echo "</select>";
+        } else {
+            echo "<label for=\"list2\">Patient</label>
+                    <select id=\"patient_my_past_appointments\" name=\"patient\">
+                    <option value=\"default\" selected>Choose an option</option>";
+            foreach ($Patients->request_all(false, false) as $patient) {
+                echo "<option value=\"patient_" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "\">" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "</option>";
+            }
+            echo "</select>";
+        }
+        ?>
         <label for="list2">Expertise</label>
         <select id="expertise_my_past_appointments" name="expertise">
-            <option value="default" selected>Chose an option</option>
+            <option value="default" selected>Choose an option</option>
 
             <?php
             foreach ($Expertise->request_all(false, false) as $expertise) {
@@ -1003,7 +1011,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
         </select>
         <label for="list3">Location :</label>
         <select id="location_my_past_appointments" name="location">
-            <option value="default" selected>Chose an option</option>
+            <option value="default" selected>Choose an option</option>
             <?php
             foreach ($Locations->request_all(false, false) as $location) {
                 echo "<option value=\"location_" . $location['name'] . "\">" . $location['name'] . " - " . $location['postcode'] . "</option>";
@@ -1033,7 +1041,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                 if ($_SESSION['user_type'] == 'doctor') {
                     foreach ($Rendezvous->request_if('doctor_id', $_SESSION['id'], false, false) as $rendezvous) {
                         $rendezvousDate = DateTime::createFromFormat('d/m/Y', $rendezvous['date']);
-                        $currentDate = new DateTime(); // current date
+                        $currentDate = new DateTime();
                         if ($rendezvousDate < $currentDate) {
                             echo "<tr id=\"table_my_past_appointments_" . $rendezvous['id'] . "\">
                                         <td id=\"my_past_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
@@ -1048,7 +1056,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                 } else {
                     foreach ($Rendezvous->request_if('patient_id', $_SESSION['id'], false, false) as $rendezvous) {
                         $rendezvousDate = DateTime::createFromFormat('d/m/Y', $rendezvous['date']);
-                        $currentDate = new DateTime(); // current date
+                        $currentDate = new DateTime();
                         if ($rendezvousDate < $currentDate) {
                             echo "<tr id=\"table_my_past_appointments_" . $rendezvous['id'] . "\">
                                         <td id=\"my_past_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
@@ -1064,14 +1072,83 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                 ?>
             </tbody>
         </table>
-        <!-- js to dynamicly adjust the visible elements  -->
     </div>
     <br><br><br><br>
     <!-- bonus mdr -->
-    <div class="my_patients">
-        <input type="text" placeholder="First name" id="first_name">
-        <input type="text" placeholder="Last name" id="last_name">
-    </div>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <?php
+
+    if ($_SESSION['user_type'] == 'doctor') {
+        echo "<h2>My patients</h2>
+            <div class=\"my_patients\">
+            <input type=\"text\" placeholder=\"First name\" id=\"first_name\">
+            <input type=\"text\" placeholder=\"Last name\" id=\"last_name\">
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style=\"border: 1px solid white;\">Lasnamt</th>
+                        <th style=\"border: 1px solid white;\">Firstname</th>
+                        <th style=\"border: 1px solid white;\">Email</th>
+                        <th style=\"border: 1px solid white;\">Phone number</th>
+                    </tr>
+                </thead>
+                <tbody>";
+        $my_patients = $Rendezvous->request_if('doctor_id', $_SESSION['id'], false, false);
+        $patients_id = [];
+        foreach ($my_patients as $my_patient) {
+            array_push($patients_id, $my_patient['patient_id']);
+        }
+        $patients_id = array_unique($patients_id);
+        foreach ($patients_id as $id) {
+            $patient = $Patients->request($id, false, false);
+            echo "<tr>
+                    <td id=\"" . strtoupper($patient['lastname']) . "\" style=\"color: black;border: 1px solid white;\">" . strtoupper($patient['lastname']) . "</td>
+                    <td id=\"" . $patient['firstname'] . "\" style=\"color: black;border: 1px solid white;\">" . $patient['firstname'] . "</td>
+                    <td style=\"color: black;border: 1px solid white;\">" . $patient['email'] . "</td>
+                    <td style=\"color: black;border: 1px solid white;\">" . $patient['phone'] . "</td>
+                </tr>";
+        }
+    } else {
+        echo "<h2>My doctors</h2>
+            <div class=\"my_doctors\">
+            <input type=\"text\" placeholder=\"First name\" id=\"first_name\">
+            <input type=\"text\" placeholder=\"Last name\" id=\"last_name\">
+            </div>
+            <table>
+            <thead>
+                <tr>
+                    <th style=\"border: 1px solid white;\">Lasnamt</th>
+                    <th style=\"border: 1px solid white;\">Firstname</th>
+                    <th style=\"border: 1px solid white;\">Email</th>
+                    <th style=\"border: 1px solid white;\">Phone number</th>
+                </tr>
+            </thead>
+            <tbody>";
+        $my_doctors = $Rendezvous->request_if('patient_id', $_SESSION['id'], false, false);
+        $doctors_id = [];
+        foreach ($my_doctors as $my_doctor) {
+            array_push($doctors_id, $my_doctor['patient_id']);
+        }
+        $doctors_id = array_unique($doctors_id);
+        foreach ($doctors_id as $id) {
+            $doctor = $Doctors->request($id, false, false);
+            echo "<tr>
+                    <td id=\"" . strtoupper($doctor['lastname']) . "\" style=\"color: black;border: 1px solid white;\">" . strtoupper($doctor['lastname']) . "</td>
+                    <td id=\"" . $doctor['firstname'] . "\" style=\"color: black;border: 1px solid white;\">" . $doctor['firstname'] . "</td>
+                    <td style=\"color: black;border: 1px solid white;\">" . $doctor['email'] . "</td>
+                    <td style=\"color: black;border: 1px solid white;\">" . $doctor['phone'] . "</td>
+                </tr>";
+        }
+    }
+    ?>
+    </tbody>
+    </table>
     <br><br><br><br>
     <footer class="footer">
         <form action="logout.php" method="POST">
