@@ -20,6 +20,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
     <link rel="stylesheet" href="edt.css" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Page</title>
+    <script src="my_poc.js" defer></script>
     <script src="my_appointments.js" defer></script>
     <script src="my_past_appointments.js" defer></script>
     <script src="navbar.js" defer></script>
@@ -1074,25 +1075,17 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
         </table>
     </div>
     <br><br><br><br>
-    <!-- bonus mdr -->
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
     <?php
-
     if ($_SESSION['user_type'] == 'doctor') {
         echo "<h2>My patients</h2>
-            <div class=\"my_patients\">
-            <input type=\"text\" placeholder=\"First name\" id=\"first_name\">
-            <input type=\"text\" placeholder=\"Last name\" id=\"last_name\">
+            <div id=\"my_patients\">
+                <input type=\"text\" placeholder=\"Last name\" id=\"last_name\">
+                <input type=\"text\" placeholder=\"First name\" id=\"first_name\">
             </div>
             <table>
                 <thead>
                     <tr>
-                        <th style=\"border: 1px solid white;\">Lasnamt</th>
+                        <th style=\"border: 1px solid white;\">Lastname</th>
                         <th style=\"border: 1px solid white;\">Firstname</th>
                         <th style=\"border: 1px solid white;\">Email</th>
                         <th style=\"border: 1px solid white;\">Phone number</th>
@@ -1107,23 +1100,23 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
         $patients_id = array_unique($patients_id);
         foreach ($patients_id as $id) {
             $patient = $Patients->request($id, false, false);
-            echo "<tr>
-                    <td id=\"" . strtoupper($patient['lastname']) . "\" style=\"color: black;border: 1px solid white;\">" . strtoupper($patient['lastname']) . "</td>
-                    <td id=\"" . $patient['firstname'] . "\" style=\"color: black;border: 1px solid white;\">" . $patient['firstname'] . "</td>
+            echo "<tr class=\"my_poc_table\">
+                    <td id=\"my_poc_lastname_" . strtoupper($patient['lastname']) . "\" style=\"color: black;border: 1px solid white;\">" . strtoupper($patient['lastname']) . "</td>
+                    <td id=\"my_poc_firstname_" . $patient['firstname'] . "\" style=\"color: black;border: 1px solid white;\">" . $patient['firstname'] . "</td>
                     <td style=\"color: black;border: 1px solid white;\">" . $patient['email'] . "</td>
                     <td style=\"color: black;border: 1px solid white;\">" . $patient['phone'] . "</td>
                 </tr>";
         }
     } else {
         echo "<h2>My doctors</h2>
-            <div class=\"my_doctors\">
-            <input type=\"text\" placeholder=\"First name\" id=\"first_name\">
-            <input type=\"text\" placeholder=\"Last name\" id=\"last_name\">
+            <div id=\"my_doctors\">
+                <input type=\"text\" placeholder=\"Last name\" id=\"last_name\">
+                <input type=\"text\" placeholder=\"First name\" id=\"first_name\">
             </div>
             <table>
             <thead>
                 <tr>
-                    <th style=\"border: 1px solid white;\">Lasnamt</th>
+                    <th style=\"border: 1px solid white;\">Lastname</th>
                     <th style=\"border: 1px solid white;\">Firstname</th>
                     <th style=\"border: 1px solid white;\">Email</th>
                     <th style=\"border: 1px solid white;\">Phone number</th>
@@ -1138,9 +1131,9 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
         $doctors_id = array_unique($doctors_id);
         foreach ($doctors_id as $id) {
             $doctor = $Doctors->request($id, false, false);
-            echo "<tr>
-                    <td id=\"" . strtoupper($doctor['lastname']) . "\" style=\"color: black;border: 1px solid white;\">" . strtoupper($doctor['lastname']) . "</td>
-                    <td id=\"" . $doctor['firstname'] . "\" style=\"color: black;border: 1px solid white;\">" . $doctor['firstname'] . "</td>
+            echo "<tr class=\"my_poc_table\">
+                    <td id=\"my_poc_lastname_" . strtoupper($doctor['lastname']) . "\" style=\"color: black;border: 1px solid white;\">" . strtoupper($doctor['lastname']) . "</td>
+                    <td id=\"my_poc_firtsname_" . $doctor['firstname'] . "\" style=\"color: black;border: 1px solid white;\">" . $doctor['firstname'] . "</td>
                     <td style=\"color: black;border: 1px solid white;\">" . $doctor['email'] . "</td>
                     <td style=\"color: black;border: 1px solid white;\">" . $doctor['phone'] . "</td>
                 </tr>";
