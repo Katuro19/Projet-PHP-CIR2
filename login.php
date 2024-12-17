@@ -85,10 +85,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <title>Login Page</title>
 </head>
 <body>
+
   <div class="container">
     <!-- Left Section -->
     <div class="photo-section">
-      <div class="photo-placeholder">Photos</div>
+        <?php
+            $images = [
+                'doctor_1.jpg',
+            ];
+            $secrets_images = [
+                'secret.jpg',
+            ];
+            $randomImage = rand(0, count($images) - 1);
+            $toDisplay = "./img/".$images[$randomImage];
+
+            $secret = rand(0,1000); //fun
+            if($secret < 50){
+                $toDisplay = "./img/".$secrets_images[rand(0, count($secrets_images) - 1)]; //We grab a secret image
+                if($secret < 1){
+                    $toDisplay = './img/insane.jpg';
+                }
+            }
+            echo "<img src='".$toDisplay."'/>";
+        ?>
+        
     </div>
 
     <div class="form-section">

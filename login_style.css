@@ -13,6 +13,7 @@
     background-color: #728ed1;
   }
   
+
   .container {
     display: flex;
     width: 70%;
@@ -21,7 +22,9 @@
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     overflow: hidden;
-  }
+   }
+  
+
   
   .photo-section {
     flex: 1;
@@ -29,8 +32,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100px;
+    width: 100px;
   }
   
+
   .photo-placeholder {
     transform: rotate(-30deg);
     font-size: 24px;
