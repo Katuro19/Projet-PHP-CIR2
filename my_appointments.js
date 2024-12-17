@@ -1,5 +1,5 @@
 document.getElementById("date_my_appointments").addEventListener("input", filter);
-if (is_doctor) {
+if (is_doctor()) {
     document.getElementById("patient_my_appointments").addEventListener("input", filter);
 } else {
     document.getElementById("doctor_my_appointments").addEventListener("input", filter);
@@ -12,7 +12,7 @@ function filter() {
 
     let inputed_user;
     let inputed_date = document.getElementById("date_my_appointments").value;
-    if (is_doctor) {
+    if (is_doctor()) {
         inputed_user = document.getElementById("patient_my_appointments").value;
     } else {
         inputed_user = document.getElementById("doctor_my_appointments").value;

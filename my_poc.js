@@ -1,6 +1,6 @@
 function is_doctor() {
     if (document.getElementById("user_type").innerHTML == 'doctor') {
-        console.log("oui");
+        console.log("true");
         return true;
     }
     if (document.getElementById("user_type").innerHTML == 'patient') {
@@ -13,7 +13,7 @@ function is_doctor() {
 }
 
 
-if (is_doctor) {
+if (is_doctor()) {
     document.getElementById("my_patients").addEventListener("input", filter);
 } else {
     document.getElementById("my_doctors").addEventListener("input", filter);

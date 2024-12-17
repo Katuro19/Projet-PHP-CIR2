@@ -1,4 +1,4 @@
-if (is_doctor) {
+if (is_doctor()) {
     document.getElementById("patient_my_past_appointments").addEventListener("input", filter);
 } else {
     document.getElementById("doctor_my_past_appointments").addEventListener("input", filter);
@@ -10,7 +10,7 @@ document.getElementById("location_my_past_appointments").addEventListener("input
 function filter() {
 
     let inputed_user;
-    if (is_doctor) {
+    if (is_doctor()) {
         inputed_user = document.getElementById("patient_my_past_appointments").value;
     } else {
         inputed_user = document.getElementById("doctor_my_past_appointments").value;
