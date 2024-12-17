@@ -32,7 +32,7 @@ function filter() {
 
 
     let appointments = document.querySelectorAll('[id^="table_my_past_appointments_"]');
-    console.log(appointments);
+    //console.log(appointments);
 
     appointments.forEach(function (appointments) {
         let elems = appointments.querySelectorAll('[id^="my_past_appointments_"]');
@@ -51,11 +51,11 @@ function filter() {
 
 
 function is_doctor() {
-    if (document.getElementById("doctor_my_past_appointments") != undefined) {
+    if (document.getElementById("user_type").innerHTML == 'doctor') {
         console.log("true");
         return true;
     }
-    if (document.getElementById("patient_my_past_appointments") != undefined) {
+    if (document.getElementById("user_type").innerHTML == 'patient') {
         console.log("false");
         return false;
     }

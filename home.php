@@ -30,6 +30,14 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
 </head>
 
 <body class="templatePrincipal">
+    <script>
+        const user_type = <?php echo json_encode($_SESSION['user_type']); ?>;
+        const user_element = document.createElement('div');
+        document.body.appendChild(user_element);
+        user_element.id = "user_type";
+        user_element.innerHTML = user_type;
+        user_element.style.display = 'none';
+    </script>
     <header id="navBarHeader">
         <nav class="navbar navbar-expand-lg " id="navBar">
             <div class="container-fluid" style="z-index: 10; background-color: var(--darkblue);">
@@ -882,17 +890,17 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                 echo "<label for=\"list2\">Doctor</label>
                     <select id=\"doctor_my_appointments\" name=\"doctor\">
                     <option value=\"default\" selected>Chose an option</option>";
-                    foreach ($Doctors->request_all(false, false) as $doctor) {
-                        echo "<option value=\"doctor_" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "\">" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "</option>";
-                    }
+                foreach ($Doctors->request_all(false, false) as $doctor) {
+                    echo "<option value=\"doctor_" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "\">" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "</option>";
+                }
                 echo "</select>";
             } else {
                 echo "<label for=\"list2\">Patient</label>
                     <select id=\"patient_my_appointments\" name=\"patient\">
                     <option value=\"default\" selected>Chose an option</option>";
-                    foreach ($Patients->request_all(false, false) as $patient) {
-                        echo "<option value=\"patient_" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "\">" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "</option>";
-                    }
+                foreach ($Patients->request_all(false, false) as $patient) {
+                    echo "<option value=\"patient_" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "\">" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "</option>";
+                }
                 echo "</select>";
             }
             ?>
@@ -972,25 +980,25 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
     </div>
     <br><br><br><br>
     <div class="my_past_appointments">
-    <?php
-            if ($_SESSION['user_type'] == 'patient') {
-                echo "<label for=\"list2\">Doctor</label>
+        <?php
+        if ($_SESSION['user_type'] == 'patient') {
+            echo "<label for=\"list2\">Doctor</label>
                     <select id=\"doctor_my_past_appointments\" name=\"doctor\">
                     <option value=\"default\" selected>Chose an option</option>";
-                    foreach ($Doctors->request_all(false, false) as $doctor) {
-                        echo "<option value=\"doctor_" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "\">" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "</option>";
-                    }
-                echo "</select>";
-            } else {
-                echo "<label for=\"list2\">Patient</label>
+            foreach ($Doctors->request_all(false, false) as $doctor) {
+                echo "<option value=\"doctor_" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "\">" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "</option>";
+            }
+            echo "</select>";
+        } else {
+            echo "<label for=\"list2\">Patient</label>
                     <select id=\"patient_my_past_appointments\" name=\"patient\">
                     <option value=\"default\" selected>Chose an option</option>";
-                    foreach ($Patients->request_all(false, false) as $patient) {
-                        echo "<option value=\"patient_" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "\">" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "</option>";
-                    }
-                echo "</select>";
+            foreach ($Patients->request_all(false, false) as $patient) {
+                echo "<option value=\"patient_" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "\">" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "</option>";
             }
-            ?>
+            echo "</select>";
+        }
+        ?>
         <label for="list2">Expertise</label>
         <select id="expertise_my_past_appointments" name="expertise">
             <option value="default" selected>Chose an option</option>
