@@ -89,9 +89,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="container">
     <!-- Left Section -->
     <div class="photo-section">
+        <!-- <div class="photo-placeholder">Photos</div> -->
         <?php
             $images = [
                 'doctor_1.jpg',
+                'doctor_2.jpg'
             ];
             $secrets_images = [
                 'secret.jpg',
@@ -106,9 +108,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $toDisplay = './img/insane.jpg';
                 }
             }
-            echo "<img src='".$toDisplay."'/>";
-        ?>
-        
+            echo "<img class='photo-placeholder' src='".$toDisplay."'/>";
+        ?>        
     </div>
 
     <div class="form-section">
