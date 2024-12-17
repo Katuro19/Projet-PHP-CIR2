@@ -196,7 +196,6 @@ class db{
             if($details)
             echo "<br>Requested query : ".$query;
 
-
             $request = ($this->conn)->prepare($query);
             $request->execute($datas); //The execute take $datas to auto-bind
     
