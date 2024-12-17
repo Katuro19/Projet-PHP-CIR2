@@ -17,6 +17,8 @@ INSERT INTO "rendezvous" values (0,'25/01/0470','08:00','09:30',0 ,0, 3);
 INSERT INTO "rendezvous"(id, date, start, "end", doctor_id, location_id) VALUES (1, '25/01/2024', '08:00', '09:30', 0, 3);
 INSERT INTO "rendezvous" VALUES (2, '26/01/2024', '08:00', '09:30',1 ,0, 2);
 INSERT INTO "rendezvous" VALUES (3, '26/01/2024', '08:00', '09:30',0 ,1, 2);
+
+
 -- Exemples: 
 /* select d.firstname as "Doctors name", p.firstname as "Patient name", l.name as "Location" from rendezvous as rv join doctors d on rv.doctor_id = d.id join patients p on rv.patient_id = p.id join locations l on rv.location_id = l.id;
 

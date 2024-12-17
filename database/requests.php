@@ -168,6 +168,16 @@ class db{
         Details will display informations about the queries
         */
 
+        foreach(array_keys($values) as $column){
+            if(!in_array($column,$this->columns)){
+                if($verbose){
+                    echo "The column '".$column."' was not set as a valid column by your admin. If this is not normal, check the database definition in your code.<br>";
+                }
+                return false;
+            }
+        }
+
+
         try {
 
             // get the columns
@@ -191,7 +201,6 @@ class db{
             $request->execute($datas); //The execute take $datas to auto-bind
     
 
-            $result = $request->fetchAll(PDO::FETCH_ASSOC);
             if($details)
                 echo "<br>Request executed !"; 
             
