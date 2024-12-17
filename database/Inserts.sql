@@ -17,6 +17,13 @@ INSERT INTO "rendezvous" values (0,'25/01/0470','08:00','09:30',0 ,0, 3);
 INSERT INTO "rendezvous"(id, date, start, "end", doctor_id, location_id) VALUES (1, '25/01/2024', '08:00', '09:30', 0, 3);
 INSERT INTO "rendezvous" VALUES (2, '26/01/2024', '08:00', '09:30',1 ,0, 2);
 INSERT INTO "rendezvous" VALUES (3, '26/01/2024', '08:00', '09:30',0 ,1, 2);
+INSERT INTO "rendezvous" VALUES (4, '16/12/2024', '08:30', '09:30', 0, 1, 2);
+INSERT INTO "rendezvous" VALUES (5, '17/12/2024', '10:15', '11:45', 0, 0, 3);
+INSERT INTO "rendezvous" VALUES (6, '18/12/2024', '14:00', '15:00', 0, 1, 1);
+INSERT INTO "rendezvous" VALUES (7, '19/12/2024', '09:00', '10:00', 0, 0, 0);
+INSERT INTO "rendezvous" VALUES (8, '20/12/2024', '16:45', '18:15', 0, 1, 3);
+INSERT INTO "rendezvous" VALUES (9, '21/12/2024', '18:00', '19:30', 0, 0, 2);
+
 
 
 -- Exemples: 

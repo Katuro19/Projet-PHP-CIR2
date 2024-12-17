@@ -110,776 +110,181 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
             </div>
         </nav>
     </header>
-    <div id="home">
-        <form id="form" name="form" method="post">
-            <div id="form:cadreMiseEnPage" class="cadreMiseEnPage">
-                <div id="layout-container" class="mode-portail-entete-affiche">
-                    <div id="layout-container-row">
-                        <div id="layout-portlets-cover" style="margin-left: 0px;">
-                            <div id="form:Center">
-                                <div class="Container100">
-                                    <div class="planning Card"
-                                        style="padding-top: 0px;padding-left: 0px;padding-right: 0px;padding-bottom: 0px;">
-                                        <div id="form:j_idt118" class="schedule">
-                                            <div id="form:j_idt118_container" class="fc fc-cursor fc-ltr ui-widget">
-                                                <div class="fc-toolbar">
-                                                    <div class="fc-center">
-                                                        <h2>9 — 15 Décembre 2024</h2>
-                                                    </div>
-                                                    <div class="fc-clear"></div>
-                                                </div>
-                                                <div class="fc-view-container">
-                                                    <div class="fc-view fc-agendaWeek-view fc-agenda-view">
-                                                        <table id="zindex">
-                                                            <thead class="fc-head">
-                                                                <tr>
-                                                                    <td class="fc-head-container ui-widget-header">
-                                                                        <div class="fc-row ui-widget-header">
-                                                                            <table
-                                                                                style="margin-bottom: 0.5%; margin-top: 0.5%;">
-                                                                                <thead>
-                                                                                    <tr>
-                                                                                        <th class="fc-axis ui-widget-header"
-                                                                                            style="width:30px">
-                                                                                        </th>
-                                                                                        <th class="ui-widget-header"
-                                                                                            data-date="2024-12-09">Mon
-                                                                                        </th>
-                                                                                        <th class="ui-widget-header"
-                                                                                            data-date="2024-12-10">Tue
-                                                                                        </th>
-                                                                                        <th class="ui-widget-header"
-                                                                                            data-date="2024-12-11">Wen
-                                                                                        </th>
-                                                                                        <th class="ui-widget-header"
-                                                                                            data-date="2024-12-12">Thu
-                                                                                        </th>
-                                                                                        <th class="ui-widget-header"
-                                                                                            data-date="2024-12-13">Fri
-                                                                                        </th>
-                                                                                        <th class="ui-widget-header"
-                                                                                            data-date="2024-12-14">Sat
-                                                                                        </th>
-                                                                                        <th class="ui-widget-header"
-                                                                                            data-date="2024-12-15">Sun
-                                                                                        </th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                            </table>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="fc-body">
-                                                                <tr>
-                                                                    <td class="ui-widget-content">
-                                                                        <div class="fc-scroller fc-time-grid-container"
-                                                                            style="overflow: hidden auto; height: auto;">
-                                                                            <div class="fc-time-grid fc-unselectable">
-                                                                                <div class="fc-bg">
-                                                                                    <table>
-                                                                                        <tbody>
-                                                                                            <tr>
-                                                                                                <td class="fc-axis ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                </td>
-                                                                                                <td class="fc-day ui-widget-content"
-                                                                                                    data-date="2024-12-09">
-                                                                                                </td>
-                                                                                                <td class="fc-day ui-widget-content"
-                                                                                                    data-date="2024-12-10">
-                                                                                                </td>
-                                                                                                <td class="fc-day ui-widget-content"
-                                                                                                    data-date="2024-12-11">
-                                                                                                </td>
-                                                                                                <td class="fc-day ui-widget-content"
-                                                                                                    data-date="2024-12-12">
-                                                                                                </td>
-                                                                                                <td class="fc-day ui-widget-content"
-                                                                                                    data-date="2024-12-13">
-                                                                                                </td>
-                                                                                                <td class="fc-day ui-widget-content"
-                                                                                                    data-date="2024-12-14">
-                                                                                                </td>
-                                                                                                <td class="fc-day ui-widget-content"
-                                                                                                    data-date="2024-12-15">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                </div>
-                                                                                <div class="fc-slats">
-                                                                                    <table>
-                                                                                        <tbody>
-                                                                                            <tr data-time="08:00:00">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                    <span>08</span>
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="08:30:00"
-                                                                                                class="fc-minor">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="09:00:00">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                    <span>09</span>
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="09:30:00"
-                                                                                                class="fc-minor">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="10:00:00">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                    <span>10</span>
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="10:30:00"
-                                                                                                class="fc-minor">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="11:00:00">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                    <span>11</span>
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="11:30:00"
-                                                                                                class="fc-minor">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="12:00:00">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                    <span>12</span>
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="12:30:00"
-                                                                                                class="fc-minor">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="13:00:00">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                    <span>13</span>
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="13:30:00"
-                                                                                                class="fc-minor">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="14:00:00">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                    <span>14</span>
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="14:30:00"
-                                                                                                class="fc-minor">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="15:00:00">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                    <span>15</span>
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="15:30:00"
-                                                                                                class="fc-minor">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="16:00:00">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                    <span>16</span>
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="16:30:00"
-                                                                                                class="fc-minor">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="17:00:00">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                    <span>17</span>
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="17:30:00"
-                                                                                                class="fc-minor">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="18:00:00">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                    <span>18</span>
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="18:30:00"
-                                                                                                class="fc-minor">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="19:00:00">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                    <span>19</span>
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr data-time="19:30:00"
-                                                                                                class="fc-minor">
-                                                                                                <td class="fc-axis fc-time ui-widget-content"
-                                                                                                    style="width:30px">
-                                                                                                </td>
-                                                                                                <td
-                                                                                                    class="ui-widget-content">
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                </div>
-                                                                                <div class="fc-content-skeleton">
-                                                                                    <table>
-                                                                                        <tbody>
-                                                                                            <tr>
-                                                                                                <td class="fc-axis"
-                                                                                                    style="width:30px">
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <div
-                                                                                                        class="fc-content-col">
-                                                                                                        <div
-                                                                                                            class="fc-event-container fc-helper-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-event-container">
-                                                                                                            <a class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 274.5px 0% -374.5px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 387px 0% -487px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-highlight-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-bgevent-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-business-container">
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <div
-                                                                                                        class="fc-content-col">
-                                                                                                        <div
-                                                                                                            class="fc-event-container fc-helper-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-event-container">
-                                                                                                            <a class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 274.5px 0% -374.5px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 387px 0% -487px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-highlight-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-bgevent-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-business-container">
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <div
-                                                                                                        class="fc-content-col">
-                                                                                                        <div
-                                                                                                            class="fc-event-container fc-helper-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-event-container">
-                                                                                                            <a class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 274.5px 0% -374.5px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 387px 0% -487px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-highlight-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-bgevent-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-business-container">
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <div
-                                                                                                        class="fc-content-col">
-                                                                                                        <div
-                                                                                                            class="fc-event-container fc-helper-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-event-container">
-                                                                                                            <a class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 274.5px 0% -374.5px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 387px 0% -487px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-highlight-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-bgevent-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-business-container">
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <div
-                                                                                                        class="fc-content-col">
-                                                                                                        <div
-                                                                                                            class="fc-event-container fc-helper-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-event-container">
-                                                                                                            <a class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 274.5px 0% -374.5px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 387px 0% -487px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-highlight-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-bgevent-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-business-container">
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <div
-                                                                                                        class="fc-content-col">
-                                                                                                        <div
-                                                                                                            class="fc-event-container fc-helper-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-event-container">
-                                                                                                            <a class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 274.5px 0% -374.5px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 387px 0% -487px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-highlight-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-bgevent-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-business-container">
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <div
-                                                                                                        class="fc-content-col">
-                                                                                                        <div
-                                                                                                            class="fc-event-container fc-helper-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-event-container">
-                                                                                                            <a class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 0px 0% -99.5px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 112px 0% -212px; z-index: 1; width: auto; height: auto;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 274.5px 0% -374.5px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a><a
-                                                                                                                class="fc-time-grid-event fc-v-event fc-event fc-start fc-end COURS"
-                                                                                                                title="Voir"
-                                                                                                                style="inset: 387px 0% -487px; z-index: 1;">
-                                                                                                                <div
-                                                                                                                    class="fc-title">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="fc-bg">
-                                                                                                                </div>
-                                                                                                            </a>
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-highlight-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-bgevent-container">
-                                                                                                        </div>
-                                                                                                        <div
-                                                                                                            class="fc-business-container">
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </td>
-                                                                </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div><span id="form:j_idt235"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
+   <div id='superCalendar'>
+   <?php
+        if($_SESSION['user_type'] == 'doctor')
+            $allAppointements = $Rendezvous->request_if('doctor_id',$_SESSION['id']);
+        else
+            $allAppointements = $Rendezvous->request_if('patient_id',$_SESSION['id']);
+
+        $allLoc = $Locations->request_all();
+        $allPatients = $Patients->request_all();
+        $allDoctors = $Doctors->request_all();
+
+   
+   ?>
+   <script>
+        const allAppointements = <?php echo json_encode($allAppointements); ?>;
+        const allLoc = <?php echo json_encode($allLoc); ?>;
+        const allPatients = <?php echo json_encode($allPatients); ?>;
+        const allDoctors = <?php echo json_encode($allDoctors); ?>;
+
+
+        /* Configuration variables */
+        const HOURS = 14; // Total slots from 8:00 to 21:00 (each row = 30min slot)
+        const START_HOUR = 8; // Starting hour
+        const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        const TIME_SLOT_HEIGHT = 40; // Height in pixels for each time slot row
+
+        const calendarContainer = document.getElementById("superCalendar");
+
+        // Function to create the grid layout of the calendar
+        function createCalendar() {
+            // First row: Day headers
+            const emptyHeader = document.createElement("div");
+            emptyHeader.classList.add("day-header");
+            calendarContainer.appendChild(emptyHeader); // Top-left empty corner
+
+            DAYS.forEach(day => {
+                const dayHeader = document.createElement("div");
+                dayHeader.classList.add("day-header");
+                dayHeader.textContent = day;
+                calendarContainer.appendChild(dayHeader);
+            });
+
+            // Time slots: Hours and grid cells
+            for (let hour = START_HOUR; hour < START_HOUR + HOURS; hour++) {
+                // Hour label column
+                const hourLabel = document.createElement("div");
+                hourLabel.classList.add("hour-label");
+                hourLabel.textContent = `${String(hour).padStart(2, '0')}:00`;
+                calendarContainer.appendChild(hourLabel);
+
+                // Create time slots for each day
+                for (let day = 0; day < 7; day++) {
+                    const timeSlot = document.createElement("div");
+                    timeSlot.classList.add("time-slot");
+                    timeSlot.dataset.day = day;
+                    timeSlot.dataset.hour = hour;
+                    calendarContainer.appendChild(timeSlot);
+                }
+            }
+        }
+
+        // Function to add an appointment dynamically
+        function addAppointment(dayIndex, startHour, startMinute, endHour, endMinute, title) {
+
+            // Calculate the top position based on the start time
+            let startOffset = 33.4 * (startMinute)/60;
+            const duration = 41.7 * ((endHour - startHour) + (endMinute - startMinute)/(60));   //38.5 is a size in px. Yes we are using pixel. Yes i do want to die
+
+            // Find the appropriate time slot container (to position the appointment within it)
+            const timeSlot = document.querySelector(`.time-slot[data-day='${dayIndex}'][data-hour='${Math.floor(startHour)}']`);
+            if (timeSlot) {
+                // Create the appointment element
+                const appointment = document.createElement("div");
+                appointment.classList.add("appointment");
+                console.log(startOffset + " : " + duration);
+                // Set the position of the appointment within the time slot
+                appointment.style.top = `${startOffset}px`; // Adjust position for minutes
+                appointment.style.height = `${duration}px`; // Adjust height for the event duration
+                appointment.textContent = title;
+
+                // Append the appointment to the correct time slot
+                timeSlot.appendChild(appointment);
+            }
+        }
+
+        // Initialize the calendar
+        createCalendar();
+        for(let i = 0; i < allAppointements.length; i++){
+            let currentAppointement = allAppointements[i];
+            console.log(allAppointements[i]);
+            if(isInCurrentWeek(currentAppointement['date'])){
+                let appId = currentAppointement['id'];
+                let dateIndex = getDayNumber(currentAppointement['date']); 
+                let startHour = splitTime(currentAppointement['start'])[0];
+                let startMin = splitTime(currentAppointement['start'])[1];
+                let endHour = splitTime(currentAppointement['end'])[0]; 
+                let endMin = splitTime(currentAppointement['end'])[1]; 
+                let locationName = findById(allLoc,currentAppointement['location_id']);
+                let appDoctor = findById(allDoctors,currentAppointement['doctor_id']);
+                let appPatient = findById(allPatients,currentAppointement['patient_id']);
+                addAppointment(dateIndex,startHour,startMin,endHour,endMin,"Location : " + locationName['name'] + " with Doctor : " + appDoctor['lastname'] + "\nPatient : " + appPatient['lastname']);
+            }
+            else{
+                console.log("not in week ");
+            }
+        }
+
+        /*
+        Example of adding an appointment dynamically:
+        addAppointment(dayIndex, startHour, startMinute, endHour, endMinute, "Title");
+        - dayIndex: 0 (Monday) to 6 (Sunday)
+        - startHour and endHour: Hour in 24-hour format
+        - startMinute and endMinute
+
+
+        //exemple
+        addAppointment(0, 8, 30, 10, 0, "Meeting with Team");
+        addAppointment(2, 14, 0, 15, 30, "Client Call");
+        addAppointment(4, 17, 0, 18, 30, "Project Review");
+        addAppointment(5, 10, 0, 12, 30, "Brainstorming Session");
+        */
+
+        function getDayNumber(dateStr) {
+        // Split the date string (DD/MM/YYYY)
+            const [day, month, year] = dateStr.split('/');
+
+            // Create a new Date object (months are 0-based, so subtract 1 from month)
+            const date = new Date(year, month - 1, day);
+
+            // getDay() returns 0 (Sunday) to 6 (Saturday), so adjust to make Monday = 0
+            let dayNumber = date.getDay();
+            
+            // Adjust so that Monday is 0, Sunday is 6
+            dayNumber = (dayNumber === 0) ? 6 : dayNumber - 1;
+
+            return dayNumber;
+        }
+
+
+
+        function splitTime(timeStr) {
+            // Split the time string by the colon (":")
+            const [hour, minute] = timeStr.split(':').map(Number);
+
+            // Return the array of integers
+            return [hour, minute];
+        }
+
+
+        function isInCurrentWeek(dateStr) {
+            // Get the current date
+            const currentDate = new Date();
+
+            // Get the current week's start date (Monday)
+            const startOfWeek = new Date(currentDate);
+            startOfWeek.setDate(currentDate.getDate() - currentDate.getDay() + 1);  // Adjust to Monday
+
+            // Get the current week's end date (Sunday)
+            const endOfWeek = new Date(startOfWeek);
+            endOfWeek.setDate(startOfWeek.getDate() + 6);  // Add 6 days to Monday to get Sunday
+
+            // Parse the input date (DD/MM/YYYY)
+            const [day, month, year] = dateStr.split('/');
+            const givenDate = new Date(year, month - 1, day);
+
+            // Compare the given date with the start and end of the current week
+            return givenDate >= startOfWeek && givenDate <= endOfWeek;
+        }
+
+        function findById(array, id) {
+            // Use the find method to search the array of dictionaries for the object with the matching id
+            return array.find(item => item.id === id);
+        }
+    </script>
+   </div>
 
     <br><br><br><br>
     <div class="my_appointments">
