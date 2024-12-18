@@ -7,7 +7,9 @@ require './database/databases.php';
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $res = false;
     $errorOccured = "";
+    $successOccured = "";
     $postcode = null;
     $expertise = null;
     $first_name = htmlspecialchars($_POST['first_name']);
@@ -46,6 +48,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ];
 
                 $res = $Doctors->add_with($toCreate);
+
+                if($res == false){
+                  $errorOccured = "The creation failed. Please try later.";
+                }
+                else{
+                  $successOccured = "Account successfully created !. Please <a href='./login.php'>login</a> to access your account";
+                }
             }
             else{
                 $errorOccured = "An account with this email already exist. Please <a href='./login.php'>login</a> instead";
@@ -62,18 +71,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 "password" => $password,
             ];
 
-            $res = $Patients->add_with($toCreate);
+              $res = $Patients->add_with($toCreate,true,true);
+
+              if($res == false){
+                $errorOccured = "The creation failed. Please try later.";
+              }
+              else{
+                $successOccured = "Account successfully created !. Please <a href='./login.php'>login</a> to access your account";
+              }
+
             }      
             else{
                 $errorOccured = "An account with this email already exist. Please <a href='./login.php'>login</a> instead";
             }      
         }
-        if($res = false){
-          print('aaaaa');
-        }
-        else{
-          print('yipeeee');
-        }
+
     }
 }
 ?>
@@ -121,6 +133,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php
                 if($errorOccured != ""){
                     echo "<div class='error-container'>".$errorOccured."</div>";
+                }
+                if($successOccured != ""){
+                  echo "<div class='success-container'>".$errorOccured."</div>";
                 }
             ?>
       </form>
