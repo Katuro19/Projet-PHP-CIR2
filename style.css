@@ -14,9 +14,9 @@
 }
 
 a.nav-link {
-    margin-right: 0.5rem;
+    margin-left: 5rem;
     border-radius: 5px;
-    width: 200px;
+    width: 100%;
     text-align: center;
     color: white;
 
@@ -29,15 +29,16 @@ a.nav-link {
 
 
 .nav-link:hover {
-    background-color: var(--lightblue);
+    /* background-color: var(--lightblue); */
+    color: white !important ;
     border-radius: 5px;
-    cursor: pointer;
+    cursor:default ;
 
 }
 
 .add_appointment {
     border-radius: 5px;
-    padding-right: 5em;
+    padding-right: 2em;
 }
 
 .text {
@@ -103,4 +104,87 @@ html {
     --lightblue: #7895E0;
     --darkblue: #4069D1;
     --onpage_blue: #2A5DDD;
+    --tableblue:#668ae6;
+}
+
+.my_appointments{
+    display:flex;
+    flex-direction: column;
+    width: 60%;
+    margin-left: 2em;
+    background-color: #668ae6;
+    border-radius: 5px;
+    padding-bottom: 1em;
+    padding-top: 1em;
+    padding-left:1em;
+    padding-right: 1em;
+    justify-content: center;
+    align-items: center;    
+}
+.my_past_appointments{
+    display:flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: 2em;
+    background-color: #668ae6;
+    border-radius: 5px;
+    padding-bottom: 1em;
+    padding-top: 1em;
+    padding-left:1em;
+    padding-right: 1em;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.my_poc{
+    display:flex;
+    flex-direction: column;
+    width: 25%;
+    margin-left: 2em;
+    background-color: var(--tableblue);
+    border-radius: 5px;
+    padding-bottom: 1em;
+    padding-top: 1em;
+    padding-left:1em;
+    padding-right: 1em;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.table_my_appointments,
+.table_my_past_appointments,
+.table_my_poc{
+    justify-content: center;
+    margin-top: 1em;
+    width: 100%;
+    text-align: center;
+}
+
+footer{
+    margin-left: 2em;
+    margin-bottom: 2em;
+}
+
+.disconnect {
+    padding-right: 2em;
+    align-self: center;
+    background-color: var(--darkblue);
+    color: white;
+    border: none;
+    padding: 1em 1.5em;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: auto;
+}
+
+.disconnect:hover {
+    background-color: var(--tableblue);
+}
+
+.disconnect-container{
+    align-content: center;
 }
