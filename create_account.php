@@ -16,6 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirm_email = htmlspecialchars($_POST['confirm_email']);
     $password = htmlspecialchars($_POST['password']);
     $confirm_password = htmlspecialchars($_POST['confirm_password']);
+    $phone = htmlspecialchars($_POST['phone']);
 
     $user_type = 'patient';
     if(isset($_POST['expertise']) && isset($_POST['postcode'])){
@@ -34,7 +35,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if($user_type === 'doctor'){
             $datas = $Doctors->request_if('email',$email);
             if($datas == []){
-                //Createhere
+                $toCreate = [
+                    "firstname" => $first_name,
+                    "lastname" => $last_name,
+                    "email" => $email,
+                    "phone" => $phone,
+                    "password" => $password,
+                    "postcode" => $postcode,
+                    "expertise_id" => $expertise
+                ];
+
+                $res = $Doctors->add_with($toCreate);
             }
             else{
                 $errorOccured = "An account with this email already exist. Please <a href='./login.php'>login</a> instead";
@@ -43,11 +54,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         elseif($user_type === 'patient'){
             $datas = $Patients->request_if('email',$email);
             if($datas == []){
-                //Create here
+              $toCreate = [
+                "firstname" => $first_name,
+                "lastname" => $last_name,
+                "email" => $email,
+                "phone" => $phone,
+                "password" => $password,
+            ];
+
+            $res = $Patients->add_with($toCreate);
             }      
             else{
                 $errorOccured = "An account with this email already exist. Please <a href='./login.php'>login</a> instead";
             }      
+        }
+        if($res = false){
+          print('aaaaa');
+        }
+        else{
+          print('yipeeee');
         }
     }
 }
@@ -122,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php 
                     
                     foreach($Expertise->request_all(false,false) as $expertise){
-                        echo "<option value='".$expertise['name']."'>".$expertise['name']."</option>";
+                        echo "<option value='".$expertise['id']."'>".$expertise['name']."</option>";
                       }
                     
                 ?>

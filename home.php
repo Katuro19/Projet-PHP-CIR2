@@ -213,7 +213,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                 addAppointment(dateIndex,startHour,startMin,endHour,endMin,"Location : " + locationName['name'] + " with Doctor : " + appDoctor['lastname'] + "\nPatient : " + appPatient['lastname']);
             }
             else{
-                console.log("not in week ");
+                //console.log("not in week ");
             }
         }
 
