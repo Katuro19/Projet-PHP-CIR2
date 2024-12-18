@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   $errorOccured = "The creation failed. Please try later.";
                 }
                 else{
-                  $successOccured = "Account successfully created !. Please <a href='./login.php'>login</a> to access your account";
+                  $successOccured = "Account successfully created ! Please <a href='./login.php'>login</a> to access your account";
                 }
             }
             else{
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 "password" => $password,
             ];
 
-              $res = $Patients->add_with($toCreate,true,true);
+              $res = $Patients->add_with($toCreate);
 
               if($res == false){
                 $errorOccured = "The creation failed. Please try later.";
