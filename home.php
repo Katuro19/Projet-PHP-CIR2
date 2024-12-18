@@ -217,36 +217,8 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                     console.log("not in week ");
                 }
             }
-
-            /*
-            Example of adding an appointment dynamically:
-            addAppointment(dayIndex, startHour, startMinute, endHour, endMinute, "Title");
-            - dayIndex: 0 (Monday) to 6 (Sunday)
-            - startHour and endHour: Hour in 24-hour format
-            - startMinute and endMinute
-    
-    
-            //exemple
-            addAppointment(0, 8, 30, 10, 0, "Meeting with Team");
-            addAppointment(2, 14, 0, 15, 30, "Client Call");
-            addAppointment(4, 17, 0, 18, 30, "Project Review");
-            addAppointment(5, 10, 0, 12, 30, "Brainstorming Session");
-            */
-
-            function getDayNumber(dateStr) {
-                // Split the date string (DD/MM/YYYY)
-                const [day, month, year] = dateStr.split('/');
-
-                // Create a new Date object (months are 0-based, so subtract 1 from month)
-                const date = new Date(year, month - 1, day);
-
-                // getDay() returns 0 (Sunday) to 6 (Saturday), so adjust to make Monday = 0
-                let dayNumber = date.getDay();
-
-                // Adjust so that Monday is 0, Sunday is 6
-                dayNumber = (dayNumber === 0) ? 6 : dayNumber - 1;
-
-                return dayNumber;
+            else{
+                //console.log("not in week ");
             }
 
 
