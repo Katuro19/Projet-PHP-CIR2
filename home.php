@@ -105,9 +105,11 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                         </div>
                     </ul>
                     <ul class="disconnect-container">
-                        <button class="disconnect" type="submit">
-                            <h2>Logout</h2>
-                        </button>
+                        <form action="logout.php" method="POST">
+                            <button class="disconnect" type="submit">
+                                <h2>Logout</h2>
+                            </button>
+                        </form>
                     </ul>
                 </div>
             </div>
@@ -126,7 +128,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
 
 
         ?>
-   <script>
+           <script>
         const allAppointements = <?php echo json_encode($allAppointements); ?>;
         const allLoc = <?php echo json_encode($allLoc); ?>;
         const allPatients = <?php echo json_encode($allPatients); ?>;
