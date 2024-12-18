@@ -48,17 +48,17 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+                        <li class="nav-item" style="display: none;">
                             <a class="nav-link">Home</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" style="display: none;">
                             <a class="nav-link">My appointments</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" style="display: none;">
                             <a class="nav-link">My past appointments</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item" style="display: none;">
                             <a class="nav-link">My patients</a>
                         </li>
                     </ul>
