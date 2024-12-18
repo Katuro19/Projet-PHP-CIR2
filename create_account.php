@@ -135,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "<div class='error-container'>".$errorOccured."</div>";
                 }
                 if($successOccured != ""){
-                  echo "<div class='success-container'>".$errorOccured."</div>";
+                  echo "<div class='success-container'>".$successOccured."</div>";
                 }
             ?>
       </form>
