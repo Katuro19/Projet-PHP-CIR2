@@ -76,27 +76,33 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                     <label for="list1">Choose a day :</label>
                                     <input type="date" id="date">
                                     <br><br>
-                                    <label for="list2">Choose a time slot :</label>
-                                    <select id="time" name="time">
-                                        <option value="default" selected>Choose an option</option>
-                                        <!-- instert php request here to get available time slots  for the selected day-->
-                                        <?php
-                                        echo "tamere";
-                                        ?>
-                                        <!-- echo "<option value="optionC">". content ."</option>" -->
-                                    </select>
+                                    <label for="list2">Choose a time period :</label>
+                                    <?php
+                                    if ($_SESSION['user_type'] == 'doctor') {
+                                        echo "<input type=\"time\" id=\"start_time\" name=\"start_time\">
+                                                  <input type=\"time\" id=\"end_time\" name=\"end_time\">";
+                                    } else {
+                                        echo "<select id=\"time_period\" name=\"time_period\">";
+                                        foreach ($Rendezvous->request_if("patient_id", null, true, true) as $available_rendezvous) {
+                                            echo "<option value=\"time_period_" . $available_rendezvous['id'] . "\">" . $available_rendezvous['start'] . " - " . $available_rendezvous['end'] . $available_rendezvous['date'] . "</option>";
+
+                                        }
+                                        echo "</select>";
+                                    }
+                                    ?>
+
+                                    <!-- instert php request here to get available time slots  for the selected day-->
+                                    <!-- echo "<option value="optionC">". content ."</option>" -->
                                     <br><br>
                                     <label for="list3">Choose a location :</label>
                                     <select id="location" name="location">
                                         <option value="default" selected>Choose an option</option>
                                         <!-- instert php request here to get available locations-->
                                         <?php
-
                                         foreach ($Locations->request_all(false, false) as $location) {
                                             echo "<option value=\"location_\"" . $location['name'] . ">" . $location['name'] . " - " . $location['postcode'] . "</option>";
                                         }
                                         ?>
-                                        <!-- echo "<option value="optionC">". content ."</option>" -->
                                     </select>
                                     <br><br>
                                     <button type="button" class="validate_add_appointment">Validate</button>
@@ -128,167 +134,167 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
 
 
         ?>
-           <script>
-        const allAppointements = <?php echo json_encode($allAppointements); ?>;
-        const allLoc = <?php echo json_encode($allLoc); ?>;
-        const allPatients = <?php echo json_encode($allPatients); ?>;
-        const allDoctors = <?php echo json_encode($allDoctors); ?>;
+        <script>
+            const allAppointements = <?php echo json_encode($allAppointements); ?>;
+            const allLoc = <?php echo json_encode($allLoc); ?>;
+            const allPatients = <?php echo json_encode($allPatients); ?>;
+            const allDoctors = <?php echo json_encode($allDoctors); ?>;
 
 
-        /* Configuration variables */
-        const HOURS = 14; // Total slots from 8:00 to 21:00 (each row = 30min slot)
-        const START_HOUR = 8; // Starting hour
-        const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-        const TIME_SLOT_HEIGHT = 40; // Height in pixels for each time slot row
+            /* Configuration variables */
+            const HOURS = 14; // Total slots from 8:00 to 21:00 (each row = 30min slot)
+            const START_HOUR = 8; // Starting hour
+            const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+            const TIME_SLOT_HEIGHT = 40; // Height in pixels for each time slot row
 
-        const calendarContainer = document.getElementById("superCalendar");
+            const calendarContainer = document.getElementById("superCalendar");
 
-        // Function to create the grid layout of the calendar
-        function createCalendar() {
-            // First row: Day headers
-            const emptyHeader = document.createElement("div");
-            emptyHeader.classList.add("day-header");
-            calendarContainer.appendChild(emptyHeader); // Top-left empty corner
+            // Function to create the grid layout of the calendar
+            function createCalendar() {
+                // First row: Day headers
+                const emptyHeader = document.createElement("div");
+                emptyHeader.classList.add("day-header");
+                calendarContainer.appendChild(emptyHeader); // Top-left empty corner
 
-            DAYS.forEach(day => {
-                const dayHeader = document.createElement("div");
-                dayHeader.classList.add("day-header");
-                dayHeader.textContent = day;
-                calendarContainer.appendChild(dayHeader);
-            });
+                DAYS.forEach(day => {
+                    const dayHeader = document.createElement("div");
+                    dayHeader.classList.add("day-header");
+                    dayHeader.textContent = day;
+                    calendarContainer.appendChild(dayHeader);
+                });
 
-            // Time slots: Hours and grid cells
-            for (let hour = START_HOUR; hour < START_HOUR + HOURS; hour++) {
-                // Hour label column
-                const hourLabel = document.createElement("div");
-                hourLabel.classList.add("hour-label");
-                hourLabel.textContent = `${String(hour).padStart(2, '0')}:00`;
-                calendarContainer.appendChild(hourLabel);
+                // Time slots: Hours and grid cells
+                for (let hour = START_HOUR; hour < START_HOUR + HOURS; hour++) {
+                    // Hour label column
+                    const hourLabel = document.createElement("div");
+                    hourLabel.classList.add("hour-label");
+                    hourLabel.textContent = `${String(hour).padStart(2, '0')}:00`;
+                    calendarContainer.appendChild(hourLabel);
 
-                // Create time slots for each day
-                for (let day = 0; day < 7; day++) {
-                    const timeSlot = document.createElement("div");
-                    timeSlot.classList.add("time-slot");
-                    timeSlot.dataset.day = day;
-                    timeSlot.dataset.hour = hour;
-                    calendarContainer.appendChild(timeSlot);
+                    // Create time slots for each day
+                    for (let day = 0; day < 7; day++) {
+                        const timeSlot = document.createElement("div");
+                        timeSlot.classList.add("time-slot");
+                        timeSlot.dataset.day = day;
+                        timeSlot.dataset.hour = hour;
+                        calendarContainer.appendChild(timeSlot);
+                    }
                 }
             }
-        }
 
-        // Function to add an appointment dynamically
-        function addAppointment(dayIndex, startHour, startMinute, endHour, endMinute, title) {
+            // Function to add an appointment dynamically
+            function addAppointment(dayIndex, startHour, startMinute, endHour, endMinute, title) {
 
-            // Calculate the top position based on the start time
-            let startOffset = 33.4 * (startMinute)/60;
-            const duration = 41.7 * ((endHour - startHour) + (endMinute - startMinute)/(60));   //38.5 is a size in px. Yes we are using pixel. Yes i do want to die
+                // Calculate the top position based on the start time
+                let startOffset = 33.4 * (startMinute) / 60;
+                const duration = 41.7 * ((endHour - startHour) + (endMinute - startMinute) / (60));   //38.5 is a size in px. Yes we are using pixel. Yes i do want to die
 
-            // Find the appropriate time slot container (to position the appointment within it)
-            const timeSlot = document.querySelector(`.time-slot[data-day='${dayIndex}'][data-hour='${Math.floor(startHour)}']`);
-            if (timeSlot) {
-                // Create the appointment element
-                const appointment = document.createElement("div");
-                appointment.classList.add("appointment");
-                console.log(startOffset + " : " + duration);
-                // Set the position of the appointment within the time slot
-                appointment.style.top = `${startOffset}px`; // Adjust position for minutes
-                appointment.style.height = `${duration}px`; // Adjust height for the event duration
-                appointment.textContent = title;
+                // Find the appropriate time slot container (to position the appointment within it)
+                const timeSlot = document.querySelector(`.time-slot[data-day='${dayIndex}'][data-hour='${Math.floor(startHour)}']`);
+                if (timeSlot) {
+                    // Create the appointment element
+                    const appointment = document.createElement("div");
+                    appointment.classList.add("appointment");
+                    console.log(startOffset + " : " + duration);
+                    // Set the position of the appointment within the time slot
+                    appointment.style.top = `${startOffset}px`; // Adjust position for minutes
+                    appointment.style.height = `${duration}px`; // Adjust height for the event duration
+                    appointment.textContent = title;
 
-                // Append the appointment to the correct time slot
-                timeSlot.appendChild(appointment);
+                    // Append the appointment to the correct time slot
+                    timeSlot.appendChild(appointment);
+                }
             }
-        }
 
-        // Initialize the calendar
-        createCalendar();
-        for(let i = 0; i < allAppointements.length; i++){
-            let currentAppointement = allAppointements[i];
-            console.log(allAppointements[i]);
-            if(isInCurrentWeek(currentAppointement['date'])){
-                let appId = currentAppointement['id'];
-                let dateIndex = getDayNumber(currentAppointement['date']); 
-                let startHour = splitTime(currentAppointement['start'])[0];
-                let startMin = splitTime(currentAppointement['start'])[1];
-                let endHour = splitTime(currentAppointement['end'])[0]; 
-                let endMin = splitTime(currentAppointement['end'])[1]; 
-                let locationName = findById(allLoc,currentAppointement['location_id']);
-                let appDoctor = findById(allDoctors,currentAppointement['doctor_id']);
-                let appPatient = findById(allPatients,currentAppointement['patient_id']);
-                addAppointment(dateIndex,startHour,startMin,endHour,endMin,"Location : " + locationName['name'] + " with Doctor : " + appDoctor['lastname'] + "\nPatient : " + appPatient['lastname']);
+            // Initialize the calendar
+            createCalendar();
+            for (let i = 0; i < allAppointements.length; i++) {
+                let currentAppointement = allAppointements[i];
+                console.log(allAppointements[i]);
+                if (isInCurrentWeek(currentAppointement['date'])) {
+                    let appId = currentAppointement['id'];
+                    let dateIndex = getDayNumber(currentAppointement['date']);
+                    let startHour = splitTime(currentAppointement['start'])[0];
+                    let startMin = splitTime(currentAppointement['start'])[1];
+                    let endHour = splitTime(currentAppointement['end'])[0];
+                    let endMin = splitTime(currentAppointement['end'])[1];
+                    let locationName = findById(allLoc, currentAppointement['location_id']);
+                    let appDoctor = findById(allDoctors, currentAppointement['doctor_id']);
+                    let appPatient = findById(allPatients, currentAppointement['patient_id']);
+                    addAppointment(dateIndex, startHour, startMin, endHour, endMin, "Location : " + locationName['name'] + " with Doctor : " + appDoctor['lastname'] + "\nPatient : " + appPatient['lastname']);
+                }
+                else {
+                    //console.log("not in week ");
+                }
             }
-            else{
-                //console.log("not in week ");
+
+            /*
+            Example of adding an appointment dynamically:
+            addAppointment(dayIndex, startHour, startMinute, endHour, endMinute, "Title");
+            - dayIndex: 0 (Monday) to 6 (Sunday)
+            - startHour and endHour: Hour in 24-hour format
+            - startMinute and endMinute
+    
+    
+            //exemple
+            addAppointment(0, 8, 30, 10, 0, "Meeting with Team");
+            addAppointment(2, 14, 0, 15, 30, "Client Call");
+            addAppointment(4, 17, 0, 18, 30, "Project Review");
+            addAppointment(5, 10, 0, 12, 30, "Brainstorming Session");
+            */
+
+            function getDayNumber(dateStr) {
+                // Split the date string (DD/MM/YYYY)
+                const [day, month, year] = dateStr.split('/');
+
+                // Create a new Date object (months are 0-based, so subtract 1 from month)
+                const date = new Date(year, month - 1, day);
+
+                // getDay() returns 0 (Sunday) to 6 (Saturday), so adjust to make Monday = 0
+                let dayNumber = date.getDay();
+
+                // Adjust so that Monday is 0, Sunday is 6
+                dayNumber = (dayNumber === 0) ? 6 : dayNumber - 1;
+
+                return dayNumber;
             }
-        }
-
-        /*
-        Example of adding an appointment dynamically:
-        addAppointment(dayIndex, startHour, startMinute, endHour, endMinute, "Title");
-        - dayIndex: 0 (Monday) to 6 (Sunday)
-        - startHour and endHour: Hour in 24-hour format
-        - startMinute and endMinute
-
-
-        //exemple
-        addAppointment(0, 8, 30, 10, 0, "Meeting with Team");
-        addAppointment(2, 14, 0, 15, 30, "Client Call");
-        addAppointment(4, 17, 0, 18, 30, "Project Review");
-        addAppointment(5, 10, 0, 12, 30, "Brainstorming Session");
-        */
-
-        function getDayNumber(dateStr) {
-        // Split the date string (DD/MM/YYYY)
-            const [day, month, year] = dateStr.split('/');
-
-            // Create a new Date object (months are 0-based, so subtract 1 from month)
-            const date = new Date(year, month - 1, day);
-
-            // getDay() returns 0 (Sunday) to 6 (Saturday), so adjust to make Monday = 0
-            let dayNumber = date.getDay();
-            
-            // Adjust so that Monday is 0, Sunday is 6
-            dayNumber = (dayNumber === 0) ? 6 : dayNumber - 1;
-
-            return dayNumber;
-        }
 
 
 
-        function splitTime(timeStr) {
-            // Split the time string by the colon (":")
-            const [hour, minute] = timeStr.split(':').map(Number);
+            function splitTime(timeStr) {
+                // Split the time string by the colon (":")
+                const [hour, minute] = timeStr.split(':').map(Number);
 
-            // Return the array of integers
-            return [hour, minute];
-        }
+                // Return the array of integers
+                return [hour, minute];
+            }
 
 
-        function isInCurrentWeek(dateStr) {
-            // Get the current date
-            const currentDate = new Date();
+            function isInCurrentWeek(dateStr) {
+                // Get the current date
+                const currentDate = new Date();
 
-            // Get the current week's start date (Monday)
-            const startOfWeek = new Date(currentDate);
-            startOfWeek.setDate(currentDate.getDate() - currentDate.getDay() + 1);  // Adjust to Monday
+                // Get the current week's start date (Monday)
+                const startOfWeek = new Date(currentDate);
+                startOfWeek.setDate(currentDate.getDate() - currentDate.getDay() + 1);  // Adjust to Monday
 
-            // Get the current week's end date (Sunday)
-            const endOfWeek = new Date(startOfWeek);
-            endOfWeek.setDate(startOfWeek.getDate() + 6);  // Add 6 days to Monday to get Sunday
+                // Get the current week's end date (Sunday)
+                const endOfWeek = new Date(startOfWeek);
+                endOfWeek.setDate(startOfWeek.getDate() + 6);  // Add 6 days to Monday to get Sunday
 
-            // Parse the input date (DD/MM/YYYY)
-            const [day, month, year] = dateStr.split('/');
-            const givenDate = new Date(year, month - 1, day);
+                // Parse the input date (DD/MM/YYYY)
+                const [day, month, year] = dateStr.split('/');
+                const givenDate = new Date(year, month - 1, day);
 
-            // Compare the given date with the start and end of the current week
-            return givenDate >= startOfWeek && givenDate <= endOfWeek;
-        }
+                // Compare the given date with the start and end of the current week
+                return givenDate >= startOfWeek && givenDate <= endOfWeek;
+            }
 
-        function findById(array, id) {
-            // Use the find method to search the array of dictionaries for the object with the matching id
-            return array.find(item => item.id === id);
-        }
-    </script>```
+            function findById(array, id) {
+                // Use the find method to search the array of dictionaries for the object with the matching id
+                return array.find(item => item.id === id);
+            }
+        </script>```
     </div>
 
     <br><br>
