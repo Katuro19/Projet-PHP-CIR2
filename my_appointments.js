@@ -70,14 +70,9 @@ function filter() {
 
 function is_doctor() {
     if (document.getElementById("user_type").innerHTML == 'doctor') {
-        console.log("true");
         return true;
     }
     if (document.getElementById("user_type").innerHTML == 'patient') {
-        console.log("false");
         return false;
-    }
-    else {
-        console.log("merde");
     }
 }

@@ -23,7 +23,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
     <script src="my_poc.js" defer></script>
     <script src="my_appointments.js" defer></script>
     <script src="my_past_appointments.js" defer></script>
-    <script src="navbar.js" defer></script>
+    <script src="add_get_appointment.js" defer></script>
     <script src="navbar.js" defer></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
@@ -73,8 +73,34 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                             <div class="add_appointment_content">
                                 <h1>Add an appointment</h1>
                                 <form id="form">
-                                    <label for="list1">Choose a day :</label>
-                                    <input type="date" id="date">
+                                    <?php if ($_SESSION["user_type"] == "doctor") {
+                                        echo "<label for=\"list1\">Choose a day :</label>
+                                              <input type=\"date\" id=\"date_add_appointment\">";
+                                    } else {
+                                        echo "<label for=\"list\" id=\"available_doctors\">Choose a doctor :</label>
+                                              <select id=\"selected_available_doctor\" name=\"doctor\">";
+                                        $available_doctors = $Rendezvous->request_if_null("patient_id");
+                                        $available_doctors_id = [];
+                                        foreach ($available_doctors as $doctor) {
+                                            array_push($available_doctors_id, $doctor['doctor_id']);
+                                        }
+                                        $available_doctors_id = array_unique($available_doctors_id);
+                                         foreach($available_doctors_id as $doctors){
+                                            echo "<option value=\"doctor_" . $doctors . "\">" . $Doctors->request($doctors)['lastname'] . " " . $Doctors->request($doctors)['firstname'] . "</option>";
+                                         }
+                                        echo "</select>";
+                                    }
+                                    ?>
+                                    <br><br>
+                                    <label for="list3" id="available_locations">Choose a location :</label>
+                                    <select id="selected_available_location" name="location">
+                                        <option value="default" selected>Choose an option</option>
+                                        <?php
+                                        foreach ($Locations->request_all(false, false) as $location) {
+                                            echo "<option value=\"location_" . $location['name'] . "\">" . $location['name'] . " - " . $location['postcode'] . "</option>";
+                                        }
+                                        ?>
+                                    </select>
                                     <br><br>
                                     <label for="list2">Choose a time period :</label>
                                     <?php
@@ -82,28 +108,13 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                         echo "<input type=\"time\" id=\"start_time\" name=\"start_time\">
                                                   <input type=\"time\" id=\"end_time\" name=\"end_time\">";
                                     } else {
-                                        echo "<select id=\"time_period\" name=\"time_period\">";
-                                        foreach ($Rendezvous->request_if("patient_id", null, true, true) as $available_rendezvous) {
-                                            echo "<option value=\"time_period_" . $available_rendezvous['id'] . "\">" . $available_rendezvous['start'] . " - " . $available_rendezvous['end'] . $available_rendezvous['date'] . "</option>";
-
+                                        echo "<select id=\"patient_available_appointments\" name=\"time_period\">";
+                                        foreach ($Rendezvous->request_if_null("patient_id") as $available_rendezvous) {
+                                            echo "<option value=\"appointment_" . $available_rendezvous['id'] . "\" class=\"date_" . $available_rendezvous['date'] . " location_" . $Locations->request($available_rendezvous['location_id'])['name'] . "\">" . $available_rendezvous['start'] . " - " . $available_rendezvous['end'] . " " . $available_rendezvous['date'] . "</option>";
                                         }
                                         echo "</select>";
                                     }
                                     ?>
-
-                                    <!-- instert php request here to get available time slots  for the selected day-->
-                                    <!-- echo "<option value="optionC">". content ."</option>" -->
-                                    <br><br>
-                                    <label for="list3">Choose a location :</label>
-                                    <select id="location" name="location">
-                                        <option value="default" selected>Choose an option</option>
-                                        <!-- instert php request here to get available locations-->
-                                        <?php
-                                        foreach ($Locations->request_all(false, false) as $location) {
-                                            echo "<option value=\"location_\"" . $location['name'] . ">" . $location['name'] . " - " . $location['postcode'] . "</option>";
-                                        }
-                                        ?>
-                                    </select>
                                     <br><br>
                                     <button type="button" class="validate_add_appointment">Validate</button>
                                 </form>
@@ -195,7 +206,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                     // Create the appointment element
                     const appointment = document.createElement("div");
                     appointment.classList.add("appointment");
-                    console.log(startOffset + " : " + duration);
+                    //console.log(startOffset + " : " + duration);
                     // Set the position of the appointment within the time slot
                     appointment.style.top = `${startOffset}px`; // Adjust position for minutes
                     appointment.style.height = `${duration}px`; // Adjust height for the event duration
@@ -210,7 +221,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
             createCalendar();
             for (let i = 0; i < allAppointements.length; i++) {
                 let currentAppointement = allAppointements[i];
-                console.log(allAppointements[i]);
+                //console.log(allAppointements[i]);
                 if (isInCurrentWeek(currentAppointement['date'])) {
                     let appId = currentAppointement['id'];
                     let dateIndex = getDayNumber(currentAppointement['date']);
