@@ -30,13 +30,10 @@ function filter() {
         inputed_location = inputed_location.split("_")[1];
     }
 
-
     let appointments = document.querySelectorAll('[id^="table_my_past_appointments_"]');
-    //console.log(appointments);
 
     appointments.forEach(function (appointments) {
         let elems = appointments.querySelectorAll('[id^="my_past_appointments_"]');
-        //console.log(elems);
         if (elems[3].id.includes(inputed_user) || inputed_user == "default") {
             if (elems[5].id.includes(inputed_expertise) || inputed_expertise == "default") {
                 if (elems[4].id.includes(inputed_location) || inputed_location == "default") {

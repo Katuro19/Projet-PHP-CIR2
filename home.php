@@ -78,7 +78,8 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                               <input type=\"date\" id=\"date_add_appointment\">";
                                     } else {
                                         echo "<label id=\"available_doctors\">Choose a doctor :</label>
-                                              <select id=\"selected_available_doctor\" name=\"doctor\">";
+                                              <select id=\"selected_available_doctor\" name=\"doctor\">
+                                              <option value=\"default\" selected>Choose an option</option>";
                                         $available_doctors = $Rendezvous->request_if_null("patient_id");
                                         $available_doctors_id = [];
                                         foreach ($available_doctors as $doctor) {
@@ -97,20 +98,21 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                         <option value="default" selected>Choose an option</option>
                                         <?php
                                         foreach ($Locations->request_all(false, false) as $location) {
-                                            echo "<option value=\"location_" . $location['name'] . "\">" . $location['name'] . " - " . $location['postcode'] . "</option>";
+                                            echo "<option value=\"location_" . $location['id'] . "\">" . $location['name'] . " - " . $location['postcode'] . "</option>";
                                         }
                                         ?>
                                     </select>
                                     <br><br>
-                                    <label>Choose a time period :</label>
+                                    <label>Choose a time slot :</label>
                                     <?php
                                     if ($_SESSION['user_type'] == 'doctor') {
                                         echo "<input type=\"time\" id=\"start_time\" name=\"start_time\">
                                                   <input type=\"time\" id=\"end_time\" name=\"end_time\">";
                                     } else {
-                                        echo "<select id=\"patient_available_appointments\" name=\"time_period\">";
+                                        echo "<select id=\"patient_available_appointments\" name=\"time_period\">
+                                              <option value=\"default\" selected>Choose an option</option>";
                                         foreach ($Rendezvous->request_if_null("patient_id") as $available_rendezvous) {
-                                            echo "<option value=\"appointment_" . $available_rendezvous['id'] . "\" class=\"date_" . $available_rendezvous['date'] . " location_" . $Locations->request($available_rendezvous['location_id'])['name'] . "\">" . $available_rendezvous['start'] . " - " . $available_rendezvous['end'] . " " . $available_rendezvous['date'] . "</option>";
+                                            echo "<option id=\"appointment_" . $available_rendezvous['id'] . "\" class=\"doctor_" . $available_rendezvous['doctor_id'] . "-location_" . $available_rendezvous['location_id'] . "\">" . $available_rendezvous['start'] . " - " . $available_rendezvous['end'] . " " . $available_rendezvous['date'] . "</option>";
                                         }
                                         echo "</select>";
                                     }
