@@ -1,7 +1,8 @@
 if (!is_doctor()) {
+    console.log("oui");
     document.getElementById("available_doctors").addEventListener("input", filter());
     document.getElementById("available_locations").addEventListener("input", filter());
-    console.log("oui");
+
 }
 
 
