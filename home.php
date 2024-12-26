@@ -74,10 +74,10 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                 <h1>Add an appointment</h1>
                                 <form id="form">
                                     <?php if ($_SESSION["user_type"] == "doctor") {
-                                        echo "<label for=\"list1\">Choose a day :</label>
+                                        echo "<label>Choose a day :</label>
                                               <input type=\"date\" id=\"date_add_appointment\">";
                                     } else {
-                                        echo "<label for=\"list\" id=\"available_doctors\">Choose a doctor :</label>
+                                        echo "<label id=\"available_doctors\">Choose a doctor :</label>
                                               <select id=\"selected_available_doctor\" name=\"doctor\">";
                                         $available_doctors = $Rendezvous->request_if_null("patient_id");
                                         $available_doctors_id = [];
@@ -92,7 +92,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                     }
                                     ?>
                                     <br><br>
-                                    <label for="list3" id="available_locations">Choose a location :</label>
+                                    <label id="available_locations">Choose a location :</label>
                                     <select id="selected_available_location" name="location">
                                         <option value="default" selected>Choose an option</option>
                                         <?php
@@ -102,7 +102,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                                         ?>
                                     </select>
                                     <br><br>
-                                    <label for="list2">Choose a time period :</label>
+                                    <label>Choose a time period :</label>
                                     <?php
                                     if ($_SESSION['user_type'] == 'doctor') {
                                         echo "<input type=\"time\" id=\"start_time\" name=\"start_time\">
@@ -312,11 +312,11 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
     <div class="my_appointments">
         <h2 style="padding-bottom: 10px">My appointments</h2>
         <form>
-            <label for="list1">Date :</label>
+            <label>Date :</label>
             <input type="date" id="date_my_appointments" value="">
             <?php
             if ($_SESSION['user_type'] == 'patient') {
-                echo "<label for=\"list2\">Doctor</label>
+                echo "<label >Doctor</label>
                     <select id=\"doctor_my_appointments\" name=\"doctor\" style=\"margin-right: 10px\">
                     <option value=\"default\" selected>Choose an option</option>";
                 foreach ($Doctors->request_all(false, false) as $doctor) {
@@ -324,7 +324,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                 }
                 echo "</select>";
             } else {
-                echo "<label for=\"list2\">Patient</label>
+                echo "<label >Patient</label>
                     <select id=\"patient_my_appointments\" name=\"patient\" style=\"margin-right: 10px\">
                     <option value=\"default\" selected>Choose an option</option>";
                 foreach ($Patients->request_all(false, false) as $patient) {
@@ -333,7 +333,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                 echo "</select>";
             }
             ?>
-            <label for="list2">Expertise</label>
+            <label>Expertise</label>
             <select id="expertise_my_appointments" name="expertise" style="margin-right: 10px">
                 <option value="default" selected>Choose an option</option>
                 <?php
@@ -342,7 +342,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                 }
                 ?>
             </select>
-            <label for="list3">Location :</label>
+            <label>Location :</label>
             <select id="location_my_appointments" name="location" style="margin-right: 10px">
                 <option value="default" selected>Choose an option</option>
                 <?php
@@ -413,7 +413,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
         <form style>
             <?php
             if ($_SESSION['user_type'] == 'patient') {
-                echo "<label for=\"list2\">Doctor</label>
+                echo "<label>Doctor</label>
                     <select id=\"doctor_my_past_appointments\" name=\"doctor\" style=\"margin-right: 10px\">
                     <option value=\"default\" selected>Choose an option</option>";
                 foreach ($Doctors->request_all(false, false) as $doctor) {
@@ -421,7 +421,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                 }
                 echo "</select>";
             } else {
-                echo "<label for=\"list2\">Patient</label>
+                echo "<label>Patient</label>
                     <select id=\"patient_my_past_appointments\" name=\"patient\" style=\"margin-right: 10px\">
                     <option value=\"default\" selected>Choose an option</option>";
                 foreach ($Patients->request_all(false, false) as $patient) {
@@ -430,7 +430,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                 echo "</select>";
             }
             ?>
-            <label for="list2">Expertise</label>
+            <label>Expertise</label>
             <select id="expertise_my_past_appointments" name="expertise" style="margin-right: 10px">
                 <option value="default" selected>Choose an option</option>
 
@@ -440,7 +440,7 @@ if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
                 }
                 ?>
             </select>
-            <label for="list3">Location :</label>
+            <label>Location :</label>
             <select id="location_my_past_appointments" name="location" style="margin-right: 10px">
                 <option value="default" selected>Choose an option</option>
                 <?php
