@@ -24,61 +24,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $end_time = null;
     $user_type = $_SESSION['user_type'];
 
-    if($user_type === 'doctor'){
+    if ($user_type === 'doctor') {
         $date_add_appointment = $_POST['date_add_appointment'];
         //Here i need to work a bit on the date
-        $date_split = explode("-",$date_add_appointment);
-        $date_add_appointment = $date_split[2]."/".$date_split[1]."/".$date_split[0];
+        $date_split = explode("-", $date_add_appointment);
+        $date_add_appointment = $date_split[2] . "/" . $date_split[1] . "/" . $date_split[0];
         $start_time = $_POST['start_time'];
         $end_time = $_POST['end_time'];
-    }
-    elseif($user_type === 'patient' && $_POST['doctor'] != "default" && $_POST['time_period'] != 'default'){
+    } elseif ($user_type === 'patient' && $_POST['doctor'] != "default" && $_POST['time_period'] != 'default') {
         $choosen_doctor = explode("_", $_POST['doctor'])[1]; //since the doctor in the list are written like this : doctor_ID, im taking the last part
         $date_chosen = explode(" ", $_POST['time_period']); // ( [0] => 14:34 [1] => - [2] => 16:34 [3] => 28/12/2024 )  look like this
     }
 
-    if($_POST['location'] != "default")
-        $selected_location = explode("_", $_POST['location'])[1]; 
+    if ($_POST['location'] != "default")
+        $selected_location = explode("_", $_POST['location'])[1];
 
-    echo $choosen_doctor."/".$date_add_appointment."/".$selected_location."/".print_r($date_chosen)."/".$start_time."/".$end_time;
+    echo $choosen_doctor . "/" . $date_add_appointment . "/" . $selected_location . "/" . print_r($date_chosen) . "/" . $start_time . "/" . $end_time;
 
 
-    function validRendezVous($Rendezvous,$date, $start, $end, $patient_id, $doctor_id, $location_id){ //check if the rendezvous is valid (exist, and no patient already)
+    function validRendezVous($Rendezvous, $date, $start, $end, $patient_id, $doctor_id, $location_id)
+    { //check if the rendezvous is valid (exist, and no patient already)
         $allAppointementsExisting = $Rendezvous->request_all();
         foreach ($allAppointementsExisting as $appointment) {
             // we check every appointement to see if it exist
-            if(
+            if (
                 $appointment['date'] === $date &&
                 $appointment['start'] === $start &&
                 $appointment['end'] === $end &&
                 ($patient_id === "" || $appointment['patient_id'] === $patient_id) &&
                 $appointment['doctor_id'] == $doctor_id &&
-                $appointment['location_id'] == $location_id                 
-            ){
-                
+                $appointment['location_id'] == $location_id
+            ) {
+
                 return $appointment['id'];
             }
         }
 
         return -1;
     }
-    
 
 
-    if($user_type === 'doctor' && $date_add_appointment != null && $selected_location != null){
-        $the_rendezvous = ['date' => $date_add_appointment,
-                           'start' => $start_time,
-                           'end' => $end_time,
-                           'doctor_id' => $_SESSION['id'],
-                           'location_id' => $selected_location];
+
+    if ($user_type === 'doctor' && $date_add_appointment != null && $selected_location != null) {
+        $the_rendezvous = [
+            'date' => $date_add_appointment,
+            'start' => $start_time,
+            'end' => $end_time,
+            'doctor_id' => $_SESSION['id'],
+            'location_id' => $selected_location
+        ];
         $Rendezvous->add_with($the_rendezvous); //Here we should check if the doctor dont already have an appointement. But i'm f lazy
-    }
-    elseif($user_type === 'patient' && $choosen_doctor != null && $date_chosen != null){
-        $isValid = validRendezVous($Rendezvous,$date_chosen[3],$date_chosen[0],$date_chosen[2],null,$choosen_doctor,$selected_location);
-        if($isValid != -1){
-            $Rendezvous->change_if($isValid,'patient_id',$_SESSION['id']);
-        }
-        else
+    } elseif ($user_type === 'patient' && $choosen_doctor != null && $date_chosen != null) {
+        $isValid = validRendezVous($Rendezvous, $date_chosen[3], $date_chosen[0], $date_chosen[2], null, $choosen_doctor, $selected_location);
+        if ($isValid != -1) {
+            $Rendezvous->change_if($isValid, 'patient_id', $_SESSION['id']);
+        } else
             echo "fuck";
     }
 
@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="add_appointment_container">
                             <div class="add_appointment_content">
                                 <h1>Add an appointment</h1>
-                                <form id="form"  method="POST" action="home.php">
+                                <form id="form" method="POST" action="home.php">
                                     <?php if ($_SESSION["user_type"] == "doctor") {
                                         echo "<label>Choose a day :</label>
                                               <input type=\"date\" id=\"date_add_appointment\" name='date_add_appointment'>";
@@ -167,9 +167,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             array_push($available_doctors_id, $doctor['doctor_id']);
                                         }
                                         $available_doctors_id = array_unique($available_doctors_id);
-                                         foreach($available_doctors_id as $doctors){
+                                        foreach ($available_doctors_id as $doctors) {
                                             echo "<option value=\"doctor_" . $doctors . "\">" . $Doctors->request($doctors)['lastname'] . " " . $Doctors->request($doctors)['firstname'] . "</option>";
-                                         }
+                                        }
                                         echo "</select>";
                                     }
                                     ?>
@@ -315,7 +315,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     let locationName = findById(allLoc, currentAppointement['location_id']);
                     let appDoctor = findById(allDoctors, currentAppointement['doctor_id']);
                     let appPatient = findById(allPatients, currentAppointement['patient_id']);
-                    if(appPatient == null){
+                    if (appPatient == null) {
                         addAppointment(dateIndex, startHour, startMin, endHour, endMin, "Location : " + locationName['name'] + " with Doctor : " + appDoctor['lastname'] + ". No patient yet.");
                     }
                     else {
@@ -465,13 +465,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $rendezvousDate = DateTime::createFromFormat('d/m/Y', $rendezvous['date']);
                         $currentDate = new DateTime();
                         if ($rendezvousDate > $currentDate) {
-                            echo "<tr id=\"table_my_appointments_" . $rendezvous['id'] . "\">
-                                        <td id=\"my_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
-                                        <td id=\"my_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
-                                        <td id=\"my_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>
-                                        <td id=\"my_appointments_" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "</td>
-                                        <td id=\"my_appointments_" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "</td>
-                                        <td id=\"my_appointments_" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "</td>
+                            echo "<tr id=\"table_my_past_appointments_" . $rendezvous['id'] . "\">
+                                        <td id=\"my_past_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
+                                        <td id=\"my_past_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
+                                        <td id=\"my_past_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>";
+                            if ($Patients->request($rendezvous['patient_id']) != null) {
+                                echo "<td id=\"my_past_appointments_" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "</td>";
+                            } else {
+                                echo "<td id=\"my_past_appointments_null\"style=\"color: black;border: 1px solid white;\"> NONE </td>";
+                            }
+                            echo "<td id=\"my_past_appointments_" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "</td>
+                                        <td id=\"my_past_appointments_" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "</td>
                                     </tr>";
                         }
                     }
@@ -566,9 +570,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             echo "<tr id=\"table_my_past_appointments_" . $rendezvous['id'] . "\">
                                         <td id=\"my_past_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
                                         <td id=\"my_past_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
-                                        <td id=\"my_past_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>
-                                        <td id=\"my_past_appointments_" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "</td>
-                                        <td id=\"my_past_appointments_" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "</td>
+                                        <td id=\"my_past_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>";
+                            if ($Patients->request($rendezvous['patient_id']) != null) {
+                                echo "<td id=\"my_past_appointments_" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "</td>";
+                            } else {
+                                echo "<td id=\"my_past_appointments_null\"style=\"color: black;border: 1px solid white;\"> NONE </td>";
+                            }
+                            echo "<td id=\"my_past_appointments_" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "</td>
                                         <td id=\"my_past_appointments_" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "</td>
                                     </tr>";
                         }
@@ -616,7 +624,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $my_patients = $Rendezvous->request_if('doctor_id', $_SESSION['id'], false, false);
             $patients_id = [];
             foreach ($my_patients as $my_patient) {
-                array_push($patients_id, $my_patient['patient_id']);
+                if ($my_patient['patient_id'] != null) {
+                    array_push($patients_id, $my_patient['patient_id']);
+                }
             }
             $patients_id = array_unique($patients_id);
             foreach ($patients_id as $id) {
