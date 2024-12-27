@@ -183,7 +183,8 @@ class db{
         try {
 
             // get the columns
-            $columns = array_keys($values);
+            $columns = array_map(fn($col) => '"' . $col . '"', array_keys($values)); //here, this will add "" to every column. I did this because they may have conflict with SQL keywords, like END.
+
             
             // get the values
             $datas = array_values($values);
