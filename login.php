@@ -1,21 +1,33 @@
 <?php
 require './database/requests.php';
 require './database/databases.php';
-
-
 session_start();
 
 // Check if the user is already logged in via session
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
     // Redirect to dashboard if already logged in
-    if ($_SESSION['user_type'] === 'doctor')
-        header("Location: doctors_home.php");
-    else
-        header("Location: patient_home.php");
-
+    header("Location: home.php");
     exit();
 }
 
+// Check if the "Keep me signed in" cookie exists
+if (isset($_COOKIE['user_email'])) {
+    $email = $_COOKIE['user_email'];
+    // Fetch user by email
+    $user = $Patients->request_if('email', $email); // Fetch user by email
+
+    if ($user) {
+        // Automatically log in the user
+        $_SESSION['loggedin'] = true;
+        $_SESSION['id'] = $user[0]['id'];
+        $_SESSION['firstname'] = $user[0]['firstname'];
+        $_SESSION['lastname'] = $user[0]['lastname'];
+        $_SESSION['user_type'] = 'patient'; // Adjust based on user type
+
+        header("Location: home.php");
+        exit();
+    }
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $Logged = false;
@@ -24,14 +36,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userType = $_POST['user_type']; // Get the user type ('patient' or 'doctor')
     $email = $_POST['email'];
     $password = $_POST['password'];
-
-
     if ($userType === 'patient') {
         // Handle patient login
-
-        if ($password == $Patients->request_if('email', $email)[0]['password']) { //We can do this because email is unique
+        if ($password == $Patients->request_if('email', $email)[0]['password']) { // We can do this because email is unique
             $patient = $Patients->request_if('email', $email)[0];
-            //Save the session
+            // Save the session
             $_SESSION['loggedin'] = true;
             $_SESSION['id'] = $patient['id'];
             $_SESSION['firstname'] = $patient['firstname'];
@@ -43,20 +52,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 setcookie('user_email', $email, time() + (86400 * 30), "/"); // 30 days
             }
 
-            header("Location: home.php"); //Dont forget to change to patient_home later !
+            header("Location: home.php"); // Redirect to patient home
             exit();
-
         } else {
-            //Wrong password/user
+            // Wrong password/user
             $LoginError = true;
         }
-
     } elseif ($userType === 'doctor') {
         // Handle doctor login
-
-        if ($password == $Doctors->request_if('email', $email)[0]['password']) { //We can do this because email is unique
+        if ($password == $Doctors->request_if('email', $email)[0]['password']) { // We can do this because email is unique
             $doctor = $Doctors->request_if('email', $email)[0];
-            //Save the session
+            // Save the session
             $_SESSION['loggedin'] = true;
             $_SESSION['id'] = $doctor['id'];
             $_SESSION['firstname'] = $doctor['firstname'];
@@ -68,24 +74,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 setcookie('user_email', $email, time() + (86400 * 30), "/"); // 30 days
             }
 
-            header("Location: home.php"); //Dont forget to change to doctors_home later !
+            header("Location: home.php"); // Redirect to doctor home
             exit();
         } else {
-            //Wrong password/user
+            // Wrong password/user
             $LoginError = true;
         }
     }
-
-
-
 }
-
 ?>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
 <!DOCTYPE html>
 <html lang="en">
 
@@ -98,11 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-
     <div class="container">
         <!-- Left Section -->
         <div class="photo-section">
-            <!-- <div class="photo-placeholder">Photos</div> -->
             <?php
             $images = [
                 'doctor_1.jpg',
@@ -114,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $randomImage = rand(0, count($images) - 1);
             $toDisplay = "./img/" . $images[$randomImage];
 
-            $secret = rand(0, 1000); //fun
+            $secret = rand(0, 1000); // fun
             if ($secret < 50) {
                 $toDisplay = "./img/" . $secrets_images[rand(0, count($secrets_images) - 1)]; //We grab a secret image
                 if ($secret < 1) {
@@ -164,6 +159,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     value="<?php echo $isDoctor ? 'doctor' : 'patient'; ?>">
 
                 <button type="submit" class="btn">Sign in</button>
+                <br><br>
+                <div><a href="create_account.php" class="btn" style="text-decoration: none; display: flex; justify-content: center !important;">Create account</a></div>
+                
                 <?php
                 if ($LoginError) {
                     echo "<div class='error'>Login failed</div>";
