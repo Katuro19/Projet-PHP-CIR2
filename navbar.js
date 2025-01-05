@@ -26,6 +26,9 @@ function on_page(){
     );
 }
 
+
+
+
 document.querySelector(".text").addEventListener("click", () => {
     document.querySelector(".add_appointment_container").style.display = "flex";
 });
@@ -40,6 +43,7 @@ document.querySelector(".validate_add_appointment").addEventListener("click", ()
     document.querySelector(".add_appointment_container").style.display = "none";
     
 });
+
 
 loadTags();
 on_page();
