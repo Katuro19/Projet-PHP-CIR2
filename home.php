@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['location'] != "default")
         $selected_location = explode("_", $_POST['location'])[1];
 
-    echo $choosen_doctor . "/" . $date_add_appointment . "/" . $selected_location . "/" . print_r($date_chosen) . "/" . $start_time . "/" . $end_time;
+    //echo $choosen_doctor . "/" . $date_add_appointment . "/" . $selected_location . "/" . print_r($date_chosen) . "/" . $start_time . "/" . $end_time;
 
 
     function validRendezVous($Rendezvous, $date, $start, $end, $patient_id, $doctor_id, $location_id)
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'doctor_id' => $_SESSION['id'],
             'location_id' => $selected_location
         ];
-        $Rendezvous->add_with($the_rendezvous); //Here we should check if the doctor dont already have an appointement. But i'm f lazy
+        $Rendezvous->add_with($the_rendezvous); //Here we should check if the doctor dont already have an appointement. But i'm lazy
     } elseif ($user_type === 'patient' && $choosen_doctor != null && $date_chosen != null) {
         $isValid = validRendezVous($Rendezvous, $date_chosen[3], $date_chosen[0], $date_chosen[2], null, $choosen_doctor, $selected_location);
         if ($isValid != -1) {
@@ -149,6 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             echo "<button class=\"text\" title=\"click here to make an appointment\" type=\"button\">+</button>";
                         }
                         ?>
+
 
                         <div class="add_appointment_container">
                             <div class="add_appointment_content">
