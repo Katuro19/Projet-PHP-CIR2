@@ -6,8 +6,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 include_once 'database/requests.php';
 include_once 'database/databases.php';
-if (!isset($_SESSION['id']) || $_SESSION['loggedin'] !== true) {
-    header('Location: login.php');
+// Check if the user is already logged in
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+    // Redirect to login page if not logged in
+    header("Location: login.php");
     exit();
 }
 

@@ -1,7 +1,7 @@
 <?php
+session_start();
 require './database/requests.php';
 require './database/databases.php';
-session_start();
 
 // Check if the user is already logged in via session
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
@@ -26,6 +26,10 @@ if (isset($_COOKIE['user_email'])) {
 
         header("Location: home.php");
         exit();
+    } else {
+        setcookie('user_email', '', time() - 3600, "/"); // Clear invalid cookie
+        $LoginError = true;
+        exit();
     }
 }
 
@@ -36,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userType = $_POST['user_type']; // Get the user type ('patient' or 'doctor')
     $email = $_POST['email'];
     $password = $_POST['password'];
+    
     if ($userType === 'patient') {
         // Handle patient login
         $patient = $Patients->request_if('email', $email); // Fetch user by email
@@ -43,8 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Save the session
             $_SESSION['loggedin'] = true;
             $_SESSION['id'] = $patient['id'];
-            $_SESSION['firstname'] = $patient['firstname'];
-            $_SESSION['lastname'] = $patient['lastname'];
+            $_SESSION['firstname'] = $patient[0]['firstname'];
+            $_SESSION['lastname'] = $patient[0]['lastname'];
             $_SESSION['user_type'] = $userType;
 
             // Set cookie if "Keep me signed in" is checked
@@ -64,9 +69,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($doctor && password_verify($password, $doctor[0]['password'])) { // Verify hashed password
             // Save the session
             $_SESSION['loggedin'] = true;
-            $_SESSION['id'] = $doctor['id'];
-            $_SESSION['firstname'] = $doctor['firstname'];
-            $_SESSION['lastname'] = $doctor['lastname'];
+            $_SESSION['id'] = $doctor[0]['id'];
+            $_SESSION['firstname'] = $doctor[0]['firstname'];
+            $_SESSION['lastname'] = $doctor[0]['lastname'];
             $_SESSION['user_type'] = $userType;
 
             // Set cookie if "Keep me signed in" is checked
@@ -150,19 +155,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="options">
                     <input type="checkbox" id="keep-signed-in" name="keep_signed_in">
                     <label for="keep-signed-in">Keep me signed in</label>
-                    <a href="#" class="forgot-password">Forgot password?</a>
-                </div>
 
-                
+                </div>
+                <a href="#" class="forgot-password">Forgot password?</a>
+
 
                 <!-- Hidden input to track the selected tab -->
                 <input type="hidden" id="user-type" name="user_type"
                     value="<?php echo $isDoctor ? 'doctor' : 'patient'; ?>">
 
-                <button type="submit" class="btn" >Sign in</button>
+                <button type="submit" class="btn">Sign in</button>
                 <br><br>
-                <div><a href="create_account.php" class="btn" style="text-decoration: none; display: flex; justify-content: center !important;">Create account</a></div>
-                
+                <div><a href="create_account.php" class="btn"
+                        style="text-decoration: none; display: flex; justify-content: center !important;">Create
+                        account</a></div>
+
                 <?php
                 if ($LoginError) {
                     echo "<div class='error'>Login failed</div>";
