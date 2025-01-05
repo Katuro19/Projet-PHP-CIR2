@@ -141,7 +141,7 @@ html {
 .my_poc{
     display:flex;
     flex-direction: column;
-    width: 25%;
+    width: 35%;
     margin-left: 2em;
     background-color: var(--tableblue);
     border-radius: 5px;
