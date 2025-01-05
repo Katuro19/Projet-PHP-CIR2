@@ -1,5 +1,5 @@
 -- Don't forget to use this after creating the database or you'll cry later on
-
+-- Note that this is using ID !! This will NOT work if you used the database before, bcs the primary key keep incrementing. Please delete and re-create the db.
 
 BEGIN;
 

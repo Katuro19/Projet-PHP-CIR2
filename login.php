@@ -150,15 +150,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="options">
                     <input type="checkbox" id="keep-signed-in" name="keep_signed_in">
                     <label for="keep-signed-in">Keep me signed in</label>
+                    <a href="#" class="forgot-password">Forgot password?</a>
                 </div>
 
-                <a href="#" class="forgot-password">Forgot password?</a>
+                
 
                 <!-- Hidden input to track the selected tab -->
                 <input type="hidden" id="user-type" name="user_type"
                     value="<?php echo $isDoctor ? 'doctor' : 'patient'; ?>">
 
-                <button type="submit" class="btn">Sign in</button>
+                <button type="submit" class="btn" >Sign in</button>
                 <br><br>
                 <div><a href="create_account.php" class="btn" style="text-decoration: none; display: flex; justify-content: center !important;">Create account</a></div>
                 

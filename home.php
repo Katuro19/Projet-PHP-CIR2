@@ -370,20 +370,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
             function isInCurrentWeek(dateStr) {
-                // Get the current date
+                // Get the current date and set time to midnight
                 const currentDate = new Date();
+                currentDate.setHours(0, 0, 0, 0);
 
                 // Get the current week's start date (Monday)
+                const dayOfWeek = currentDate.getDay(); // Sunday = 0, Monday = 1, ..., Saturday = 6
+                const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek; // Adjust if Sunday
                 const startOfWeek = new Date(currentDate);
-                startOfWeek.setDate(currentDate.getDate() - currentDate.getDay() + 1);  // Adjust to Monday
+                startOfWeek.setDate(currentDate.getDate() + diffToMonday);
 
                 // Get the current week's end date (Sunday)
                 const endOfWeek = new Date(startOfWeek);
-                endOfWeek.setDate(startOfWeek.getDate() + 6);  // Add 6 days to Monday to get Sunday
+                endOfWeek.setDate(startOfWeek.getDate() + 6);
 
                 // Parse the input date (DD/MM/YYYY)
                 const [day, month, year] = dateStr.split('/');
                 const givenDate = new Date(year, month - 1, day);
+                givenDate.setHours(0, 0, 0, 0); // Reset the time for consistency
 
                 // Compare the given date with the start and end of the current week
                 return givenDate >= startOfWeek && givenDate <= endOfWeek;
