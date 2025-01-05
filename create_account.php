@@ -1,5 +1,3 @@
-
-
 <?php
 
 require './database/requests.php';
@@ -37,12 +35,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if($user_type === 'doctor'){
             $datas = $Doctors->request_if('email',$email);
             if($datas == []){
+              $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hash the password
                 $toCreate = [
                     "firstname" => $first_name,
                     "lastname" => $last_name,
                     "email" => $email,
                     "phone" => $phone,
-                    "password" => $password,
+                    "password" => $hashed_password,
                     "postcode" => $postcode,
                     "expertise_id" => $expertise
                 ];
@@ -63,12 +62,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         elseif($user_type === 'patient'){
             $datas = $Patients->request_if('email',$email);
             if($datas == []){
+              $hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hash the password
               $toCreate = [
                 "firstname" => $first_name,
                 "lastname" => $last_name,
                 "email" => $email,
                 "phone" => $phone,
-                "password" => $password,
+                "password" => $hashed_password,
             ];
 
               $res = $Patients->add_with($toCreate);

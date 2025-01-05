@@ -38,8 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     if ($userType === 'patient') {
         // Handle patient login
-        if ($password == $Patients->request_if('email', $email)[0]['password']) { // We can do this because email is unique
-            $patient = $Patients->request_if('email', $email)[0];
+        $patient = $Patients->request_if('email', $email); // Fetch user by email
+        if ($patient && password_verify($password, $patient[0]['password'])) { // Verify hashed password
             // Save the session
             $_SESSION['loggedin'] = true;
             $_SESSION['id'] = $patient['id'];
@@ -60,8 +60,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     } elseif ($userType === 'doctor') {
         // Handle doctor login
-        if ($password == $Doctors->request_if('email', $email)[0]['password']) { // We can do this because email is unique
-            $doctor = $Doctors->request_if('email', $email)[0];
+        $doctor = $Doctors->request_if('email', $email); // Fetch user by email
+        if ($doctor && password_verify($password, $doctor[0]['password'])) { // Verify hashed password
             // Save the session
             $_SESSION['loggedin'] = true;
             $_SESSION['id'] = $doctor['id'];
