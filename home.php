@@ -199,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         foreach ($Rendezvous->request_if_null("patient_id") as $available_rendez_vous) {
                                             $available_rendez_vous_Date = DateTime::createFromFormat('d/m/Y', $available_rendez_vous['date']);
                                             $currentDate = new DateTime();
-                                            if ($rendezvousDate >= $currentDate) {
+                                            if ($available_rendez_vous_Date >= $currentDate) {
                                                 echo "<option id=\"appointment_" . $available_rendez_vous['id'] . "\" class=\"doctor_" . $available_rendez_vous['doctor_id'] . "-location_" . $available_rendez_vous['location_id'] . "\">" . $available_rendez_vous['start'] . " - " . $available_rendez_vous['end'] . " " . $available_rendez_vous['date'] . "</option>";
                                             }
                                         }

@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     if (!is_doctor()) {
+        filter();
         document.getElementById("selected_available_doctor").addEventListener("change", filter);
         document.getElementById("selected_available_location").addEventListener("change", filter);
     }
@@ -25,8 +26,10 @@ function filter() {
         let doctor_id = classList.find(cls => cls.startsWith("doctor_"))?.split("_")[1];
         let location_id = classList.find(cls => cls.startsWith("location_"))?.split("_")[1];
 
-        if ((inputed_doctor === "default" || doctor_id === inputed_doctor) &&
-            (inputed_location === "default" || location_id === inputed_location)) {
+        if (inputed_location === "default" || inputed_location === "default") {
+            slot.style.display = "none";
+        }
+        if (doctor_id === inputed_doctor && location_id === inputed_location) {
             slot.removeAttribute("style");
         } else {
             slot.style.display = "none";
