@@ -22,11 +22,25 @@ if (isset($_COOKIE['user_email'])) {
         $_SESSION['id'] = $user[0]['id'];
         $_SESSION['firstname'] = $user[0]['firstname'];
         $_SESSION['lastname'] = $user[0]['lastname'];
-        $_SESSION['user_type'] = 'patient'; // Adjust based on user type
+        $_SESSION['user_type'] = 'patient';
 
         header("Location: home.php");
         exit();
-    } else {
+    }
+    $user = $Doctors->request_if('email', $email); // Fetch user by email
+
+    if ($user) {
+        // Automatically log in the user
+        $_SESSION['loggedin'] = true;
+        $_SESSION['id'] = $user[0]['id'];
+        $_SESSION['firstname'] = $user[0]['firstname'];
+        $_SESSION['lastname'] = $user[0]['lastname'];
+        $_SESSION['user_type'] = 'doctor';
+
+        header("Location: home.php");
+        exit();
+    }
+    else {
         setcookie('user_email', '', time() - 3600, "/"); // Clear invalid cookie
         $LoginError = true;
         exit();
@@ -47,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($patient && password_verify($password, $patient[0]['password'])) { // Verify hashed password
             // Save the session
             $_SESSION['loggedin'] = true;
-            $_SESSION['id'] = $patient['id'];
+            $_SESSION['id'] = $patient[0]['id'];
             $_SESSION['firstname'] = $patient[0]['firstname'];
             $_SESSION['lastname'] = $patient[0]['lastname'];
             $_SESSION['user_type'] = $userType;
