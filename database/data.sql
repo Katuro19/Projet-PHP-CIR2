@@ -11,12 +11,12 @@ INSERT INTO locations("name","postcode") VALUES
 ('GreatCity','12500'), ('DownTown','21600'), ('AquaCity','80800'), ('Senatus populusque Romanus','50927');
 
 INSERT INTO patients(firstname,lastname,email,phone,"password") VALUES
-('Kévin','Pereira','thisIsMyRealEmail@gmail.com','0771749163','cryptedPassword'),
-('Louis','Lacoste','anotherRealEmail@gmail.com','0620239690','password');
+('Kévin','Pereira','thisIsMyRealEmail@gmail.com','0771749163','$2y$10$Rkb4Tw09m2C8RgrlsAIByOqEnzu1FlTJ94mNlYt1ialeSp4zCvMSm'), --  Password : cryptedPassword
+('Louis','Lacoste','anotherRealEmail@gmail.com','0620239690','$2y$10$cR1hLK1qY4dxvk9weD/dW.5ma0GQqQ4UAq2WysgMsjSCj5ClanVIC'); -- Password ; password
 
 INSERT INTO doctors(firstname,lastname,email,phone,"password",postcode,expertise_id) VALUES 
-('Oscar','Lavigne','yesyes@outlook.com','0649777963','verydemurepassword','78500',6),
-('Pierre-Luc','Maurice','another@outlook.com','0636099659','sheep','89000',1);
+('Oscar','Lavigne','yesyes@outlook.com','0649777963','$2y$10$Rkb4Tw09m2C8RgrlsAIByOqEnzu1FlTJ94mNlYt1ialeSp4zCvMSm','78500',6), --  Password : cryptedPassword
+('Pierre-Luc','Maurice','another@outlook.com','0636099659','$2y$10$cR1hLK1qY4dxvk9weD/dW.5ma0GQqQ4UAq2WysgMsjSCj5ClanVIC','89000',1); -- Password ; password
 
 INSERT INTO "rendezvous"("date", "start", "end", patient_id, doctor_id, location_id) VALUES
 ('25/01/0470','08:00','09:30',1 ,1, 4),
