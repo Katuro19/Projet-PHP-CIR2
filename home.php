@@ -666,11 +666,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $my_doctors = $Rendezvous->request_if('patient_id', $_SESSION['id'], false, false);
             $doctors_id = [];
             foreach ($my_doctors as $my_doctor) {
-                array_push($doctors_id, $my_doctor['patient_id']);
+                array_push($doctors_id, $my_doctor['doctor_id']);
             }
             $doctors_id = array_unique($doctors_id);
             foreach ($doctors_id as $id) {
-                $doctor = $Doctors->request($id, false, false);
+                $doctor = $Doctors->request($id);
                 echo "<tr class=\"my_poc_table\">
                     <td id=\"my_poc_lastname_" . strtoupper($doctor['lastname']) . "\" style=\"color: black;border: 1px solid white;\">" . strtoupper($doctor['lastname']) . "</td>
                     <td id=\"my_poc_firtsname_" . $doctor['firstname'] . "\" style=\"color: black;border: 1px solid white;\">" . $doctor['firstname'] . "</td>
