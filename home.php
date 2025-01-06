@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($isValid != -1) {
             $Rendezvous->change_if($isValid, 'patient_id', $_SESSION['id']);
         } else
-            echo "fuck";
+           // echo "that doesnt work";
     }
 
 
