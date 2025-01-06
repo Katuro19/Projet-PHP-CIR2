@@ -171,7 +171,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <label for="keep-signed-in">Keep me signed in</label>
 
                 </div>
-                <a href="#" class="forgot-password">Forgot password?</a>
+                <a href="forgotpassword.html" class="forgot-password">Forgot password?</a>
 
 
                 <!-- Hidden input to track the selected tab -->
