@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $Rendezvous->change_if($isValid, 'patient_id', $_SESSION['id']);
         } else
             $errorGettingAnAppointement = true;
-            
+
     }
 
 
@@ -196,8 +196,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     } else {
                                         echo "<select id=\"patient_available_appointments\" name=\"time_period\">
                                               <option value=\"default\" selected>Choose an option</option>";
-                                        foreach ($Rendezvous->request_if_null("patient_id") as $available_rendezvous) {
-                                            echo "<option id=\"appointment_" . $available_rendezvous['id'] . "\" class=\"doctor_" . $available_rendezvous['doctor_id'] . "-location_" . $available_rendezvous['location_id'] . "\">" . $available_rendezvous['start'] . " - " . $available_rendezvous['end'] . " " . $available_rendezvous['date'] . "</option>";
+                                        foreach ($Rendezvous->request_if_null("patient_id") as $available_rendez_vous) {
+                                            $available_rendez_vous_Date = DateTime::createFromFormat('d/m/Y', $available_rendez_vous['date']);
+                                            $currentDate = new DateTime();
+                                            if ($rendezvousDate >= $currentDate) {
+                                                echo "<option id=\"appointment_" . $available_rendez_vous['id'] . "\" class=\"doctor_" . $available_rendez_vous['doctor_id'] . "-location_" . $available_rendez_vous['location_id'] . "\">" . $available_rendez_vous['start'] . " - " . $available_rendez_vous['end'] . " " . $available_rendez_vous['date'] . "</option>";
+                                            }
                                         }
                                         echo "</select>";
                                     }
