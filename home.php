@@ -82,18 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $Rendezvous->change_if($isValid, 'patient_id', $_SESSION['id']);
         } else
             $errorGettingAnAppointement = true;
-
     }
-
-
-
-
 }
-
-
-
-
-
 ?>
 
 
@@ -160,15 +150,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <form id="form" method="POST" action="home.php">
                                     <?php if ($_SESSION["user_type"] == "doctor") {
                                         echo "<label>Choose a day :</label>
-                                              <input type=\"date\" id=\"date_add_appointment\" name='date_add_appointment'>";
+                                              <input type=\"date\" id=\"date_add_appointment\" name='date_add_appointment'required>";
                                     } else {
                                         echo "<label id=\"available_doctors\">Choose a doctor :</label>
-                                              <select id=\"selected_available_doctor\" name=\"doctor\">
+                                              <select id=\"selected_available_doctor\" name=\"doctor\" required>
                                               <option value=\"default\" selected>Choose an option</option>";
                                         $available_doctors = $Rendezvous->request_if_null("patient_id");
+                                        $currentDate = new DateTime();
                                         $available_doctors_id = [];
                                         foreach ($available_doctors as $doctor) {
-                                            array_push($available_doctors_id, $doctor['doctor_id']);
+                                            $available_rendez_vous_Date = DateTime::createFromFormat('d/m/Y', $doctor['date']);
+                                            if ($available_rendez_vous_Date >= $currentDate) {
+                                                array_push($available_doctors_id, $doctor['doctor_id']);
+                                            }
                                         }
                                         $available_doctors_id = array_unique($available_doctors_id);
                                         foreach ($available_doctors_id as $doctors) {
@@ -179,7 +173,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     ?>
                                     <br><br>
                                     <label id="available_locations">Choose a location :</label>
-                                    <select id="selected_available_location" name="location">
+                                    <select id="selected_available_location" name="location" required>
                                         <option value="default" selected>Choose an option</option>
                                         <?php
                                         foreach ($Locations->request_all(false, false) as $location) {
@@ -191,10 +185,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <label>Choose a time slot :</label>
                                     <?php
                                     if ($_SESSION['user_type'] == 'doctor') {
-                                        echo "<input type=\"time\" id=\"start_time\" name=\"start_time\">
-                                                  <input type=\"time\" id=\"end_time\" name=\"end_time\">";
+                                        echo "<input type=\"time\" id=\"start_time\" name=\"start_time\" required>
+                                                  <input type=\"time\" id=\"end_time\" name=\"end_time\" required>";
                                     } else {
-                                        echo "<select id=\"patient_available_appointments\" name=\"time_period\">
+                                        echo "<select id=\"patient_available_appointments\" name=\"time_period\" required>
                                               <option value=\"default\" selected>Choose an option</option>";
                                         foreach ($Rendezvous->request_if_null("patient_id") as $available_rendez_vous) {
                                             $available_rendez_vous_Date = DateTime::createFromFormat('d/m/Y', $available_rendez_vous['date']);
@@ -678,8 +672,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             foreach ($doctors_id as $id) {
                 $doctor = $Doctors->request($id);
                 echo "<tr class=\"my_poc_table\">
-                    <td class=\"canBeClicked\" id=\"my_poc_lastname_" . strtoupper($doctor['lastname']) . "_".$doctor['id']."\" style=\"color: black;border: 1px solid white;\">" . strtoupper($doctor['lastname']) . "</td>
-                    <td class=\"canBeClicked\" id=\"my_poc_firtsname_" . $doctor['firstname'] . "_".$doctor['id']."\" style=\"color: black;border: 1px solid white;\">" . $doctor['firstname'] . "</td>
+                    <td class=\"canBeClicked\" id=\"my_poc_lastname_" . strtoupper($doctor['lastname']) . "_" . $doctor['id'] . "\" style=\"color: black;border: 1px solid white;\">" . strtoupper($doctor['lastname']) . "</td>
+                    <td class=\"canBeClicked\" id=\"my_poc_firtsname_" . $doctor['firstname'] . "_" . $doctor['id'] . "\" style=\"color: black;border: 1px solid white;\">" . $doctor['firstname'] . "</td>
                     <td style=\"color: black;border: 1px solid white;\">" . $doctor['email'] . "</td>
                     <td style=\"color: black;border: 1px solid white;\">" . $doctor['phone'] . "</td>
                 </tr>";
