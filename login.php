@@ -180,9 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <button type="submit" class="btn">Sign in</button>
                 <br><br>
-                <div><a href="create_account.php" class="btn"
-                        style="text-decoration: none; display: flex; justify-content: center !important;">Create
-                        account</a></div>
+                <div><a href="create_account.php" class="btn" style="text-decoration: none; display: flex; justify-content: center !important;">Create account</a></div>
 
                 <?php
                 if ($LoginError) {
