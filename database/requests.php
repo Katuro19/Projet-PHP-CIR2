@@ -376,6 +376,66 @@ class db{
             return [];            
         } 
     }
+
+    public function request_in_order($column,$value,$sortColumn,$asc=true,$verbose=false,$details=false){
+        /* Return an array of array containing all the lines (fetched) of the database that valide the condition in order
+        Will sort using the $sortColumn values. 
+        ARGS : column,value,sortColumn,asc=true,verbose=false,details=false
+        - Fetched : YES
+
+        In case of failure, return an empty array
+        Verbose will display informations about the failure
+        Details will display informations about the queries
+        Warning : This will not work to check if a column is null. Please use the request_if_null function instead
+        */
+
+        if(!in_array($column,$this->columns)){
+            if($verbose){
+                echo "<br>The column '".$column."' was not set as a valid column by your admin. If this is not normal, check the database definition in your code.";
+            }
+            return [];
+        }
+        if(!in_array($sortColumn,$this->columns)){
+            if($verbose){
+                echo "<br>The column '".$sortColumn."' was not set as a valid column by your admin. If this is not normal, check the database definition in your code.";
+            }
+            return [];
+        }
+    
+        try {
+            $ascOrDesc = "asc";
+            if($asc == false){
+                $ascOrDesc = "desc";
+            }
+
+
+            $query = "SELECT * FROM ".$this->mainTable." WHERE ".$column." = ? ORDER BY ".$sortColumn." ".$ascOrDesc;
+            if($details)
+            echo "<br>Requested query : ".$query."<br>The column to check the condition on is ".$column." and the condition is =".$value;
+
+            $request = ($this->conn)->prepare($query);
+            if($details)
+                echo "<br>The prepare is done";
+
+            $request->bindParam(1, $value); 
+            if($details)
+                echo "<br>".$value." bind successfull"; 
+
+            $request->execute();
+
+            $result = $request->fetchAll(PDO::FETCH_ASSOC);
+            if($details)
+                echo "<br>Request executed and fetched"; 
+            
+            
+            return $result;
+        }
+        catch(PDOException $e){
+            if($verbose)
+                echo "Error on request_if function : ".$e->getMessage();
+            return [];            
+        } 
+    }
 }
 
 ?>

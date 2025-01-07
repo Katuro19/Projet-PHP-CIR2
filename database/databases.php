@@ -20,7 +20,7 @@ catch (PDOException $e) {
 /* 
 $Table = new db($conn,'tableName','primaryKey');
  And then you can do request :
-$result = $Table->request($truc); (read the f doc)
+$result = $Table->request($truc); (read the doc)
 */
 
 

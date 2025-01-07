@@ -15,7 +15,6 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 
 
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $choosen_doctor = null;
     $date_add_appointment = null;
