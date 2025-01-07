@@ -14,21 +14,6 @@ function loadTags() {
 }
 
 
-function on_page(){ 
-    let elem_id = document.body.children[1].id;
-    let elems = document.body.children[0].querySelectorAll('[href]');
-    elems.forEach(elem => {
-        if(elem.href.includes(elem_id)) {
-            elem.classList.add('onpage');
-            return;
-            }
-        }
-    );
-}
-
-
-
-
 document.querySelector(".text").addEventListener("click", () => {
     document.querySelector(".add_appointment_container").style.display = "flex";
 });
@@ -46,8 +31,3 @@ document.querySelector(".validate_add_appointment").addEventListener("click", ()
 
 
 loadTags();
-on_page();
-
-
-
-

@@ -672,7 +672,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             foreach ($my_doctors as $my_doctor) {
                 array_push($doctors_id, $my_doctor['doctor_id']);
             }
-            $doctors_id = array_unique($doctors_id);
+            $doctors_id = array_unique($doctors_id);    
             foreach ($doctors_id as $id) {
                 $doctor = $Doctors->request($id);
                 echo "<tr class=\"my_poc_table\">
