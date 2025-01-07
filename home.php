@@ -148,6 +148,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <div class="add_appointment_content">
                                 <h1>Add an appointment</h1>
                                 <form id="form" method="POST" action="home.php">
+
+                                    <?php if ($_SESSION["user_type"] !== "doctor") {
+                                        echo "<label id=\"available_expertises\">Choose an expertise :</label>
+                                              <select id=\"selected_available_expertise\" name=\"doctor\" required>
+                                              <option value=\"default\" selected>Choose an option</option>";
+                                        $available_expertise = $Rendezvous->request_if_null("patient_id");
+                                        $currentDate = new DateTime();
+                                        $available_expertise_id = [];
+                                        foreach ($available_expertise as $expertise) {
+                                            $available_rendez_vous_Date = DateTime::createFromFormat('d/m/Y', $expertise['date']);
+                                            if ($available_rendez_vous_Date >= $currentDate) {
+                                                array_push($available_expertise_id, $expertise['doctor_id']);
+                                            }
+                                        }
+                                        $available_expertise_id = array_unique($available_expertise_id);
+
+                                        foreach ($available_expertise_id as $expertise) {
+                                            echo "<option value=\"doctor_" . $expertise . "\">" . $Expertise->request($Doctors->request($expertise, false, false)['expertise_id'], false, false)['name'] . "</option>";
+                                        }
+                                        echo "</select><br><br>";
+                                    }
+                                    ?>
+
                                     <?php if ($_SESSION["user_type"] == "doctor") {
                                         echo "<label>Choose a day :</label>
                                               <input type=\"date\" id=\"date_add_appointment\" name='date_add_appointment'required>";
@@ -167,28 +190,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         $available_doctors_id = array_unique($available_doctors_id);
                                         foreach ($available_doctors_id as $doctors) {
                                             echo "<option value=\"doctor_" . $doctors . "\">" . $Doctors->request($doctors)['lastname'] . " " . $Doctors->request($doctors)['firstname'] . "</option>";
-                                        }
-                                        echo "</select>";
-                                    }
-                                    ?>
-                                    <br><br>
-                                    <?php if ($_SESSION["user_type"] !== "doctor") {
-                                        echo "<label id=\"available_expertises\">Choose a doctor :</label>
-                                              <select id=\"selected_available_expertise\" name=\"doctor\" required>
-                                              <option value=\"default\" selected>Choose an option</option>";
-                                        $available_expertise = $Rendezvous->request_if_null("patient_id");
-                                        $currentDate = new DateTime();
-                                        $available_expertise_id = [];
-                                        foreach ($available_expertise as $expertise) {
-                                            $available_rendez_vous_Date = DateTime::createFromFormat('d/m/Y', $expertise['date']);
-                                            if ($available_rendez_vous_Date >= $currentDate) {
-                                                array_push($available_expertise_id, $expertise['doctor_id']);
-                                            }
-                                        }
-                                        $available_expertise_id = array_unique($available_expertise_id);
-
-                                        foreach ($available_expertise_id as $expertise) {
-                                            echo "<option value=\"doctor_" . $expertise . "\">" . $Expertise->request($Doctors->request($expertise, false, false)['expertise_id'], false, false)['name'] . "</option>";
                                         }
                                         echo "</select>";
                                     }
