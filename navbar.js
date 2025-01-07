@@ -54,7 +54,6 @@ window.addEventListener("click", (event) => {
 
 document.querySelector(".validate_add_appointment").addEventListener("click", () => {
     document.querySelector(".add_appointment_container").style.display = "none";
-    
 });
 
 
