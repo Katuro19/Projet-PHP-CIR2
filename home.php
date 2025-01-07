@@ -450,7 +450,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </select>
         </form>
         <br>
-        <div class="abcd">
         <table style="border: 1px solid white;" class="table_my_appointments">
             <thead>
                 <tr>
@@ -508,7 +507,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ?>
             </tbody>
         </table>
-            </div>
     </div>
     <br><br>
     <div class="my_past_appointments">
