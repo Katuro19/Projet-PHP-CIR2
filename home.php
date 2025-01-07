@@ -652,6 +652,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } else {
             echo "<h2 style=\"padding-bottom: 10px\">My doctors</h2>
+                <h3>Select a doctor to see the available appointements.</h3>
+
             <div id=\"my_doctors\" >
                 <input type=\"text\" placeholder=\"Last name\" id=\"last_name\" style=\"margin-right: 10px\">
                 <input type=\"text\" placeholder=\"First name\" id=\"first_name\">
@@ -676,8 +678,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             foreach ($doctors_id as $id) {
                 $doctor = $Doctors->request($id);
                 echo "<tr class=\"my_poc_table\">
-                    <td id=\"my_poc_lastname_" . strtoupper($doctor['lastname']) . "\" style=\"color: black;border: 1px solid white;\">" . strtoupper($doctor['lastname']) . "</td>
-                    <td id=\"my_poc_firtsname_" . $doctor['firstname'] . "\" style=\"color: black;border: 1px solid white;\">" . $doctor['firstname'] . "</td>
+                    <td class=\"canBeClicked\" id=\"my_poc_lastname_" . strtoupper($doctor['lastname']) . "_".$doctor['id']."\" style=\"color: black;border: 1px solid white;\">" . strtoupper($doctor['lastname']) . "</td>
+                    <td class=\"canBeClicked\" id=\"my_poc_firtsname_" . $doctor['firstname'] . "_".$doctor['id']."\" style=\"color: black;border: 1px solid white;\">" . $doctor['firstname'] . "</td>
                     <td style=\"color: black;border: 1px solid white;\">" . $doctor['email'] . "</td>
                     <td style=\"color: black;border: 1px solid white;\">" . $doctor['phone'] . "</td>
                 </tr>";

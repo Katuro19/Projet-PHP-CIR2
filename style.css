@@ -187,3 +187,8 @@ footer{
 .disconnect-container{
     align-content: center;
 }
+
+
+.canBeClicked{
+    cursor: pointer !important;
+}

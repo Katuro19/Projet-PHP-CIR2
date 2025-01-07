@@ -13,6 +13,34 @@ function loadTags() {
     //
 }
 
+document.querySelectorAll(".canBeClicked").forEach(element => {
+    element.addEventListener("click", (event) => {
+        
+        const clickedElement = event.target;
+        const clickedElementId = clickedElement.id;
+        const doctorId = clickedElementId.split("_")[4]; //The 4 part of the ID is the doctor id !
+
+
+        const selectElement = document.querySelector("#selected_available_doctor");
+        const options = selectElement.querySelectorAll("option");
+        let doctorExists = false;
+
+        options.forEach(option => {
+            if (option.value === "doctor_" + doctorId) {
+                doctorExists = true;
+            }
+        });
+
+        if (doctorExists) {
+            selectElement.value = "doctor_" + doctorId;
+            document.querySelector(".add_appointment_container").style.display = "flex";
+        } else {
+            alert("This doctor doesn't have any timeslots available ! Please try later");
+        }
+
+        
+    });
+});
 
 document.querySelector(".text").addEventListener("click", () => {
     document.querySelector(".add_appointment_container").style.display = "flex";
