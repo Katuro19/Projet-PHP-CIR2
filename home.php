@@ -13,7 +13,30 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
     exit();
 }
 
+/*
+To whomever it may concern
+My name is Sir Kévin Pierre-Luc of Jacob
+I am the original author of this code
+This code should NOT be enhanced, tuned, upgraded or otherwise changed
 
+I have no idea of this code actually works, it's truly the eight wonder of this world
+Nothing on this mortal plane of existance could explain the existence of this system
+
+The variables the names of Gods to appease them
+The loops, an enigma
+
+please, I beg of you, do not touch this code.
+do not.
+
+Sir Kévin Pierre-Luc of Jacob.
+
+
+
+
+
+run...
+
+*/
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
