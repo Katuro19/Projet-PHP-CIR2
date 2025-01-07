@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS "doctors" (
 	"lastname"	TEXT NOT NULL,
 	"email"	TEXT NOT NULL UNIQUE,
 	"phone" TEXT NOT NULL,
-	"password"	TEXT NOT NULL DEFAULT 'password',
+	"password"	TEXT NOT NULL DEFAULT '$2y$10$cR1hLK1qY4dxvk9weD/dW.5ma0GQqQ4UAq2WysgMsjSCj5ClanVIC',
 	"postcode" TEXT NOT NULL DEFAULT '999999',
 	"expertise_id" INTEGER NOT NULL,
 	FOREIGN KEY("expertise_id") REFERENCES "expertise"("id") ON DELETE CASCADE
