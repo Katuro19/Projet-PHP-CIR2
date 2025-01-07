@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $end_time = $_POST['end_time'];
     } elseif ($user_type === 'patient' && $_POST['doctor'] != "default" && $_POST['time_period'] != 'default') {
         $choosen_doctor = explode("_", $_POST['doctor'])[1]; //since the doctor in the list are written like this : doctor_ID, im taking the last part
-        $date_chosen = explode(" ", $_POST['time_period']); // ( [0] => 14:34 [1] => - [2] => 16:34 [3] => 28/12/2024 )  look like this
+        $date_chosen = explode(" ", $_POST['time_period']); // ( [0] => 14:34 [1] => - [2] => 16:34 [3] => 28/12/2024 ) look like this
     }
 
     if ($_POST['location'] != "default")
@@ -174,8 +174,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                     <?php if ($_SESSION["user_type"] !== "doctor") {
                                         echo "<label id=\"available_expertises\">Choose an expertise :</label>
-                                              <select id=\"selected_available_expertise\" name=\"doctor\" required>
-                                              <option value=\"default\" selected>Choose an option</option>";
+                       <select id=\"selected_available_expertise\" name=\"doctor\" required>
+                       <option value=\"default\" selected>Choose an option</option>";
                                         $available_expertise = $Rendezvous->request_if_null("patient_id");
                                         $currentDate = new DateTime();
                                         $available_expertise_id = [];
@@ -197,11 +197,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                     <?php if ($_SESSION["user_type"] == "doctor") {
                                         echo "<label>Choose a day :</label>
-                                              <input type=\"date\" id=\"date_add_appointment\" name='date_add_appointment'required>";
+                       <input type=\"date\" id=\"date_add_appointment\" name='date_add_appointment'required>";
                                     } else {
                                         echo "<label id=\"available_doctors\">Choose a doctor :</label>
-                                              <select id=\"selected_available_doctor\" name=\"doctor\" required>
-                                              <option value=\"default\" selected>Choose an option</option>";
+                       <select id=\"selected_available_doctor\" name=\"doctor\" required>
+                       <option value=\"default\" selected>Choose an option</option>";
                                         $available_doctors = $Rendezvous->request_if_null("patient_id");
                                         $currentDate = new DateTime();
                                         $available_doctors_id = [];
@@ -213,7 +213,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         }
                                         $available_doctors_id = array_unique($available_doctors_id);
                                         foreach ($available_doctors_id as $doctors) {
-                                            echo "<option value=\"doctor_" . $doctors ."_". $Doctors->request($doctors)['expertise_id']."\">" . $Doctors->request($doctors)['lastname'] . " " . $Doctors->request($doctors)['firstname'] . "</option>";
+                                            echo "<option value=\"doctor_" . $doctors . "_" . $Doctors->request($doctors)['expertise_id'] . "\">" . $Doctors->request($doctors)['lastname'] . " " . $Doctors->request($doctors)['firstname'] . "</option>";
                                         }
                                         echo "</select>";
                                     }
@@ -223,7 +223,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <select id="selected_available_location" name="location" required>
                                         <option value="default" selected>Choose an option</option>
                                         <?php
-                                        foreach ($Locations->request_all(false, false) as $location) {
+                                        foreach ($Locations->request_all(false) as $location) {
                                             echo "<option name='choosen_location' value=\"location_" . $location['id'] . "\">" . $location['name'] . " - " . $location['postcode'] . "</option>";
                                         }
                                         ?>
@@ -233,10 +233,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <?php
                                     if ($_SESSION['user_type'] == 'doctor') {
                                         echo "<input type=\"time\" id=\"start_time\" name=\"start_time\" required>
-                                                  <input type=\"time\" id=\"end_time\" name=\"end_time\" required>";
+                         <input type=\"time\" id=\"end_time\" name=\"end_time\" required>";
                                     } else {
                                         echo "<select id=\"patient_available_appointments\" name=\"time_period\" required>
-                                              <option value=\"default\" selected>Choose an option</option>";
+                       <option value=\"default\" selected>Choose an option</option>";
                                         foreach ($Rendezvous->request_if_null("patient_id") as $available_rendez_vous) {
                                             $available_rendez_vous_Date = DateTime::createFromFormat('d/m/Y', $available_rendez_vous['date']);
                                             $currentDate = new DateTime();
@@ -330,7 +330,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Calculate the top position based on the start time
                 let startOffset = 33.4 * (startMinute) / 60;
-                const duration = 41.7 * ((endHour - startHour) + (endMinute - startMinute) / (60));   //38.5 is a size in px. Yes we are using pixel. Yes i do want to die
+                const duration = 41.7 * ((endHour - startHour) + (endMinute - startMinute) / (60));  //38.5 is a size in px. Yes we are using pixel. Yes i do want to die
 
                 // Find the appropriate time slot container (to position the appointment within it)
                 const timeSlot = document.querySelector(`.time-slot[data-day='${dayIndex}'][data-hour='${Math.floor(startHour)}']`);
@@ -382,8 +382,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             - dayIndex: 0 (Monday) to 6 (Sunday)
             - startHour and endHour: Hour in 24-hour format
             - startMinute and endMinute
-    
-    
+        
+        
             //exemple
             addAppointment(0, 8, 30, 10, 0, "Meeting with Team");
             addAppointment(2, 14, 0, 15, 30, "Client Call");
@@ -461,17 +461,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php
                 if ($_SESSION['user_type'] == 'patient') {
                     echo "<label >Doctor</label>
-                    <select id=\"doctor_my_appointments\" name=\"doctor\" style=\"margin-right: 10px\">
-                    <option value=\"default\" selected>Choose an option</option>";
-                    foreach ($Doctors->request_all(false, false) as $doctor) {
+          <select id=\"doctor_my_appointments\" name=\"doctor\" style=\"margin-right: 10px\">
+          <option value=\"default\" selected>Choose an option</option>";
+                    foreach ($Doctors->request_all() as $doctor) {
                         echo "<option value=\"doctor_" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "\">" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "</option>";
                     }
                     echo "</select>";
                 } else {
                     echo "<label >Patient</label>
-                    <select id=\"patient_my_appointments\" name=\"patient\" style=\"margin-right: 10px\">
-                    <option value=\"default\" selected>Choose an option</option>";
-                    foreach ($Patients->request_all(false, false) as $patient) {
+          <select id=\"patient_my_appointments\" name=\"patient\" style=\"margin-right: 10px\">
+          <option value=\"default\" selected>Choose an option</option>";
+                    foreach ($Patients->request_all() as $patient) {
                         echo "<option value=\"patient_" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "\">" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "</option>";
                     }
                     echo "</select>";
@@ -481,7 +481,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <select id="expertise_my_appointments" name="expertise" style="margin-right: 10px">
                     <option value="default" selected>Choose an option</option>
                     <?php
-                    foreach ($Expertise->request_all(false, false) as $expertise) {
+                    foreach ($Expertise->request_all() as $expertise) {
                         echo "<option value=\"expertise_" . $expertise['name'] . "\">" . $expertise['name'] . "</option>";
                     }
                     ?>
@@ -490,7 +490,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <select id="location_my_appointments" name="location" style="margin-right: 10px">
                     <option value="default" selected>Choose an option</option>
                     <?php
-                    foreach ($Locations->request_all(false, false) as $location) {
+                    foreach ($Locations->request_all() as $location) {
                         echo "<option value=\"location_" . $location['name'] . "\">" . $location['name'] . " - " . $location['postcode'] . "</option>";
                     }
                     ?>
@@ -517,37 +517,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <tbody>
                     <?php
                     if ($_SESSION['user_type'] == 'doctor') {
-                        foreach ($Rendezvous->request_if('doctor_id', $_SESSION['id'], false, false) as $rendezvous) {
+                        foreach ($Rendezvous->request_if('doctor_id', $_SESSION['id']) as $rendezvous) {
                             $rendezvousDate = DateTime::createFromFormat('d/m/Y', $rendezvous['date']);
                             $currentDate = new DateTime();
                             if ($rendezvousDate > $currentDate) {
                                 echo "<tr id=\"table_my_past_appointments_" . $rendezvous['id'] . "\">
-                                        <td id=\"my_past_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
-                                        <td id=\"my_past_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
-                                        <td id=\"my_past_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>";
+                    <td id=\"my_past_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
+                    <td id=\"my_past_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
+                    <td id=\"my_past_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>";
                                 if ($Patients->request($rendezvous['patient_id']) != null) {
-                                    echo "<td id=\"my_past_appointments_" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "</td>";
+                                    echo "<td id=\"my_past_appointments_" . strtoupper($Patients->request($rendezvous['patient_id'])['lastname']) . " " . $Patients->request($rendezvous['patient_id'])['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Patients->request($rendezvous['patient_id'])['lastname']) . " " . $Patients->request($rendezvous['patient_id'])['firstname'] . "</td>";
                                 } else {
                                     echo "<td id=\"my_past_appointments_null\"style=\"color: black;border: 1px solid white;\"> NONE </td>";
                                 }
-                                echo "<td id=\"my_past_appointments_" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "</td>
-                                        <td id=\"my_past_appointments_" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "</td>
-                                    </tr>";
+                                echo "<td id=\"my_past_appointments_" . $Locations->request($rendezvous['location_id'])['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'])['name'] . "</td>
+                    <td id=\"my_past_appointments_" . $Expertise->request($Doctors->request($rendezvous['doctor_id'])['expertise_id'])['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'])['expertise_id'])['name'] . "</td>
+                  </tr>";
                             }
                         }
                     } else {
-                        foreach ($Rendezvous->request_if('patient_id', $_SESSION['id'], false, false) as $rendezvous) {
+                        foreach ($Rendezvous->request_if('patient_id', $_SESSION['id']) as $rendezvous) {
                             $rendezvousDate = DateTime::createFromFormat('d/m/Y', $rendezvous['date']);
                             $currentDate = new DateTime();
                             if ($rendezvousDate > $currentDate) {
                                 echo "<tr id=\"table_my_appointments_" . $rendezvous['id'] . "\">
-                                        <td id=\"my_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
-                                        <td id=\"my_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
-                                        <td id=\"my_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>
-                                        <td id=\"my_appointments_" . strtoupper($Doctors->request($rendezvous['doctor_id'], false, false)['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Doctors->request($rendezvous['doctor_id'], false, false)['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'], false, false)['firstname'] . "</td>
-                                        <td id=\"my_appointments_" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "</td>
-                                        <td id=\"my_appointments_" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "</td>
-                                    </tr>";
+                    <td id=\"my_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
+                    <td id=\"my_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
+                    <td id=\"my_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>
+                    <td id=\"my_appointments_" . strtoupper($Doctors->request($rendezvous['doctor_id'])['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'])['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Doctors->request($rendezvous['doctor_id'])['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'])['firstname'] . "</td>
+                    <td id=\"my_appointments_" . $Locations->request($rendezvous['location_id'])['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'])['name'] . "</td>
+                    <td id=\"my_appointments_" . $Expertise->request($Doctors->request($rendezvous['doctor_id'])['expertise_id'])['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'])['expertise_id'])['name'] . "</td>
+                  </tr>";
                             }
                         }
                     }
@@ -562,17 +562,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php
                 if ($_SESSION['user_type'] == 'patient') {
                     echo "<label>Doctor</label>
-                    <select id=\"doctor_my_past_appointments\" name=\"doctor\" style=\"margin-right: 10px\">
-                    <option value=\"default\" selected>Choose an option</option>";
-                    foreach ($Doctors->request_all(false, false) as $doctor) {
+          <select id=\"doctor_my_past_appointments\" name=\"doctor\" style=\"margin-right: 10px\">
+          <option value=\"default\" selected>Choose an option</option>";
+                    foreach ($Doctors->request_all(false) as $doctor) {
                         echo "<option value=\"doctor_" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "\">" . strtoupper($doctor['lastname']) . " " . $doctor['firstname'] . "</option>";
                     }
                     echo "</select>";
                 } else {
                     echo "<label>Patient</label>
-                    <select id=\"patient_my_past_appointments\" name=\"patient\" style=\"margin-right: 10px\">
-                    <option value=\"default\" selected>Choose an option</option>";
-                    foreach ($Patients->request_all(false, false) as $patient) {
+          <select id=\"patient_my_past_appointments\" name=\"patient\" style=\"margin-right: 10px\">
+          <option value=\"default\" selected>Choose an option</option>";
+                    foreach ($Patients->request_all(false) as $patient) {
                         echo "<option value=\"patient_" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "\">" . strtoupper($patient['lastname']) . " " . $patient['firstname'] . "</option>";
                     }
                     echo "</select>";
@@ -583,7 +583,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <option value="default" selected>Choose an option</option>
 
                     <?php
-                    foreach ($Expertise->request_all(false, false) as $expertise) {
+                    foreach ($Expertise->request_all(false) as $expertise) {
                         echo "<option value=\"expertise_" . $expertise['name'] . "\">" . $expertise['name'] . "</option>";
                     }
                     ?>
@@ -592,7 +592,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <select id="location_my_past_appointments" name="location" style="margin-right: 10px">
                     <option value="default" selected>Choose an option</option>
                     <?php
-                    foreach ($Locations->request_all(false, false) as $location) {
+                    foreach ($Locations->request_all(false) as $location) {
                         echo "<option value=\"location_" . $location['name'] . "\">" . $location['name'] . " - " . $location['postcode'] . "</option>";
                     }
                     ?>
@@ -619,37 +619,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <tbody>
                     <?php
                     if ($_SESSION['user_type'] == 'doctor') {
-                        foreach ($Rendezvous->request_if('doctor_id', $_SESSION['id'], false, false) as $rendezvous) {
+                        foreach ($Rendezvous->request_if('doctor_id', $_SESSION['id']) as $rendezvous) {
                             $rendezvousDate = DateTime::createFromFormat('d/m/Y', $rendezvous['date']);
                             $currentDate = new DateTime();
                             if ($rendezvousDate < $currentDate) {
                                 echo "<tr id=\"table_my_past_appointments_" . $rendezvous['id'] . "\">
-                                        <td id=\"my_past_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
-                                        <td id=\"my_past_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
-                                        <td id=\"my_past_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>";
+                    <td id=\"my_past_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
+                    <td id=\"my_past_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
+                    <td id=\"my_past_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>";
                                 if ($Patients->request($rendezvous['patient_id']) != null) {
-                                    echo "<td id=\"my_past_appointments_" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Patients->request($rendezvous['patient_id'], false, false)['lastname']) . " " . $Patients->request($rendezvous['patient_id'], false, false)['firstname'] . "</td>";
+                                    echo "<td id=\"my_past_appointments_" . strtoupper($Patients->request($rendezvous['patient_id'])['lastname']) . " " . $Patients->request($rendezvous['patient_id'])['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Patients->request($rendezvous['patient_id'])['lastname']) . " " . $Patients->request($rendezvous['patient_id'])['firstname'] . "</td>";
                                 } else {
                                     echo "<td id=\"my_past_appointments_null\"style=\"color: black;border: 1px solid white;\"> NONE </td>";
                                 }
-                                echo "<td id=\"my_past_appointments_" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "</td>
-                                        <td id=\"my_past_appointments_" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "</td>
-                                    </tr>";
+                                echo "<td id=\"my_past_appointments_" . $Locations->request($rendezvous['location_id'])['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'])['name'] . "</td>
+                    <td id=\"my_past_appointments_" . $Expertise->request($Doctors->request($rendezvous['doctor_id'])['expertise_id'])['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'])['expertise_id'])['name'] . "</td>
+                  </tr>";
                             }
                         }
                     } else {
-                        foreach ($Rendezvous->request_if('patient_id', $_SESSION['id'], false, false) as $rendezvous) {
+                        foreach ($Rendezvous->request_if('patient_id', $_SESSION['id']) as $rendezvous) {
                             $rendezvousDate = DateTime::createFromFormat('d/m/Y', $rendezvous['date']);
                             $currentDate = new DateTime();
                             if ($rendezvousDate < $currentDate) {
                                 echo "<tr id=\"table_my_past_appointments_" . $rendezvous['id'] . "\">
-                                        <td id=\"my_past_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
-                                        <td id=\"my_past_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
-                                        <td id=\"my_past_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>
-                                        <td id=\"my_past_appointments_" . strtoupper($Doctors->request($rendezvous['doctor_id'], false, false)['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'], false, false)['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Doctors->request($rendezvous['doctor_id'], false, false)['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'], false, false)['firstname'] . "</td>
-                                        <td id=\"my_past_appointments_" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'], false, false)['name'] . "</td>
-                                        <td id=\"my_past_appointments_" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'], false, false)['expertise_id'], false, false)['name'] . "</td>
-                                    </tr>";
+                    <td id=\"my_past_appointments_" . $rendezvous['date'] . "\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['date'] . "</td>
+                    <td id=\"my_past_appointments_start\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['start'] . "</td>
+                    <td id=\"my_past_appointments_end\"style=\"color: black;border: 1px solid white;\">" . $rendezvous['end'] . "</td>
+                    <td id=\"my_past_appointments_" . strtoupper($Doctors->request($rendezvous['doctor_id'])['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'])['firstname'] . "\"style=\"color: black;border: 1px solid white;\">" . strtoupper($Doctors->request($rendezvous['doctor_id'])['lastname']) . " " . $Doctors->request($rendezvous['doctor_id'])['firstname'] . "</td>
+                    <td id=\"my_past_appointments_" . $Locations->request($rendezvous['location_id'])['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Locations->request($rendezvous['location_id'])['name'] . "</td>
+                    <td id=\"my_past_appointments_" . $Expertise->request($Doctors->request($rendezvous['doctor_id'])['expertise_id'])['name'] . "\"style=\"color: black;border: 1px solid white;\">" . $Expertise->request($Doctors->request($rendezvous['doctor_id'])['expertise_id'])['name'] . "</td>
+                  </tr>";
                             }
                         }
                     }
@@ -662,22 +662,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php
             if ($_SESSION['user_type'] == 'doctor') {
                 echo "<h2 style=\"padding-bottom: 10px\">My patients</h2>
-            <div id=\"my_patients\">
-                <input type=\"text\" placeholder=\"Last name\" id=\"last_name\" style=\"margin-right: 10px\">
-                <input type=\"text\" placeholder=\"First name\" id=\"first_name\">
-            </div>
-            <br>
-            <table class=\"table_my_poc\">
-                <thead>
-                    <tr>
-                        <th style=\"border: 1px solid white;\">Lastname</th>
-                        <th style=\"border: 1px solid white;\">Firstname</th>
-                        <th style=\"border: 1px solid white;\">Email</th>
-                        <th style=\"border: 1px solid white;\">Phone number</th>
-                    </tr>
-                </thead>
-                <tbody>";
-                $my_patients = $Rendezvous->request_if('doctor_id', $_SESSION['id'], false, false);
+      <div id=\"my_patients\">
+        <input type=\"text\" placeholder=\"Last name\" id=\"last_name\" style=\"margin-right: 10px\">
+        <input type=\"text\" placeholder=\"First name\" id=\"first_name\">
+      </div>
+      <br>
+      <table class=\"table_my_poc\">
+        <thead>
+          <tr>
+            <th style=\"border: 1px solid white;\">Lastname</th>
+            <th style=\"border: 1px solid white;\">Firstname</th>
+            <th style=\"border: 1px solid white;\">Email</th>
+            <th style=\"border: 1px solid white;\">Phone number</th>
+          </tr>
+        </thead>
+        <tbody>";
+                $my_patients = $Rendezvous->request_if('doctor_id', $_SESSION['id']);
                 $patients_id = [];
                 foreach ($my_patients as $my_patient) {
                     if ($my_patient['patient_id'] != null) {
@@ -686,34 +686,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 $patients_id = array_unique($patients_id);
                 foreach ($patients_id as $id) {
-                    $patient = $Patients->request($id, false, false);
+                    $patient = $Patients->request($id);
                     echo "<tr class=\"my_poc_table\">
-                    <td id=\"my_poc_lastname_" . strtoupper($patient['lastname']) . "\" style=\"color: black;border: 1px solid white;\">" . strtoupper($patient['lastname']) . "</td>
-                    <td id=\"my_poc_firstname_" . $patient['firstname'] . "\" style=\"color: black;border: 1px solid white;\">" . $patient['firstname'] . "</td>
-                    <td style=\"color: black;border: 1px solid white;\">" . $patient['email'] . "</td>
-                    <td style=\"color: black;border: 1px solid white;\">" . $patient['phone'] . "</td>
-                </tr>";
+          <td id=\"my_poc_lastname_" . strtoupper($patient['lastname']) . "\" style=\"color: black;border: 1px solid white;\">" . strtoupper($patient['lastname']) . "</td>
+          <td id=\"my_poc_firstname_" . $patient['firstname'] . "\" style=\"color: black;border: 1px solid white;\">" . $patient['firstname'] . "</td>
+          <td style=\"color: black;border: 1px solid white;\">" . $patient['email'] . "</td>
+          <td style=\"color: black;border: 1px solid white;\">" . $patient['phone'] . "</td>
+        </tr>";
                 }
             } else {
                 echo "<h2 style=\"padding-bottom: 10px\">My doctors</h2>
-                <h3>Select a doctor to see the available appointements.</h3>
+        <h3>Select a doctor to see the available appointements.</h3>
 
-            <div id=\"my_doctors\" >
-                <input type=\"text\" placeholder=\"Last name\" id=\"last_name\" style=\"margin-right: 10px\">
-                <input type=\"text\" placeholder=\"First name\" id=\"first_name\">
-            </div>
-            <br>
-            <table class=\"table_my_poc\">
-            <thead>
-                <tr>
-                    <th style=\"border: 1px solid white;\">Lastname</th>
-                    <th style=\"border: 1px solid white;\">Firstname</th>
-                    <th style=\"border: 1px solid white;\">Email</th>
-                    <th style=\"border: 1px solid white;\">Phone number</th>
-                </tr>
-            </thead>
-            <tbody>";
-                $my_doctors = $Rendezvous->request_if('patient_id', $_SESSION['id'], false, false);
+      <div id=\"my_doctors\" >
+        <input type=\"text\" placeholder=\"Last name\" id=\"last_name\" style=\"margin-right: 10px\">
+        <input type=\"text\" placeholder=\"First name\" id=\"first_name\">
+      </div>
+      <br>
+      <table class=\"table_my_poc\">
+      <thead>
+        <tr>
+          <th style=\"border: 1px solid white;\">Lastname</th>
+          <th style=\"border: 1px solid white;\">Firstname</th>
+          <th style=\"border: 1px solid white;\">Email</th>
+          <th style=\"border: 1px solid white;\">Phone number</th>
+        </tr>
+      </thead>
+      <tbody>";
+                $my_doctors = $Rendezvous->request_if('patient_id', $_SESSION['id']);
                 $doctors_id = [];
                 foreach ($my_doctors as $my_doctor) {
                     array_push($doctors_id, $my_doctor['doctor_id']);
@@ -722,11 +722,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 foreach ($doctors_id as $id) {
                     $doctor = $Doctors->request($id);
                     echo "<tr class=\"my_poc_table\">
-                    <td class=\"canBeClicked\" id=\"my_poc_lastname_" . strtoupper($doctor['lastname']) . "_" . $doctor['id'] . "\" style=\"color: black;border: 1px solid white;\">" . strtoupper($doctor['lastname']) . "</td>
-                    <td class=\"canBeClicked\" id=\"my_poc_firtsname_" . $doctor['firstname'] . "_" . $doctor['id'] . "\" style=\"color: black;border: 1px solid white;\">" . $doctor['firstname'] . "</td>
-                    <td style=\"color: black;border: 1px solid white;\">" . $doctor['email'] . "</td>
-                    <td style=\"color: black;border: 1px solid white;\">" . $doctor['phone'] . "</td>
-                </tr>";
+          <td class=\"canBeClicked\" id=\"my_poc_lastname_" . strtoupper($doctor['lastname']) . "_" . $doctor['id'] . "\" style=\"color: black;border: 1px solid white;\">" . strtoupper($doctor['lastname']) . "</td>
+          <td class=\"canBeClicked\" id=\"my_poc_firtsname_" . $doctor['firstname'] . "_" . $doctor['id'] . "\" style=\"color: black;border: 1px solid white;\">" . $doctor['firstname'] . "</td>
+          <td style=\"color: black;border: 1px solid white;\">" . $doctor['email'] . "</td>
+          <td style=\"color: black;border: 1px solid white;\">" . $doctor['phone'] . "</td>
+        </tr>";
                 }
             }
             ?>
