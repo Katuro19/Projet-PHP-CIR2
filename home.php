@@ -180,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         $currentDate = new DateTime();
                                         $available_expertise_id = [];
                                         foreach ($available_expertise as $expertise) {
-                                            
+
                                             $available_rendez_vous_Date = DateTime::createFromFormat('d/m/Y', $expertise['date']);
                                             if ($available_rendez_vous_Date >= $currentDate) {
                                                 array_push($available_expertise_id, $expertise['doctor_id']);
@@ -189,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         $available_expertise_id = array_unique($available_expertise_id);
 
                                         foreach ($available_expertise_id as $expertise) {
-                                            echo "<option value=\"doctor_" . $expertise . "\">" . $Expertise->request($Doctors->request($expertise, false, false)['expertise_id'], false, false)['name'] . "</option>";
+                                            echo "<option value=\"expertise_" . $Doctors->request($expertise)['expertise_id'] . "\">" . $Expertise->request($Doctors->request($expertise)['expertise_id'])['name'] . "</option>";
                                         }
                                         echo "</select><br><br>";
                                     }
@@ -213,7 +213,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         }
                                         $available_doctors_id = array_unique($available_doctors_id);
                                         foreach ($available_doctors_id as $doctors) {
-                                            echo "<option value=\"doctor_" . $doctors . "\">" . $Doctors->request($doctors)['lastname'] . " " . $Doctors->request($doctors)['firstname'] . "</option>";
+                                            echo "<option value=\"doctor_" . $doctors ."_". $Doctors->request($doctors)['expertise_id']."\">" . $Doctors->request($doctors)['lastname'] . " " . $Doctors->request($doctors)['firstname'] . "</option>";
                                         }
                                         echo "</select>";
                                     }
