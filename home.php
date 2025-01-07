@@ -157,6 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         $currentDate = new DateTime();
                                         $available_expertise_id = [];
                                         foreach ($available_expertise as $expertise) {
+                                            
                                             $available_rendez_vous_Date = DateTime::createFromFormat('d/m/Y', $expertise['date']);
                                             if ($available_rendez_vous_Date >= $currentDate) {
                                                 array_push($available_expertise_id, $expertise['doctor_id']);
